@@ -21,20 +21,6 @@ export class ProductsService {
     return this.productRepository.getProducts(filterDto);
   }
 
-  // getProductsWithFilter(filterDto: GetProductsFilterDto): Product[] {
-  //   const { status, search } = filterDto;
-  //   let products = this.getAllProducts();
-  //   if (status) {
-  //     products = products.filter(prod => prod.status === status);
-  //   }
-  //   if (search) {
-  //     products = products.filter(
-  //       prod => prod.title.includes(search) || prod.desc.includes(search),
-  //     );
-  //   }
-  //   return products;
-  // }
-
   async getProductById(id: number): Promise<Product> {
     const found = await this.productRepository.findOne(id);
     if (!found) {
@@ -42,21 +28,6 @@ export class ProductsService {
     }
     return found;
   }
-
-  // updateProduct(productId: string, title: string, desc: string, price: number) {
-  //   const [product, index] = this.findProduct(productId);
-  //   const updateProduct = { ...product };
-  //   if (title) {
-  //     updateProduct.title = title;
-  //   }
-  //   if (desc) {
-  //     updateProduct.desc = desc;
-  //   }
-  //   if (title) {
-  //     updateProduct.price = price;
-  //   }
-  //   this.products[index] = updateProduct;
-  // }
 
   async updateProductStatus(
     id: number,

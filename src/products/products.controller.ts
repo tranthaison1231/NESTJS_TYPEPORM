@@ -10,52 +10,71 @@ import {
   UsePipes,
   ValidationPipe,
   ParseIntPipe,
+  UseGuards,
+  Logger,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { ProductStatus } from './product.model';
 import { CreateProductDto, GetProductsFilterDto } from './dto/product.dto';
-import { isEmpty } from '../utils/object';
 import { ProductStatusValidationPipe } from './pipes/product-status-validation.pipe';
 import { Product } from './product.entity';
+import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/auth/get-user-decorator';
+import { User } from 'src/auth/user.entity';
 
 @Controller('products')
+@UseGuards(AuthGuard())
 export class ProductsController {
+  private logger = new Logger('ProductController');
   constructor(private readonly productsService: ProductsService) {}
+
   @Post()
   @UsePipes(ValidationPipe)
-  addProduct(@Body() createProductDto: CreateProductDto): Promise<Product> {
-    return this.productsService.insertProduct(createProductDto);
+  addProduct(
+    @Body() createProductDto: CreateProductDto,
+    @GetUser() user: User,
+  ): Promise<Product> {
+    this.logger.verbose(
+      `User "${user.username}" created a new task.  Data ${JSON.stringify(
+        createProductDto,
+      )}`,
+    );
+    return this.productsService.insertProduct(createProductDto, user);
   }
+
   @Get()
   getProducts(
     @Query(ValidationPipe) filterDto: GetProductsFilterDto,
-  ): Product[] {
-    return this.productsService.getProducts(filterDto);
+    @GetUser() user: User,
+  ): Promise<Product[]> {
+    this.logger.verbose(
+      `User "${user.username}" retrieving all tasks. ${filterDto}`,
+    );
+    return this.productsService.getProducts(filterDto, user);
   }
 
-  @Get(':id')
-  getProduct(@Param('id', ParseIntPipe) id: number): Promise<Product> {
-    return this.productsService.getProductById(id);
+  @Get('/:id')
+  getProduct(
+    @Param('id', ParseIntPipe) id: number,
+    @GetUser() user: User,
+  ): Promise<Product> {
+    return this.productsService.getProductById(id, user);
   }
-  // @Patch(':id')
-  // updateProduct(
-  //   @Param('id') prodId: string,
-  //   @Body('title') prodTitle: string,
-  //   @Body('description') prodDesc: string,
-  //   @Body('price') prodPrice: number,
-  // ) {
-  //   this.productsService.updateProduct(prodId, prodTitle, prodDesc, prodPrice);
-  //   return null;
-  // }
+
   @Patch(':id/status')
   updateProductStatus(
     @Param('id', ParseIntPipe) id: number,
     @Body('status', ProductStatusValidationPipe) status: ProductStatus,
+    @GetUser() user: User,
   ): Promise<Product> {
-    return this.productsService.updateProductStatus(id, status);
+    return this.productsService.updateProductStatus(id, status, user);
   }
+
   @Delete(':id')
-  removeProduct(@Param('id', ParseIntPipe) id: number): Promise<void> {
-    return this.productsService.removeProduct(id);
+  removeProduct(
+    @Param('id', ParseIntPipe) id: number,
+    @GetUser() user: User,
+  ): Promise<void> {
+    return this.productsService.removeProduct(id, user);
   }
 }

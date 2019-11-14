@@ -1,0 +1,7 @@
+server:
+  origin: http
+db:
+  synchronize: false
+
+jwt:
+  secret: 'topSecret51'

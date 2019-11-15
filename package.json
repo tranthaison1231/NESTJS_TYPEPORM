@@ -17,7 +17,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "db:start": "pg_ctl -D /usr/local/var/postgres start",
+    "db:stop": "pg_ctl -D /usr/local/var/postgres stop -s -m fast"
   },
   "dependencies": {
     "@nestjs/common": "^6.9.0",
@@ -40,12 +42,12 @@
     "typeorm": "^0.2.20",
     "@types/express": "^4.17.2",
     "@types/node": "^12.12.7",
-    "ts-node": "^8.5.0",
+    "ts-node": "^8.5.2",
     "typescript": "^3.7.2"
   },
   "devDependencies": {
-    "@nestjs/cli": "^6.11.5",
-    "@nestjs/schematics": "^6.7.0",
+    "@nestjs/cli": "^6.12.1",
+    "@nestjs/schematics": "^6.7.2",
     "@nestjs/testing": "^6.9.0",
     "@types/jest": "^24.0.23",
     "@types/supertest": "^2.0.8",

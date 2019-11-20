@@ -5,7 +5,7 @@ import { ProductStatus } from './product.model';
 import { User } from 'src/auth/user.entity';
 import { Logger, InternalServerErrorException } from '@nestjs/common';
 
-@EntityRepository()
+@EntityRepository(Product)
 export class ProductRepository extends Repository<Product> {
   private logger = new Logger('ProductRepository');
 

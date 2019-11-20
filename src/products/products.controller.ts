@@ -1,11 +1,11 @@
 import {
   Controller,
+  Get,
   Post,
   Body,
-  Get,
   Param,
-  Patch,
   Delete,
+  Patch,
   Query,
   UsePipes,
   ValidationPipe,
@@ -13,12 +13,12 @@ import {
   UseGuards,
   Logger,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ProductsService } from './products.service';
 import { ProductStatus } from './product.model';
 import { CreateProductDto, GetProductsFilterDto } from './dto/product.dto';
 import { ProductStatusValidationPipe } from './pipes/product-status-validation.pipe';
 import { Product } from './product.entity';
-import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user-decorator';
 import { User } from 'src/auth/user.entity';
 
@@ -26,6 +26,7 @@ import { User } from 'src/auth/user.entity';
 @UseGuards(AuthGuard())
 export class ProductsController {
   private logger = new Logger('ProductController');
+
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()

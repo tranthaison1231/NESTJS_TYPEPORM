@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { ProductsService } from './products.service';
 import { ProductRepository } from './product.repository';
 import { GetProductsFilterDto } from './dto/product.dto';
-import { ProductStatus } from './product.model';
+import { ProductStatus } from './product-status.enum';
 
 const mockUser = { username: 'Test user' };
 

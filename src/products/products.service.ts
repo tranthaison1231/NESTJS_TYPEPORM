@@ -1,5 +1,5 @@
 import { Injectable, Get, NotFoundException } from '@nestjs/common';
-import { ProductStatus } from './product.model';
+import { ProductStatus } from './product-status.enum';
 import { CreateProductDto, GetProductsFilterDto } from './dto/product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductRepository } from './product.repository';

@@ -5,7 +5,7 @@ import {
   Column,
   ManyToOne,
 } from 'typeorm';
-import { ProductStatus } from './product.model';
+import { ProductStatus } from './product-status.enum';
 import { User } from 'src/auth/user.entity';
 
 @Entity()
@@ -20,7 +20,7 @@ export class Product extends BaseEntity {
   desc: string;
 
   @Column()
-  price: string;
+  price: number;
 
   @Column()
   status: ProductStatus;

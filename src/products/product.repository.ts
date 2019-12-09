@@ -1,7 +1,7 @@
 import { Repository, EntityRepository } from 'typeorm';
 import { Product } from './product.entity';
 import { CreateProductDto, GetProductsFilterDto } from './dto/product.dto';
-import { ProductStatus } from './product.model';
+import { ProductStatus } from './product-status.enum';
 import { User } from 'src/auth/user.entity';
 import { Logger, InternalServerErrorException } from '@nestjs/common';
 
@@ -44,9 +44,10 @@ export class ProductRepository extends Repository<Product> {
     createProductDto: CreateProductDto,
     user: User,
   ): Promise<Product> {
-    const { title, desc } = createProductDto;
+    const { title, desc, price } = createProductDto;
     const product = new Product();
     product.title = title;
+    product.price = price;
     product.desc = desc;
     product.status = ProductStatus.OPEN;
     product.user = user;

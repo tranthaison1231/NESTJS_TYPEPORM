@@ -1,4 +1,4 @@
-import { ProductStatus } from '../product.model';
+import { ProductStatus } from '../product-status.enum';
 import { IsNotEmpty, IsOptional, IsIn } from 'class-validator';
 
 export class CreateProductDto {
@@ -11,7 +11,6 @@ export class CreateProductDto {
   @IsNotEmpty()
   price: number;
 }
-
 export class GetProductsFilterDto {
   @IsOptional()
   @IsIn([ProductStatus.OPEN, ProductStatus.IN_PROGRESS, ProductStatus.DONE])

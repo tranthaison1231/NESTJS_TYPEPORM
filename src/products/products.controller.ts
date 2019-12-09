@@ -15,7 +15,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ProductsService } from './products.service';
-import { ProductStatus } from './product.model';
+import { ProductStatus } from './product-status.enum';
 import { CreateProductDto, GetProductsFilterDto } from './dto/product.dto';
 import { ProductStatusValidationPipe } from './pipes/product-status-validation.pipe';
 import { Product } from './product.entity';

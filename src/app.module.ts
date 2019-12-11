@@ -5,6 +5,8 @@ import { ProductsModule } from './products/products.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from 'nestjs-config';
 import * as path from 'path';
+import { APP_FILTER } from '@nestjs/core';
+import { HttpErrorFilter } from './shared/http-error.filter';
 
 @Module({
   imports: [
@@ -12,6 +14,12 @@ import * as path from 'path';
     TypeOrmModule.forRoot(typeOrmConfig),
     ProductsModule,
     AuthModule,
+  ],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: HttpErrorFilter,
+    },
   ],
 })
 export class AppModule {}

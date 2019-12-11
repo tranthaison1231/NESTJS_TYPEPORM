@@ -1,6 +1,15 @@
 {
   "version": 2,
   "name": "nestjs-now",
+  "env": {
+    "PORT": "8080",
+    "RDS_HOSTNAME": "satao.db.elephantsql.com",
+    "RDS_USERNAME": "iefptope",
+    "RDS_PASSWORD": "7swuRlpZfbUmV3fgeYjmR2FNTVxRJMxw",
+    "RDS_DB_NAME": "iefptope",
+    "NODE_ENV": "production",
+    "TYPEORM_SYNC": "true"
+  },
   "builds": [
     {
       "src": "dist/main.js",

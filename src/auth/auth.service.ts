@@ -25,7 +25,6 @@ export class AuthService {
     const username = await this.userRepository.validateUserPassword(
       authCredentialsDto,
     );
-
     if (!username) {
       throw new UnauthorizedException('Invalid credentials');
     }

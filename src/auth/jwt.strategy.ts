@@ -23,7 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const user = await this.userRepository.findOne({ username });
 
     if (!user) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Email or password is incorrect.');
     }
     return user;
   }

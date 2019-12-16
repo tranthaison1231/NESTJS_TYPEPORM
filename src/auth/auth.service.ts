@@ -1,9 +1,18 @@
-import { Injectable, UnauthorizedException, Logger } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  Logger,
+  ConflictException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
+import {
+  AuthCredentialsDto,
+  ResetPasswordDto,
+} from './dto/auth-credentials.dto';
 import { JwtPayload } from './jwt-payload.interface';
+import { sendEmail } from '../utils/sendEmail';
 
 @Injectable()
 export class AuthService {
@@ -36,5 +45,15 @@ export class AuthService {
     );
 
     return { accessToken };
+  }
+
+  async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<void> {
+    const { email } = resetPasswordDto;
+    const user = await this.userRepository.findOne({ email });
+    if (user) {
+      await sendEmail(email, 'https://www.facebook.com/');
+    } else {
+      throw new ConflictException('Email not found');
+    }
   }
 }

@@ -12,6 +12,9 @@ import {
   ParseIntPipe,
   UseGuards,
   Logger,
+  UseInterceptors,
+  UploadedFiles,
+  Res,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ProductsService } from './products.service';
@@ -21,7 +24,11 @@ import { ProductStatusValidationPipe } from './pipes/product-status-validation.p
 import { Product } from './product.entity';
 import { GetUser } from 'src/auth/get-user-decorator';
 import { User } from 'src/auth/user.entity';
-
+import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
+import { multerOptions } from '../config/multer.config';
+import { uploadImage } from '../config/cloudinary.config';
 @Controller('products')
 @UseGuards(AuthGuard())
 export class ProductsController {
@@ -77,5 +84,13 @@ export class ProductsController {
     @GetUser() user: User,
   ): Promise<void> {
     return this.productsService.removeProduct(id, user);
+  }
+
+  @Post('uploads')
+  @UseInterceptors(FileInterceptor('image', multerOptions))
+  async uploadFile(@UploadedFiles() file) {
+    console.log(file);
+    // const result = await uploadImage(file);
+    // console.log(result );
   }
 }

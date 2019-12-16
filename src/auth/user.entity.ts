@@ -2,20 +2,22 @@ import {
   BaseEntity,
   Entity,
   PrimaryGeneratedColumn,
-  Column,
   Unique,
   OneToMany,
+  Column,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Product } from 'src/products/product.entity';
 
 @Entity()
-@Unique(['username'])
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
+  email: string;
+
+  @Column({ unique: true })
   username: string;
 
   @Column()
@@ -30,9 +32,4 @@ export class User extends BaseEntity {
     { eager: true },
   )
   products: Product[];
-
-  async validatePassword(password: string): Promise<boolean> {
-    const hash = await bcrypt.hash(password, this.salt);
-    return hash === this.password;
-  }
 }

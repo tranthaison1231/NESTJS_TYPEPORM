@@ -1,5 +1,5 @@
 import { Repository, EntityRepository } from 'typeorm';
-import { User } from 'src/auth/user.entity';
+import { User } from 'src/users/user.entity';
 import { AuthCredentialsDto } from 'src/auth/dto/auth-credentials.dto';
 import {
   ConflictException,
@@ -22,11 +22,10 @@ export class UserRepository extends Repository<User> {
     user.password = await hashPassword(password, user.salt);
     try {
       await user.save();
-      await sendEmail(email, 'https://www.facebook.com/');
     } catch (error) {
       console.log(error);
       if (error.code === '23505') {
-        // duplicate username
+        // duplicate username && email
         throw new ConflictException(error.detail);
       } else {
         throw new InternalServerErrorException();

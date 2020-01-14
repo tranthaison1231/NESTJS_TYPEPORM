@@ -11,7 +11,7 @@ import { Product } from 'src/products/product.entity';
 
 @Entity()
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column({ unique: true })

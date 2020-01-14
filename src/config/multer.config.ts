@@ -2,10 +2,11 @@ import { extname } from 'path';
 import { existsSync, mkdirSync } from 'fs';
 import { diskStorage } from 'multer';
 import { v4 as uuid } from 'uuid';
+import { MAX_FILE_SIZE } from '../environments';
 
 export const multerOptions = {
   limits: {
-    fileSize: +process.env.MAX_FILE_SIZE || 1 * 1000 * 1000,
+    fileSize: MAX_FILE_SIZE,
   },
   fileFilter: (req: any, file: any, callback: Function) => {
     if (!file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {

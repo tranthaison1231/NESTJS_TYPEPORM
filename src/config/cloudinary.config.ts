@@ -1,10 +1,16 @@
+import {
+  CLOUDINARY_SECRET_KEY,
+  CLOUDINARY_KEY,
+  CLOUDINARY_NAME,
+} from '../environments';
+
 const cloudinary = require('cloudinary');
 
 export const uploadImage = async (file: any): Promise<string> => {
   cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME || 'xxx',
-    api_key: process.env.CLOUDINARY_KEY || 'xxx',
-    api_secret: process.env.CLOUDINARY_SECRET_KEY || 'xxx',
+    cloud_name: CLOUDINARY_NAME,
+    api_key: CLOUDINARY_KEY,
+    api_secret: CLOUDINARY_SECRET_KEY,
   });
 
   const uniqueFilename = new Date().toISOString();

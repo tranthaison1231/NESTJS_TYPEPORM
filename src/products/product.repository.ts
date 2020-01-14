@@ -2,7 +2,7 @@ import { Repository, EntityRepository } from 'typeorm';
 import { Product } from './product.entity';
 import { CreateProductDto, GetProductsFilterDto } from './dto/product.dto';
 import { ProductStatus } from './product-status.enum';
-import { User } from 'src/auth/user.entity';
+import { User } from 'src/users/user.entity';
 import { Logger, InternalServerErrorException } from '@nestjs/common';
 
 @EntityRepository(Product)

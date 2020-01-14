@@ -4,6 +4,7 @@ import { Logger, InternalServerErrorException } from '@nestjs/common';
 // import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import 'dotenv/config';
 import * as bodyParser from 'body-parser';
+import { NODE_ENV, PORT } from './environments';
 
 async function bootstrap() {
   try {
@@ -29,14 +30,14 @@ async function bootstrap() {
       }),
     );
 
-    if (process.env.NODE_ENV === 'development') {
+    if (NODE_ENV === 'development') {
       app.enableCors();
     } else {
       app.enableCors({ origin: 'http' });
       logger.log(`Accepting request from origin http`);
     }
 
-    const port = Number(process.env.PORT) || 8080;
+    const port = PORT;
 
     await app.listen(port);
     logger.log(`Application listening on port ${port}`);

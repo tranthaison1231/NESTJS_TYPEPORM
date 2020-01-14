@@ -6,6 +6,7 @@ import { ProductsModule } from './products/products.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpErrorFilter } from './shared/http-error.filter';
+import { UPLOAD_LOCATION } from './environments';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { HttpErrorFilter } from './shared/http-error.filter';
     ProductsModule,
     AuthModule,
     MulterModule.register({
-      dest: process.env.UPLOAD_LOCATION || '/files',
+      dest: UPLOAD_LOCATION,
     }),
   ],
   providers: [

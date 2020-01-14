@@ -25,7 +25,20 @@ export class AuthCredentialsDto {
   password: string;
 }
 
-export class ResetPasswordDto {
+export class ForgotPasswordDto {
   @IsEmail()
   email: string;
+}
+
+export class ChangePasswordDto {
+  @IsString()
+  token: string;
+
+  @IsString()
+  @MinLength(8)
+  @MaxLength(20)
+  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
+    message: 'password too weak',
+  })
+  password: string;
 }

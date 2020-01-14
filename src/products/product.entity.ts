@@ -6,7 +6,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { ProductStatus } from './product-status.enum';
-import { User } from 'src/auth/user.entity';
+import { User } from 'src/users/user.entity';
 
 @Entity()
 export class Product extends BaseEntity {

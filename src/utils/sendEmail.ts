@@ -1,4 +1,5 @@
 import * as nodemailer from 'nodemailer';
+import { SENDGRID_API_KEY } from '../environments';
 
 export const sendEmail = async (email: string, link: string) => {
   const transporter = nodemailer.createTransport({
@@ -7,7 +8,7 @@ export const sendEmail = async (email: string, link: string) => {
     secure: true,
     auth: {
       user: 'apikey',
-      pass: process.env.SENDGRID_API_KEY,
+      pass: SENDGRID_API_KEY,
     },
   });
 

@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, InternalServerErrorException } from '@nestjs/common';
-// import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import 'dotenv/config';
 import * as bodyParser from 'body-parser';
 import { NODE_ENV, PORT } from './environments';
@@ -37,10 +37,19 @@ async function bootstrap() {
       logger.log(`Accepting request from origin http`);
     }
 
-    const port = PORT;
+    // SWAGGER
+    const options = new DocumentBuilder()
+      .setTitle('Product Example')
+      .setDescription('Products API description')
+      .setVersion('1.0')
+      .build();
 
-    await app.listen(port);
-    logger.log(`Application listening on port ${port}`);
+    const document = SwaggerModule.createDocument(app, options);
+
+    SwaggerModule.setup('document', app, document);
+
+    await app.listen(PORT);
+    logger.log(`Application listening on port ${PORT}`);
   } catch (error) {
     Logger.error(`❌  Error starting server, ${error}`, '', 'Bootstrap', false);
     process.exit();

@@ -29,6 +29,13 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { multerOptions } from '../config/multer.config';
 import { uploadImage } from '../config/cloudinary.config';
+import { ApiTags, ApiHeader } from '@nestjs/swagger';
+
+@ApiHeader({
+  name: 'Authorization',
+  description: 'Auth token',
+})
+@ApiTags('Products')
 @Controller('products')
 @UseGuards(AuthGuard())
 export class ProductsController {

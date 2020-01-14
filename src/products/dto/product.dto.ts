@@ -1,5 +1,6 @@
 import { ProductStatus } from '../product-status.enum';
 import { IsNotEmpty, IsOptional, IsIn } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateProductDto {
   @IsNotEmpty()
@@ -14,7 +15,11 @@ export class CreateProductDto {
 export class GetProductsFilterDto {
   @IsOptional()
   @IsIn([ProductStatus.OPEN, ProductStatus.IN_PROGRESS, ProductStatus.DONE])
+  @ApiProperty({
+    enum: [ProductStatus.OPEN, ProductStatus.IN_PROGRESS, ProductStatus.DONE],
+  })
   status: ProductStatus;
+
   @IsOptional()
   @IsNotEmpty()
   search: string;

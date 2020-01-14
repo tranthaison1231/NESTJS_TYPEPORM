@@ -1,10 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, InternalServerErrorException } from '@nestjs/common';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import 'dotenv/config';
 import * as bodyParser from 'body-parser';
 import { NODE_ENV, PORT } from './environments';
+import { setupSwagger } from './swagger';
 
 async function bootstrap() {
   try {
@@ -37,16 +36,7 @@ async function bootstrap() {
       logger.log(`Accepting request from origin http`);
     }
 
-    // SWAGGER
-    const options = new DocumentBuilder()
-      .setTitle('Product Example')
-      .setDescription('Products API description')
-      .setVersion('1.0')
-      .build();
-
-    const document = SwaggerModule.createDocument(app, options);
-
-    SwaggerModule.setup('document', app, document);
+    setupSwagger(app);
 
     await app.listen(PORT);
     logger.log(`Application listening on port ${PORT}`);

@@ -2,8 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, InternalServerErrorException } from '@nestjs/common';
 import * as bodyParser from 'body-parser';
-import { NODE_ENV, PORT } from './environments';
-import { setupSwagger } from './swagger';
+import { NODE_ENV, PORT } from '@/environments';
+import { setupSwagger } from '@/swagger';
 
 async function bootstrap() {
   try {

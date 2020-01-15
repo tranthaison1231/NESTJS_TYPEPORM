@@ -5,7 +5,7 @@ import {
   ChangePasswordDto,
 } from './dto/auth-credentials.dto';
 import { AuthService } from './auth.service';
-import { User } from 'src/users/user.entity';
+import { User } from '@/users/user.entity';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Auth')

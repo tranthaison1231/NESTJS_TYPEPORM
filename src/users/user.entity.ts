@@ -7,7 +7,7 @@ import {
   Column,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { Product } from 'src/products/product.entity';
+import { Product } from '@/products/product.entity';
 
 @Entity()
 export class User extends BaseEntity {

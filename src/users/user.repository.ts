@@ -7,9 +7,7 @@ import {
 } from '@nestjs/common';
 
 import * as bcrypt from 'bcrypt';
-import { hashPassword, comparePassword } from '../utils/password';
-import { sendEmail } from '../utils/sendEmail';
-import { confirmEmailLink } from '../utils/confirmEmailLink';
+import { hashPassword, comparePassword } from '@/utils/password';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {

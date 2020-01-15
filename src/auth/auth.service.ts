@@ -7,19 +7,19 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserRepository } from 'src/users/user.repository';
+import { UserRepository } from '@/users/user.repository';
 import {
   AuthCredentialsDto,
   ForgotPasswordDto,
   ChangePasswordDto,
 } from './dto/auth-credentials.dto';
 import { JwtPayload } from './jwt-payload.interface';
-import { sendEmail } from '../utils/sendEmail';
-import { confirmEmailLink } from '../utils/confirmEmailLink';
+// import { sendEmail } from '@/utils/sendEmail';
+// import { confirmEmailLink } from '@/utils/confirmEmailLink';
 import { User } from 'src/users/user.entity';
 // import { redis } from '../redis';
-import { forgotPasswordPrefix } from '../constants/redisPrefixes';
-import { hashPassword } from '../utils/password';
+import { forgotPasswordPrefix } from '@/constants/redisPrefixes';
+import { hashPassword } from '@/utils/password';
 
 @Injectable()
 export class AuthService {

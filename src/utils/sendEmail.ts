@@ -19,5 +19,5 @@ export const sendEmail = async (email: string, link: string) => {
     text: 'Hello world?',
     html: `<b>Hello world?</b> <a href="${link}">confirm Email</a>`,
   });
-  console.log('Message sent: %s', info.messageId);
+  console.log('Message sent: %s', email);
 };

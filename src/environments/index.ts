@@ -4,7 +4,7 @@ export const NODE_ENV: string = accessEnv('NODE_ENV', 'development');
 
 export const PORT: number = +accessEnv('PORT', '8080');
 
-export const HOST: number = +accessEnv('HOST');
+export const URL: string = accessEnv('URL');
 
 export const BCRYPT_SALT: number = +accessEnv('BCRYPT_SALT', '10');
 
@@ -35,3 +35,13 @@ export const RDS_DB_NAME: string = accessEnv('RDS_DB_NAME');
 export const SALT: string = accessEnv('SALT', 'xxx');
 
 export const SENDGRID_API_KEY: string = accessEnv('SENDGRID_API_KEY');
+
+export const REDIS_PORT: number = +accessEnv('REDIS_PORT', '6379');
+
+export const REDIS_HOST: string = accessEnv('REDIS_HOST', 'localhost');
+
+export const REDIS_FAMILY: number = +accessEnv('REDIS_FAMILY', '4');
+
+export const REDIS_PASSWORD: string = accessEnv('REDIS_PASSWORD');
+
+export const REDIS_DB: number = +accessEnv('REDIS_DB', '0');

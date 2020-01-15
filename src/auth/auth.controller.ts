@@ -27,17 +27,17 @@ export class AuthController {
     return this.authService.signIn(authCredentialsDto);
   }
 
-  // @Post('/forgot-password')
-  // forgotPassword(
-  //   @Body(ValidationPipe) forgotPasswordDto: ForgotPasswordDto,
-  // ): Promise<void> {
-  //   return this.authService.forgotPassword(forgotPasswordDto);
-  // }
+  @Post('/forgot-password')
+  forgotPassword(
+    @Body(ValidationPipe) forgotPasswordDto: ForgotPasswordDto,
+  ): Promise<void> {
+    return this.authService.forgotPassword(forgotPasswordDto);
+  }
 
-  // @Post('/change-password')
-  // changePassword(
-  //   @Body(ValidationPipe) changePasswordDto: ChangePasswordDto,
-  // ): Promise<User> {
-  //   return this.authService.changePassword(changePasswordDto);
-  // }
+  @Post('/change-password')
+  changePassword(
+    @Body(ValidationPipe) changePasswordDto: ChangePasswordDto,
+  ): Promise<User> {
+    return this.authService.changePassword(changePasswordDto);
+  }
 }

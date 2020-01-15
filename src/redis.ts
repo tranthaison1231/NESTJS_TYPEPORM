@@ -1,3 +1,16 @@
 import * as Redis from 'ioredis';
+import {
+  REDIS_PORT,
+  REDIS_FAMILY,
+  REDIS_PASSWORD,
+  REDIS_DB,
+  REDIS_HOST,
+} from '@/environments';
 
-export const redis = new Redis();
+export const redis = new Redis({
+  port: REDIS_PORT, // Redis port
+  host: REDIS_HOST, // Redis host
+  family: REDIS_FAMILY, // 4 (IPv4) or 6 (IPv6)
+  password: REDIS_PASSWORD,
+  db: REDIS_DB,
+});

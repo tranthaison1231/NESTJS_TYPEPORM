@@ -4,6 +4,14 @@ import { Logger, InternalServerErrorException } from '@nestjs/common';
 import * as bodyParser from 'body-parser';
 import { NODE_ENV, PORT } from '@/environments';
 import { setupSwagger } from '@/swagger';
+import { Transport } from '@nestjs/common/enums/transport.enum';
+
+const microserviceOptions = {
+  transport: Transport.REDIS,
+  options: {
+    host: 'redis://localhost:6379',
+  },
+};
 
 async function bootstrap() {
   try {

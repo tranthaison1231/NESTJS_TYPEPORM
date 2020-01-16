@@ -16,11 +16,15 @@ export class GetProductsFilterDto {
   @IsOptional()
   @IsIn([ProductStatus.OPEN, ProductStatus.IN_PROGRESS, ProductStatus.DONE])
   @ApiProperty({
-    enum: [ProductStatus.OPEN, ProductStatus.IN_PROGRESS, ProductStatus.DONE],
+    enum: ProductStatus,
+    required: false,
   })
   status: ProductStatus;
 
   @IsOptional()
+  @ApiProperty({
+    required: false,
+  })
   @IsNotEmpty()
   search: string;
 }

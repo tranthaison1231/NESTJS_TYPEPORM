@@ -8,7 +8,7 @@ export const URL: string = accessEnv('URL');
 
 export const BCRYPT_SALT: number = +accessEnv('BCRYPT_SALT', '10');
 
-export const UPLOAD_LOCATION: string = accessEnv('BCRYPT_SALT', '/files');
+export const UPLOAD_LOCATION: string = accessEnv('UPLOAD_LOCATION', '/files');
 
 export const EXPIRES_IN: number = +accessEnv('EXPIRES_IN', '3600');
 

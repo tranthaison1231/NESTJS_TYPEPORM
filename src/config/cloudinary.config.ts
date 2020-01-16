@@ -2,7 +2,7 @@ import {
   CLOUDINARY_SECRET_KEY,
   CLOUDINARY_KEY,
   CLOUDINARY_NAME,
-} from '../environments';
+} from '@/environments';
 
 const cloudinary = require('cloudinary');
 

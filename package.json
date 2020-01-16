@@ -20,7 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "db:start": "pg_ctl -D /usr/local/var/postgres start",
     "db:stop": "pg_ctl -D /usr/local/var/postgres stop -s -m fast",
-    "deploy": "rm -rf ./dist && yarn build && npx now"
+    "deploy:now": "rm -rf ./dist && yarn build && npx now",
+    "deploy:heroku": "rm -rf ./dist && yarn build && git add . && git commit -m 'Deploy' && git push heroku master"
   },
   "dependencies": {
     "@nestjs/common": "^6.10.14",

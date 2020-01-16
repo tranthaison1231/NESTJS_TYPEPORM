@@ -29,12 +29,9 @@ import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
 // import { extname } from 'path';
 // import { multerOptions } from '../config/multer.config';
 // import { uploadImage } from '../config/cloudinary.config';
-import { ApiTags, ApiHeader } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
-@ApiHeader({
-  name: 'Authorization',
-  description: 'Auth token',
-})
+@ApiBearerAuth()
 @ApiTags('Products')
 @Controller('products')
 @UseGuards(AuthGuard())

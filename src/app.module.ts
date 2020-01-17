@@ -6,13 +6,15 @@ import { ProductsModule } from '@/products/products.module';
 import { AuthModule } from '@/auth/auth.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpErrorFilter } from '@/shared/http-error.filter';
-import { UPLOAD_LOCATION } from '@/environments';
+// import { UPLOAD_LOCATION } from '@/environments';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
     ProductsModule,
     AuthModule,
+    TasksModule,
     // MulterModule.register({
     //   dest: UPLOAD_LOCATION,
     // }),

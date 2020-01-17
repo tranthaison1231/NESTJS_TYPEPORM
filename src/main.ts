@@ -5,6 +5,9 @@ import * as bodyParser from 'body-parser';
 import { NODE_ENV, PORT } from '@/environments';
 import { setupSwagger } from '@/swagger';
 import { Transport } from '@nestjs/common/enums/transport.enum';
+import * as compression from 'compression';
+import * as helmet from 'helmet';
+import * as rateLimit from 'express-rate-limit';
 
 async function bootstrap() {
   try {
@@ -27,6 +30,18 @@ async function bootstrap() {
         limit: '2mb',
         extended: true,
         parameterLimit: 2000,
+      }),
+    );
+
+    // Compression
+    app.use(compression());
+
+    // Security
+    app.use(helmet());
+    app.use(
+      rateLimit({
+        windowMs: 15 * 60 * 1000, // 15 minutes
+        max: 100, // limit each IP to 100 requests per windowMs
       }),
     );
 

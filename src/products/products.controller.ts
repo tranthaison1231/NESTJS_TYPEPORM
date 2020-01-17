@@ -29,7 +29,7 @@ import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
 // import { extname } from 'path';
 // import { multerOptions } from '../config/multer.config';
 // import { uploadImage } from '../config/cloudinary.config';
-import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 
 @ApiBearerAuth()
 @ApiTags('Products')

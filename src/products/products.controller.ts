@@ -13,23 +13,31 @@ import {
   UseGuards,
   Logger,
   UseInterceptors,
-  UploadedFiles,
   Res,
+  UploadedFile,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ProductsService } from './products.service';
 import { ProductStatus } from './product-status.enum';
-import { CreateProductDto, GetProductsFilterDto } from './dto/product.dto';
+import {
+  CreateProductDto,
+  GetProductsFilterDto,
+  FileUploadDto,
+} from './dto/product.dto';
 import { ProductStatusValidationPipe } from './pipes/product-status-validation.pipe';
 import { Product } from './product.entity';
 import { GetUser } from 'src/users/get-user-decorator';
 import { User } from 'src/users/user.entity';
 import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
-// import { diskStorage } from 'multer';
-// import { extname } from 'path';
-// import { multerOptions } from '../config/multer.config';
-// import { uploadImage } from '../config/cloudinary.config';
-import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiBearerAuth,
+  ApiOperation,
+  ApiConsumes,
+  ApiBody,
+} from '@nestjs/swagger';
+import { uploadImage } from '../config/cloudinary.config';
+import { multerOptions } from '../config/multer.config';
 
 @ApiBearerAuth()
 @ApiTags('Products')
@@ -90,11 +98,15 @@ export class ProductsController {
     return this.productsService.removeProduct(id, user);
   }
 
-  // @Post('uploads')
-  // @UseInterceptors(FileInterceptor('image', multerOptions))
-  // async uploadFile(@UploadedFiles() file) {
-  //   console.log(file);
-  // const result = await uploadImage(file);
-  // console.log(result );
-  // }
+  @Post('uploads')
+  @UseInterceptors(FileInterceptor('file', multerOptions))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Product image',
+    type: FileUploadDto,
+  })
+  async uploadFile(@UploadedFile() file): Promise<string> {
+    const result = await uploadImage(file);
+    return result;
+  }
 }

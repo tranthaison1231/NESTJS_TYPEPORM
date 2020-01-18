@@ -5,12 +5,10 @@ import {
   Matches,
   IsEmail,
   IsNotEmpty,
+  IsJWT,
 } from 'class-validator';
 
-export class AuthCredentialsDto {
-  @IsEmail()
-  email: string;
-
+export class SignInDto {
   @IsString()
   @MinLength(4)
   @MaxLength(20)
@@ -25,13 +23,18 @@ export class AuthCredentialsDto {
   password: string;
 }
 
+export class AuthCredentialsDto extends SignInDto {
+  @IsEmail()
+  email: string;
+}
+
 export class ForgotPasswordDto {
   @IsEmail()
   email: string;
 }
 
 export class ChangePasswordDto {
-  @IsString()
+  @IsJWT()
   token: string;
 
   @IsString()

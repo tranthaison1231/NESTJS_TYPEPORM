@@ -1,6 +1,6 @@
 import { ProductStatus } from '../product-status.enum';
 import { IsNotEmpty, IsOptional, IsIn } from 'class-validator';
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
 
 export class CreateProductDto {
   @IsNotEmpty()
@@ -24,4 +24,9 @@ export class GetProductsFilterDto {
   @ApiPropertyOptional()
   @IsNotEmpty()
   search: string;
+}
+
+export class FileUploadDto {
+  @ApiProperty({ type: 'string', format: 'binary' })
+  file: any;
 }

@@ -12,6 +12,7 @@ import {
   AuthCredentialsDto,
   ForgotPasswordDto,
   ChangePasswordDto,
+  SignInDto,
 } from './dto/auth-credentials.dto';
 import { JwtPayload } from './jwt-payload.interface';
 import { sendEmail } from '@/utils/sendEmail';
@@ -35,12 +36,8 @@ export class AuthService {
     return this.userRepository.signUp(authCredentialsDto);
   }
 
-  async signIn(
-    authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ accessToken: string }> {
-    const username = await this.userRepository.validateUserPassword(
-      authCredentialsDto,
-    );
+  async signIn(signInDto: SignInDto): Promise<{ accessToken: string }> {
+    const username = await this.userRepository.validateUserPassword(signInDto);
     if (!username) {
       throw new UnauthorizedException('Invalid credentials');
     }

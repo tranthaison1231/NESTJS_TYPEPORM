@@ -1,6 +1,9 @@
 import { Repository, EntityRepository } from 'typeorm';
 import { User } from 'src/users/user.entity';
-import { AuthCredentialsDto } from 'src/auth/dto/auth-credentials.dto';
+import {
+  AuthCredentialsDto,
+  SignInDto,
+} from 'src/auth/dto/auth-credentials.dto';
 import {
   ConflictException,
   InternalServerErrorException,
@@ -31,10 +34,8 @@ export class UserRepository extends Repository<User> {
     }
   }
 
-  async validateUserPassword(
-    authCredentialsDto: AuthCredentialsDto,
-  ): Promise<string> {
-    const { username, password } = authCredentialsDto;
+  async validateUserPassword(signInDto: SignInDto): Promise<string> {
+    const { username, password } = signInDto;
     const user = await this.findOne({ username });
     if (user && (await comparePassword(password, user.password))) {
       return user.username;

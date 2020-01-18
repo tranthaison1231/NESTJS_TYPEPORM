@@ -3,6 +3,7 @@ import {
   AuthCredentialsDto,
   ForgotPasswordDto,
   ChangePasswordDto,
+  SignInDto,
 } from './dto/auth-credentials.dto';
 import { AuthService } from './auth.service';
 import { User } from '@/users/user.entity';
@@ -22,9 +23,9 @@ export class AuthController {
 
   @Post('/signin')
   signIn(
-    @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
+    @Body(ValidationPipe) signInDto: SignInDto,
   ): Promise<{ accessToken: string }> {
-    return this.authService.signIn(authCredentialsDto);
+    return this.authService.signIn(signInDto);
   }
 
   @Post('/forgot-password')

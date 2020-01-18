@@ -2,6 +2,7 @@ import {
   CLOUDINARY_SECRET_KEY,
   CLOUDINARY_KEY,
   CLOUDINARY_NAME,
+  CLOUDINARY_FORDER,
 } from '@/environments';
 
 const cloudinary = require('cloudinary');
@@ -19,9 +20,8 @@ export const uploadImage = async (file: any): Promise<string> => {
     cloudinary.v2.uploader
       .upload_stream(
         {
-          folder: 'rest',
+          folder: CLOUDINARY_FORDER,
           public_id: uniqueFilename,
-          tags: 'rest',
         },
         (err, image) => {
           if (err) {

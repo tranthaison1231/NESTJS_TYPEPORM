@@ -20,6 +20,8 @@ export const CLOUDINARY_KEY: string = accessEnv('CLOUDINARY_KEY');
 
 export const CLOUDINARY_SECRET_KEY: string = accessEnv('CLOUDINARY_SECRET_KEY');
 
+export const CLOUDINARY_FORDER: string = accessEnv('CLOUDINARY_FORDER');
+
 export const MAX_FILE_SIZE: number = +accessEnv('MAX_FILE_SIZE', '1000000');
 
 export const RDS_HOSTNAME: string = accessEnv('RDS_HOSTNAME', 'localhost');
@@ -45,3 +47,17 @@ export const REDIS_FAMILY: number = +accessEnv('REDIS_FAMILY', '4');
 export const REDIS_PASSWORD: string = accessEnv('REDIS_PASSWORD');
 
 export const REDIS_DB: number = +accessEnv('REDIS_DB', '0');
+
+// AWS - S3
+
+export const AWS_S3_BUCKET_NAME: string = accessEnv(
+  'AWS_S3_BUCKET_NAME',
+  'xxx',
+);
+
+export const AWS_ACCESS_KEY_ID: string = accessEnv('AWS_ACCESS_KEY_ID', 'xxx');
+
+export const AWS_SECRET_ACCESS_KEY: string = accessEnv(
+  'AWS_SECRET_ACCESS_KEY',
+  'xxx',
+);

@@ -21,6 +21,13 @@ export class ProductsService {
     return this.productRepository.addProduct(createProductDto, user);
   }
 
+  // async insertMultiProduct(
+  //   createProductDto: CreateProductDto,
+  //   user: User,
+  // ): Promise<Product> {
+  //   return this.productRepository.addMultiProduct(createProductDto, user);
+  // }
+
   async getProducts(
     filterDto: GetProductsFilterDto,
     user: User,

@@ -40,6 +40,30 @@ export class ProductRepository extends Repository<Product> {
     }
   }
 
+  // async addMultiProduct(
+  //   createProductDto: CreateProductDto,
+  //   user: User,
+  // ): Promise<Product> {
+  //   const { title, desc, price } = createProductDto;
+  //   const product = new Product();
+  //   product.title = title;
+  //   product.price = price;
+  //   product.desc = desc;
+  //   product.status = ProductStatus.OPEN;
+  //   product.user = user;
+  //   try {
+  //     await product.save();
+  //   } catch (error) {
+  //     this.logger.error(
+  //       `Failed to create a task for userId "${user.username}. Data: ${createProductDto}`,
+  //       error.stack,
+  //     );
+  //     throw new InternalServerErrorException();
+  //   }
+
+  //   return product;
+  // }
+
   async addProduct(
     createProductDto: CreateProductDto,
     user: User,

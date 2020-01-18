@@ -4,18 +4,9 @@ import { ProductsService } from './products.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductRepository } from './product.repository';
 import { AuthModule } from 'src/auth/auth.module';
-// import { MulterModule } from '@nestjs/platform-express';
-import { CloudinaryModule } from 'src/cloudinary/cloudinary.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([ProductRepository]),
-    AuthModule,
-    CloudinaryModule,
-    // MulterModule.register({
-    //   dest: './uploads',
-    // }),
-  ],
+  imports: [TypeOrmModule.forFeature([ProductRepository]), AuthModule],
   controllers: [ProductsController],
   providers: [ProductsService],
 })

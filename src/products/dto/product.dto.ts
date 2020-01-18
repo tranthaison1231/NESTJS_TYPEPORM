@@ -1,6 +1,11 @@
 import { ProductStatus } from '../product-status.enum';
-import { IsNotEmpty, IsOptional, IsIn } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsIn, IsArray } from 'class-validator';
 import { ApiPropertyOptional, ApiProperty } from '@nestjs/swagger';
+
+// export class CreateMultiProductDto {
+//   @IsArray()
+//   data: Array<CreateProductDto>;
+// }
 
 export class CreateProductDto {
   @IsNotEmpty()

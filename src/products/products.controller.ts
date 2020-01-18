@@ -23,6 +23,7 @@ import {
   CreateProductDto,
   GetProductsFilterDto,
   FileUploadDto,
+  // CreateMultiProductDto,
 } from './dto/product.dto';
 import { ProductStatusValidationPipe } from './pipes/product-status-validation.pipe';
 import { Product } from './product.entity';
@@ -61,6 +62,15 @@ export class ProductsController {
     );
     return this.productsService.insertProduct(createProductDto, user);
   }
+
+  // @Post('/multiple')
+  // @UsePipes(ValidationPipe)
+  // addMultiProduct(
+  //   @Body() createMultiProductDto: CreateMultiProductDto,
+  //   @GetUser() user: User,
+  // ): Promise<Product> {
+  //   return this.productsService.insertMultiProduct(createMultiProductDto, user);
+  // }
 
   @Get()
   getProducts(

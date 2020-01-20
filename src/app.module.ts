@@ -8,6 +8,7 @@ import { APP_FILTER } from '@nestjs/core';
 import { HttpErrorFilter } from '@/shared/http-error.filter';
 import { TasksModule } from '@/tasks/tasks.module';
 import { UsersModule } from '@/users/user.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UsersModule } from '@/users/user.module';
     AuthModule,
     TasksModule,
     UsersModule,
+    EventsModule,
   ],
   providers: [
     {

@@ -8,6 +8,7 @@ import { Transport } from '@nestjs/common/enums/transport.enum';
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
   try {
@@ -18,7 +19,7 @@ async function bootstrap() {
     // }
     const logger = new Logger('bootstrap');
 
-    const app = await NestFactory.create(AppModule, {
+    const app = await NestFactory.create<NestExpressApplication>(AppModule, {
       // httpsOptions,
       cors: true,
     });

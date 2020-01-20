@@ -15,6 +15,7 @@ import {
   UseInterceptors,
   Res,
   UploadedFile,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ProductsService } from './products.service';
@@ -85,7 +86,7 @@ export class ProductsController {
 
   @Get('/:id')
   getProduct(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', ParseUUIDPipe) id: string,
     @GetUser() user: User,
   ): Promise<Product> {
     return this.productsService.getProductById(id, user);
@@ -93,7 +94,7 @@ export class ProductsController {
 
   @Patch(':id/status')
   updateProductStatus(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body('status', ProductStatusValidationPipe) status: ProductStatus,
     @GetUser() user: User,
   ): Promise<Product> {
@@ -102,10 +103,15 @@ export class ProductsController {
 
   @Delete(':id')
   removeProduct(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', ParseUUIDPipe) id: string,
     @GetUser() user: User,
   ): Promise<void> {
     return this.productsService.removeProduct(id, user);
+  }
+
+  @Delete()
+  removeAllProduct(@GetUser() user: User): Promise<void> {
+    return this.productsService.removeAllProduct(user);
   }
 
   @Post('uploads')

@@ -3,12 +3,7 @@ import { TasksService } from './tasks.service';
 import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
-  imports: [
-    ScheduleModule.forRoot(),
-    // MulterModule.register({
-    //   dest: UPLOAD_LOCATION,
-    // }),
-  ],
+  imports: [ScheduleModule.forRoot()],
   providers: [TasksService],
 })
 export class TasksModule {}

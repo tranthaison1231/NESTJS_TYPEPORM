@@ -7,6 +7,7 @@ import {
 import {
   ConflictException,
   InternalServerErrorException,
+  Logger,
 } from '@nestjs/common';
 
 import * as bcrypt from 'bcrypt';
@@ -14,6 +15,8 @@ import { hashPassword, comparePassword } from '@/utils/password';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
+  private logger = new Logger('UserRepository');
+
   async signUp(authCredentialsDto: AuthCredentialsDto) {
     const { username, password, email } = authCredentialsDto;
     const user = new User();
@@ -41,6 +44,17 @@ export class UserRepository extends Repository<User> {
       return user.username;
     } else {
       return null;
+    }
+  }
+
+  async getAllUser(): Promise<User[]> {
+    const query = this.createQueryBuilder('user');
+    try {
+      const users = await query.getMany();
+      return users;
+    } catch (error) {
+      this.logger.error(`Fail to get all users`);
+      throw new InternalServerErrorException();
     }
   }
 }

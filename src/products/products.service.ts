@@ -1,4 +1,9 @@
-import { Injectable, Get, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  Get,
+  NotFoundException,
+  HttpException,
+} from '@nestjs/common';
 import { ProductStatus } from './product-status.enum';
 import { CreateProductDto, GetProductsFilterDto } from './dto/product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -35,7 +40,7 @@ export class ProductsService {
     return this.productRepository.getProducts(filterDto, user);
   }
 
-  async getProductById(id: number, user: User): Promise<Product> {
+  async getProductById(id: string, user: User): Promise<Product> {
     const found = await this.productRepository.findOne({
       where: { id, userId: user.id },
     });
@@ -46,7 +51,7 @@ export class ProductsService {
   }
 
   async updateProductStatus(
-    id: number,
+    id: string,
     status: ProductStatus,
     user: User,
   ): Promise<Product> {
@@ -56,10 +61,18 @@ export class ProductsService {
     return product;
   }
 
-  async removeProduct(id: number, user: User): Promise<void> {
+  async removeProduct(id: string, user: User): Promise<void> {
     const result = await this.productRepository.delete({ id, userId: user.id });
     if (result.affected === 0) {
-      throw new NotFoundException(`Task with ID "${id}" not found`);
+      throw new NotFoundException(`Product with ID "${id}" not found`);
+    }
+  }
+
+  async removeAllProduct(user: User): Promise<void> {
+    try {
+      await this.productRepository.clear();
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }

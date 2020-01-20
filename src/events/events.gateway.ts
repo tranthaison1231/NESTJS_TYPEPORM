@@ -13,6 +13,7 @@ import { Socket, Server } from 'socket.io';
 export class EventsGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer() server: Server;
+  users: number = 0;
 
   private logger: Logger = new Logger('AppGateway');
 
@@ -26,10 +27,12 @@ export class EventsGateway
   }
 
   handleDisconnect(client: Socket) {
+    this.users--;
     this.logger.log(`Client disconnected: ${client.id}`);
   }
 
   handleConnection(client: Socket, ...args: any[]) {
+    this.users++;
     this.logger.log(`Client connected: ${client.id}`);
   }
 }

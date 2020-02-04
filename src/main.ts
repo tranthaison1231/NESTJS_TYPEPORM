@@ -50,9 +50,10 @@ async function bootstrap() {
       app.enableCors();
     } else {
       app.enableCors({
-        origin: 'http',
+        origin: true,
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+        optionsSuccessStatus: 200,
+        credentials: true, // some legacy browsers (IE11, various SmartTVs) choke on 204
       });
       logger.log(`Accepting request from origin http`);
     }

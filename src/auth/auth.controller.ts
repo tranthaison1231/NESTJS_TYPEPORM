@@ -1,4 +1,12 @@
-import { Controller, Post, Body, ValidationPipe, Logger } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  ValidationPipe,
+  Logger,
+  UseGuards,
+  Get,
+} from '@nestjs/common';
 import {
   AuthCredentialsDto,
   ForgotPasswordDto,
@@ -7,12 +15,23 @@ import {
 } from './dto/auth-credentials.dto';
 import { AuthService } from './auth.service';
 import { User } from '@/users/user.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { GetUser } from '../users/get-user-decorator';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
+
+  @Get('/info')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard())
+  getInfo(@GetUser() user: User): { data: User } {
+    return {
+      data: user,
+    };
+  }
 
   @Post('/signup')
   signUp(

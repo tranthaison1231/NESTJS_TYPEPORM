@@ -49,7 +49,11 @@ async function bootstrap() {
     if (NODE_ENV === 'development') {
       app.enableCors();
     } else {
-      app.enableCors({ origin: 'http' });
+      app.enableCors({
+        origin: 'http',
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+      });
       logger.log(`Accepting request from origin http`);
     }
 

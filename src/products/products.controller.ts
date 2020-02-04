@@ -111,7 +111,7 @@ export class ProductsController {
 
   @Delete()
   removeAllProduct(@GetUser() user: User): Promise<void> {
-    return this.productsService.removeAllProduct(user);
+    return this.productsService.removeAllProduct(user.id);
   }
 
   @Post('uploads')

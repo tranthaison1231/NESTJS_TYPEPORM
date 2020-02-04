@@ -50,6 +50,7 @@
     "ioredis": "^4.14.1",
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
+    "nexmo": "^2.5.3",
     "nodemailer": "^6.4.2",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",

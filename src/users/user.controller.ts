@@ -30,14 +30,19 @@ import {
   ApiBody,
 } from '@nestjs/swagger';
 import { UsersService } from './user.service';
-import { UserDto } from './dto/user.dto';
+import { UserDto, PhoneDto } from './dto/user.dto';
+import { nexmo } from '../config/nexmo.config';
+import { ProductsService } from '../products/products.service';
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
   private logger = new Logger('UsersController');
 
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly productsService: ProductsService,
+  ) {}
 
   @Get()
   getAllUsers(): Promise<User[]> {
@@ -49,9 +54,30 @@ export class UsersController {
     return this.usersService.deleteAllUser();
   }
 
+  @Post()
+  sendSMS(): void {
+    nexmo.verify.request(
+      {
+        number: '84901989847',
+        brand: 'Nexmo',
+        code_length: '4',
+      },
+      (err, result) => {
+        console.log(err ? err : result);
+      },
+    );
+  }
+
   @Get(':id')
   getUser(@Param('id', ParseUUIDPipe) id: string): Promise<User> {
     return this.usersService.getUser(id);
+  }
+
+  @Delete(':id')
+  deleteUserById(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
+    console.log(id);
+    this.productsService.removeAllProduct(+id);
+    return this.usersService.deleteUserById(id);
   }
 
   @Put(':id')

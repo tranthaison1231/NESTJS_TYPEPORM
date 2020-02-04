@@ -39,6 +39,13 @@ export class UsersService {
     }
   }
 
+  async deleteUserById(id: string): Promise<void> {
+    // const result = await this.userRepository.find(id);
+    // if (result.affected === 0) {
+    //   throw new NotFoundException(`User with ID "${id}" not found`);
+    // }
+  }
+
   async updateUser(id: string, userDto: UserDto): Promise<User> {
     const user = await this.getUser(id);
     user.email = userDto.email;

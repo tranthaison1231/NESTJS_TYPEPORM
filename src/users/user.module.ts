@@ -8,11 +8,8 @@ import { ProductsService } from '../products/products.service';
 import { ProductRepository } from '../products/product.repository';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([UserRepository]),
-    TypeOrmModule.forFeature([ProductRepository]),
-  ],
+  imports: [TypeOrmModule.forFeature([UserRepository])],
   controllers: [UsersController],
-  providers: [UsersService, ProductsService],
+  providers: [UsersService],
 })
 export class UsersModule {}

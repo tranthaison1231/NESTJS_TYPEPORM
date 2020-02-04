@@ -39,10 +39,7 @@ import { ProductsService } from '../products/products.service';
 export class UsersController {
   private logger = new Logger('UsersController');
 
-  constructor(
-    private readonly usersService: UsersService,
-    private readonly productsService: ProductsService,
-  ) {}
+  constructor(private readonly usersService: UsersService) {}
 
   @Get()
   getAllUsers(): Promise<User[]> {
@@ -75,8 +72,6 @@ export class UsersController {
 
   @Delete(':id')
   deleteUserById(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
-    console.log(id);
-    this.productsService.removeAllProduct(+id);
     return this.usersService.deleteUserById(id);
   }
 

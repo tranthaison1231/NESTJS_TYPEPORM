@@ -4,8 +4,8 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 export const setupSwagger = (app: INestApplication) => {
   const options = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('Simple API')
-    .setDescription('Simple API Description')
+    .setTitle('NESTJ SHYN API')
+    .setDescription('API FOR NEST APPLICATION BY SHYN')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, options);

@@ -28,7 +28,10 @@ export class Product extends BaseEntity {
   @ManyToOne(
     type => User,
     user => user.products,
-    { eager: false },
+    {
+      eager: false,
+      onDelete: 'CASCADE',
+    },
   )
   user: User;
 

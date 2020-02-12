@@ -8,6 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/user.entity';
 import { UserRepository } from './user.repository';
 import { UserDto } from './dto/user.dto';
+import { Pagination } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class UsersService {
@@ -17,8 +18,8 @@ export class UsersService {
     private userRepository: UserRepository,
   ) {}
 
-  async getAllUser(): Promise<User[]> {
-    return this.userRepository.getAllUser();
+  async getAllUser(page: number, limit: number): Promise<Pagination<User>> {
+    return this.userRepository.getAllUser(page, limit);
   }
 
   async getUser(id: string): Promise<User> {

@@ -12,6 +12,11 @@ import {
 
 import * as bcrypt from 'bcrypt';
 import { hashPassword, comparePassword } from '@/utils/password';
+import {
+  paginate,
+  Pagination,
+  IPaginationOptions,
+} from 'nestjs-typeorm-paginate';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
@@ -47,10 +52,14 @@ export class UserRepository extends Repository<User> {
     }
   }
 
-  async getAllUser(): Promise<User[]> {
+  async getAllUser(page: number, limit: number): Promise<Pagination<User>> {
     const query = this.createQueryBuilder('user');
     try {
-      const users = await query.getMany();
+      const users = await paginate(query, {
+        page: page,
+        limit: limit,
+        route: 'https://netjs.herokuapp.com/users',
+      });
       return users;
     } catch (error) {
       this.logger.error(`Fail to get all users`);

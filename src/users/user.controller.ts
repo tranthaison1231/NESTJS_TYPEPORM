@@ -30,9 +30,10 @@ import {
   ApiBody,
 } from '@nestjs/swagger';
 import { UsersService } from './user.service';
-import { UserDto, PhoneDto } from './dto/user.dto';
+import { UserDto, PhoneDto, GetUsersQueryDto } from './dto/user.dto';
 import { nexmo } from '../config/nexmo.config';
 import { ProductsService } from '../products/products.service';
+import { Pagination } from 'nestjs-typeorm-paginate';
 
 @ApiTags('Users')
 @Controller('users')
@@ -42,8 +43,11 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  getAllUsers(): Promise<User[]> {
-    return this.usersService.getAllUser();
+  getAllUsers(
+    @Query(ValidationPipe) { limit = 10, page = 0 }: GetUsersQueryDto,
+  ): Promise<Pagination<User>> {
+    limit = limit > 100 ? 100 : limit;
+    return this.usersService.getAllUser(page, limit);
   }
 
   @Delete()

@@ -34,6 +34,9 @@ import { UserDto, PhoneDto, GetUsersQueryDto } from './dto/user.dto';
 import { nexmo } from '../config/nexmo.config';
 import { ProductsService } from '../products/products.service';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { uploadImage } from '../config/cloudinary.config';
+import { multerOptions } from '../config/multer.config';
+import { FileUploadDto } from '../users/dto/user.dto';
 
 @ApiTags('Users')
 @Controller('users')
@@ -85,5 +88,17 @@ export class UsersController {
     @Body(ValidationPipe) userDto: UserDto,
   ): Promise<User> {
     return this.usersService.updateUser(id, userDto);
+  }
+
+  @Post('uploads')
+  @UseInterceptors(FileInterceptor('file', multerOptions))
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Product image',
+    type: FileUploadDto,
+  })
+  async uploadFile(@UploadedFile() file): Promise<string> {
+    const result = await uploadImage(file);
+    return result;
   }
 }

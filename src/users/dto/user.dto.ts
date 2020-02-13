@@ -35,3 +35,8 @@ export class GetUsersQueryDto {
   @ApiPropertyOptional()
   limit: number;
 }
+
+export class FileUploadDto {
+  @ApiProperty({ type: 'string', format: 'binary' })
+  file: any;
+}

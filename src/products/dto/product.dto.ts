@@ -30,8 +30,3 @@ export class GetProductsFilterDto {
   @IsNotEmpty()
   search: string;
 }
-
-export class FileUploadDto {
-  @ApiProperty({ type: 'string', format: 'binary' })
-  file: any;
-}

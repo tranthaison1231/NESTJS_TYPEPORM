@@ -23,7 +23,6 @@ import { ProductStatus } from './product-status.enum';
 import {
   CreateProductDto,
   GetProductsFilterDto,
-  FileUploadDto,
   // CreateMultiProductDto,
 } from './dto/product.dto';
 import { ProductStatusValidationPipe } from './pipes/product-status-validation.pipe';
@@ -38,8 +37,6 @@ import {
   ApiConsumes,
   ApiBody,
 } from '@nestjs/swagger';
-import { uploadImage } from '../config/cloudinary.config';
-import { multerOptions } from '../config/multer.config';
 
 @ApiBearerAuth()
 @ApiTags('Products')
@@ -112,17 +109,5 @@ export class ProductsController {
   @Delete()
   removeAllProduct(@GetUser() user: User): Promise<void> {
     return this.productsService.removeAllProduct(user.id);
-  }
-
-  @Post('uploads')
-  @UseInterceptors(FileInterceptor('file', multerOptions))
-  @ApiConsumes('multipart/form-data')
-  @ApiBody({
-    description: 'Product image',
-    type: FileUploadDto,
-  })
-  async uploadFile(@UploadedFile() file): Promise<string> {
-    const result = await uploadImage(file);
-    return result;
   }
 }

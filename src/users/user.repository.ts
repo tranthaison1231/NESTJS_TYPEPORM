@@ -22,7 +22,7 @@ import {
 export class UserRepository extends Repository<User> {
   private logger = new Logger('UserRepository');
 
-  async signUp(authCredentialsDto: AuthCredentialsDto) {
+  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<string> {
     const { username, password, email } = authCredentialsDto;
     const user = new User();
     user.email = email;
@@ -31,6 +31,7 @@ export class UserRepository extends Repository<User> {
     user.password = await hashPassword(password, user.salt);
     try {
       await user.save();
+      return user.username;
     } catch (error) {
       console.log(error);
       if (error.code === '23505') {

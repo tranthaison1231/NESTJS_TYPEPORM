@@ -12,12 +12,19 @@ export const sendEmail = async (email: string, link: string) => {
     },
   });
 
-  const info = await transporter.sendMail({
-    from: '<thanhhuyenpoo13@gmail.com>',
-    to: email,
-    subject: 'Hello ✔',
-    text: 'Hello world?',
-    html: `<b>Hello world?</b> <a href="${link}">confirm Email</a>`,
-  });
-  console.log('Message sent: %s', email);
+  const MAIL_BODY = `<b>Hello world?</b> <a href="${link}">confirm Email</a>`;
+
+  try {
+    const info = await transporter.sendMail({
+      from: '<thanhhuyenpoo13@gmail.com>',
+      to: email,
+      subject: 'Hello ✔',
+      text: 'Hello world?',
+      html: MAIL_BODY,
+    });
+    console.log(info);
+    console.log(`Message sent: ${email}`);
+  } catch (error) {
+    console.error(`Error: ${error}`);
+  }
 };

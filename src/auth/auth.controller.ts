@@ -36,7 +36,7 @@ export class AuthController {
   @Post('/signup')
   signUp(
     @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
-  ): Promise<void> {
+  ): Promise<{ data: { token: string } }> {
     return this.authService.signUp(authCredentialsDto);
   }
 

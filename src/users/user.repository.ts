@@ -57,7 +57,7 @@ export class UserRepository extends Repository<User> {
     try {
       const users = await paginate(query, {
         page: page,
-        limit: limit,
+        limit: limit > 100 ? 100 : limit,
         route: 'https://netjs.herokuapp.com/users',
       });
       return users;

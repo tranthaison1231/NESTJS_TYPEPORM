@@ -49,7 +49,6 @@ export class UsersController {
   getAllUsers(
     @Query(ValidationPipe) { limit = 10, page = 0 }: GetUsersQueryDto,
   ): Promise<Pagination<User>> {
-    limit = limit > 100 ? 100 : limit;
     return this.usersService.getAllUser(page, limit);
   }
 

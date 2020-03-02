@@ -8,6 +8,7 @@ import {
   IsJWT,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsPassword } from '../../utils/classVaidator';
 
 export class SignInDto {
   @ApiProperty()
@@ -17,12 +18,9 @@ export class SignInDto {
   username: string;
 
   @ApiProperty()
-  @IsString()
   @MinLength(8)
   @MaxLength(20)
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-    message: 'password too weak',
-  })
+  @IsPassword()
   password: string;
 }
 
@@ -44,11 +42,8 @@ export class ChangePasswordDto {
   token: string;
 
   @ApiProperty()
-  @IsString()
   @MinLength(8)
   @MaxLength(20)
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-    message: 'password too weak',
-  })
+  @IsPassword()
   password: string;
 }

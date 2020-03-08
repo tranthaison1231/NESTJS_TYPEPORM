@@ -5,15 +5,10 @@ import {
   Body,
   Param,
   Delete,
-  Patch,
   Query,
-  UsePipes,
   ValidationPipe,
-  ParseIntPipe,
-  UseGuards,
   Logger,
   UseInterceptors,
-  Res,
   UploadedFile,
   ParseUUIDPipe,
   Put,
@@ -22,18 +17,12 @@ import {
 import { GetUser } from 'src/users/get-user-decorator';
 import { User } from 'src/users/user.entity';
 import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
-import {
-  ApiTags,
-  ApiBearerAuth,
-  ApiOperation,
-  ApiConsumes,
-  ApiBody,
-} from '@nestjs/swagger';
+import { ApiTags, ApiConsumes, ApiBody } from '@nestjs/swagger';
+import { Pagination } from 'nestjs-typeorm-paginate';
 import { UsersService } from './user.service';
 import { UserDto, PhoneDto, GetUsersQueryDto } from './dto/user.dto';
 import { nexmo } from '../config/nexmo.config';
 import { ProductsService } from '../products/products.service';
-import { Pagination } from 'nestjs-typeorm-paginate';
 import { uploadImage } from '../config/cloudinary.config';
 import { multerOptions } from '../config/multer.config';
 import { FileUploadDto } from '../users/dto/user.dto';
@@ -66,7 +55,7 @@ export class UsersController {
         code_length: '4',
       },
       (err, result) => {
-        console.log(err ? err : result);
+        console.log(err || result);
       },
     );
   }

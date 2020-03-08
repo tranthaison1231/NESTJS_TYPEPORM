@@ -1,9 +1,9 @@
 import { Repository, EntityRepository } from 'typeorm';
+import { User } from 'src/users/user.entity';
+import { Logger, InternalServerErrorException } from '@nestjs/common';
 import { Product } from './product.entity';
 import { CreateProductDto, GetProductsFilterDto } from './dto/product.dto';
 import { ProductStatus } from './product-status.enum';
-import { User } from 'src/users/user.entity';
-import { Logger, InternalServerErrorException } from '@nestjs/common';
 
 @EntityRepository(Product)
 export class ProductRepository extends Repository<Product> {

@@ -2,13 +2,12 @@ import {
   IsString,
   MinLength,
   MaxLength,
-  Matches,
   IsEmail,
   IsNotEmpty,
   IsJWT,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsPassword } from '../../utils/classVaidator';
+import { IsPassword } from '@/utils/classVaidator';
 
 export class SignInDto {
   @ApiProperty()

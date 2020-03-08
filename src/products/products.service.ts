@@ -4,16 +4,17 @@ import {
   NotFoundException,
   HttpException,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/users/user.entity';
 import { ProductStatus } from './product-status.enum';
 import { CreateProductDto, GetProductsFilterDto } from './dto/product.dto';
-import { InjectRepository } from '@nestjs/typeorm';
 import { ProductRepository } from './product.repository';
 import { Product } from './product.entity';
-import { User } from 'src/users/user.entity';
 
 @Injectable()
 export class ProductsService {
   private products: Product[] = [];
+
   constructor(
     @InjectRepository(ProductRepository)
     private productRepository: ProductRepository,
@@ -25,13 +26,6 @@ export class ProductsService {
   ): Promise<Product> {
     return this.productRepository.addProduct(createProductDto, user);
   }
-
-  // async insertMultiProduct(
-  //   createProductDto: CreateProductDto,
-  //   user: User,
-  // ): Promise<Product> {
-  //   return this.productRepository.addMultiProduct(createProductDto, user);
-  // }
 
   async getProducts(
     filterDto: GetProductsFilterDto,

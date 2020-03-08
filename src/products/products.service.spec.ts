@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-undef */
 import { Test } from '@nestjs/testing';
 import { ProductsService } from './products.service';
 import { ProductRepository } from './product.repository';

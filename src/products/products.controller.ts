@@ -18,6 +18,16 @@ import {
   ParseUUIDPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/users/get-user-decorator';
+import { User } from 'src/users/user.entity';
+import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
+import {
+  ApiTags,
+  ApiBearerAuth,
+  ApiQuery,
+  ApiBody,
+  ApiOperation,
+} from '@nestjs/swagger';
 import { ProductsService } from './products.service';
 import { ProductStatus } from './product-status.enum';
 import {
@@ -27,16 +37,6 @@ import {
 } from './dto/product.dto';
 import { ProductStatusValidationPipe } from './pipes/product-status-validation.pipe';
 import { Product } from './product.entity';
-import { GetUser } from 'src/users/get-user-decorator';
-import { User } from 'src/users/user.entity';
-import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
-import {
-  ApiTags,
-  ApiBearerAuth,
-  ApiOperation,
-  ApiConsumes,
-  ApiBody,
-} from '@nestjs/swagger';
 
 @ApiBearerAuth()
 @ApiTags('Products')
@@ -47,6 +47,9 @@ export class ProductsController {
 
   constructor(private readonly productsService: ProductsService) {}
 
+  @ApiOperation({
+    summary: 'Create New Product',
+  })
   @Post()
   @UsePipes(ValidationPipe)
   addProduct(
@@ -61,15 +64,9 @@ export class ProductsController {
     return this.productsService.insertProduct(createProductDto, user);
   }
 
-  // @Post('/multiple')
-  // @UsePipes(ValidationPipe)
-  // addMultiProduct(
-  //   @Body() createMultiProductDto: CreateMultiProductDto,
-  //   @GetUser() user: User,
-  // ): Promise<Product> {
-  //   return this.productsService.insertMultiProduct(createMultiProductDto, user);
-  // }
-
+  @ApiOperation({
+    summary: 'Get List of Products',
+  })
   @Get()
   getProducts(
     @Query(ValidationPipe) filterDto: GetProductsFilterDto,
@@ -82,6 +79,9 @@ export class ProductsController {
   }
 
   @Get('/:id')
+  @ApiOperation({
+    summary: 'Get Detail Product by ID',
+  })
   getProduct(
     @Param('id', ParseUUIDPipe) id: string,
     @GetUser() user: User,

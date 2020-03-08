@@ -7,6 +7,9 @@ import {
   UseGuards,
   Get,
 } from '@nestjs/common';
+import { User } from '@/users/user.entity';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 import {
   AuthCredentialsDto,
   ForgotPasswordDto,
@@ -14,10 +17,7 @@ import {
   SignInDto,
 } from './dto/auth-credentials.dto';
 import { AuthService } from './auth.service';
-import { User } from '@/users/user.entity';
-import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { GetUser } from '../users/get-user-decorator';
-import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Auth')
 @Controller('auth')

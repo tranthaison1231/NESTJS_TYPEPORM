@@ -1,18 +1,14 @@
-import {
-  Injectable,
-  Get,
-  NotFoundException,
-  HttpException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/user.entity';
+import { Pagination } from 'nestjs-typeorm-paginate';
 import { UserRepository } from './user.repository';
 import { UserDto } from './dto/user.dto';
-import { Pagination } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class UsersService {
   private users: User[] = [];
+
   constructor(
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,

@@ -1,5 +1,6 @@
+/* eslint-disable no-return-await */
 import * as bcrypt from 'bcrypt';
-import { SALT } from '../environments';
+import { SALT } from '@/environments';
 
 export const hashPassword = async (
   password: string,

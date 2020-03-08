@@ -1,3 +1,5 @@
+/* eslint-disable no-async-promise-executor */
+/* eslint-disable dot-notation */
 import {
   CLOUDINARY_SECRET_KEY,
   CLOUDINARY_KEY,

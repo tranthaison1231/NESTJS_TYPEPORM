@@ -5,8 +5,8 @@ import {
   Column,
   ManyToOne,
 } from 'typeorm';
-import { ProductStatus } from './product-status.enum';
 import { User } from 'src/users/user.entity';
+import { ProductStatus } from './product-status.enum';
 
 @Entity()
 export class Product extends BaseEntity {

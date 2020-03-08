@@ -48,16 +48,16 @@ export class UserRepository extends Repository<User> {
     const user = await this.findOne({ username });
     if (user && (await comparePassword(password, user.password))) {
       return user.username;
-    } else {
+    } 
       return null;
-    }
+    
   }
 
   async getAllUser(page: number, limit: number): Promise<Pagination<User>> {
     const query = this.createQueryBuilder('user');
     try {
       const users = await paginate(query, {
-        page: page,
+        page,
         limit: limit > 100 ? 100 : limit,
         route: 'https://netjs.herokuapp.com/users',
       });

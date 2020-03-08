@@ -1,5 +1,5 @@
 import * as nodemailer from 'nodemailer';
-import { SENDGRID_API_KEY } from '../environments';
+import { SENDGRID_API_KEY } from '@/environments';
 
 export const sendEmail = async (email: string, link: string) => {
   const transporter = nodemailer.createTransport({

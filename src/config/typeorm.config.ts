@@ -15,6 +15,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: RDS_USERNAME,
   password: RDS_PASSWORD,
   database: RDS_DB_NAME,
-  entities: [__dirname + '/../**/*.entity.{js,ts}'],
+  entities: [`${__dirname  }/../**/*.entity.{js,ts}`],
   synchronize: true,
 };

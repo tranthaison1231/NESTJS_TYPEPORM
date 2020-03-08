@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { PipeTransform, BadRequestException } from '@nestjs/common';
 import { ProductStatus } from '../product-status.enum';
 
@@ -7,6 +8,7 @@ export class ProductStatusValidationPipe implements PipeTransform {
     ProductStatus.IN_PROGRESS,
     ProductStatus.DONE,
   ];
+
   transform(value: any) {
     value = value.toUpperCase();
     if (!this.isStatusValid(value)) {

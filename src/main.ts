@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '@/app.module';
 import { Logger, InternalServerErrorException } from '@nestjs/common';

@@ -15,7 +15,7 @@ export function IsLongerThan(
     registerDecorator({
       name: 'isLongerThan',
       target: object.constructor,
-      propertyName: propertyName,
+      propertyName,
       constraints: [property],
       options: validationOptions,
       validator: {
@@ -41,7 +41,7 @@ export function IsPassword() {
     registerDecorator({
       name: 'isPassword',
       target: object.constructor,
-      propertyName: propertyName,
+      propertyName,
       constraints: [],
       options: validationOptions,
       validator: {

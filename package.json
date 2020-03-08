@@ -94,8 +94,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint",
-      "pre-push": "npm test"
+      "pre-commit": "yarn lint"
     }
   },
   "jest": {

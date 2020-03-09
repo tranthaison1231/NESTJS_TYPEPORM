@@ -390,4 +390,5 @@ Temporary Items
 docker-compose.yml
 .env
 dist
+documentation
 now.json

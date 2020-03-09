@@ -21,7 +21,8 @@
     "db:start": "pg_ctl -D /usr/local/var/postgres start",
     "db:stop": "pg_ctl -D /usr/local/var/postgres stop -s -m fast",
     "deploy:now": "yarn prebuild && yarn build && npx now",
-    "deploy:heroku": "yarn prebuild && yarn build && git push heroku master"
+    "deploy:heroku": "yarn prebuild && yarn build && git push heroku master",
+    "compodoc": "npx compodoc -p tsconfig.json -s"
   },
   "dependencies": {
     "@nestjs/common": "^6.11.11",
@@ -66,6 +67,7 @@
     "uuid": "^7.0.2"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.11",
     "@nestjs/cli": "^6.14.2",
     "@nestjs/schematics": "^6.9.4",
     "@nestjs/testing": "^6.11.11",

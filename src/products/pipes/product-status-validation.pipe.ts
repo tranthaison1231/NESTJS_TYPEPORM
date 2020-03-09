@@ -9,7 +9,7 @@ export class ProductStatusValidationPipe implements PipeTransform {
     ProductStatus.DONE,
   ];
 
-  transform(value: any) {
+  transform(value: string) {
     value = value.toUpperCase();
     if (!this.isStatusValid(value)) {
       throw new BadRequestException(`"${value}" is an valid status`);

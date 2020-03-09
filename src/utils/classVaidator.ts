@@ -11,7 +11,7 @@ export function IsLongerThan(
   property: string,
   validationOptions?: ValidationOptions,
 ) {
-  return function(object: Object, propertyName: string) {
+  return (object: Object, propertyName: string) => {
     registerDecorator({
       name: 'isLongerThan',
       target: object.constructor,
@@ -37,7 +37,7 @@ export function IsPassword() {
   const validationOptions: ValidationOptions = {
     message: 'Password is too weak',
   };
-  return function(object: Object, propertyName: string) {
+  return (object: Object, propertyName: string) => {
     registerDecorator({
       name: 'isPassword',
       target: object.constructor,

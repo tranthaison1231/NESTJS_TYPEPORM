@@ -33,6 +33,7 @@ import { ProductStatus } from './product-status.enum';
 import {
   CreateProductDto,
   GetProductsFilterDto,
+  GetStatusDto,
   // CreateMultiProductDto,
 } from './dto/product.dto';
 import { ProductStatusValidationPipe } from './pipes/product-status-validation.pipe';
@@ -90,6 +91,11 @@ export class ProductsController {
   }
 
   @Patch(':id/status')
+  @ApiBody({
+    description: 'List of status Product',
+    type: GetStatusDto,
+  })
+  @UsePipes(ValidationPipe)
   updateProductStatus(
     @Param('id', ParseUUIDPipe) id: string,
     @Body('status', ProductStatusValidationPipe) status: ProductStatus,

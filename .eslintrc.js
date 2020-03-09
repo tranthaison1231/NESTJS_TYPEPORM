@@ -8,6 +8,7 @@ module.exports = {
     'prettier',
     'plugin:import/errors',
     'plugin:import/warnings',
+    'plugin:nestjs/recommended',
   ],
   globals: {
     Atomics: 'readonly',
@@ -18,7 +19,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'nestjs'],
   rules: {
     'import/prefer-default-export': 0,
     'import/no-unresolved': 0,

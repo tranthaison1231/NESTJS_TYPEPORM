@@ -12,7 +12,8 @@ export class CreateProductDto {
   @IsNotEmpty()
   price: number;
 }
-export class GetProductsFilterDto {
+
+export class GetStatusDto {
   @IsOptional()
   @IsIn([ProductStatus.OPEN, ProductStatus.IN_PROGRESS, ProductStatus.DONE])
   @ApiPropertyOptional({
@@ -21,7 +22,9 @@ export class GetProductsFilterDto {
     default: ProductStatus.OPEN,
   })
   status: ProductStatus;
+}
 
+export class GetProductsFilterDto extends GetStatusDto {
   @IsOptional()
   @ApiPropertyOptional()
   @IsNotEmpty()

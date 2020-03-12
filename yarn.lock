@@ -518,13 +518,13 @@
     socket.io "2.3.0"
     tslib "1.11.1"
 
-"@nestjs/schedule@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@nestjs/schedule/-/schedule-0.2.0.tgz#748c9ba59de0dc9a5baebb100d7734490b58572c"
-  integrity sha512-VkPPQYzsKexltKYf3yE2f1ZmUebGlkd4hfJ8kNtzLYfcfn4ZN+nn7zsJ0yyNvWlCeq3oD1cFLW3Y5qoS4+Glag==
+"@nestjs/schedule@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@nestjs/schedule/-/schedule-0.2.1.tgz#d878f1c0906238c4f2ee23b0e360283358f546c9"
+  integrity sha512-cEeupUPMjz5zSHlmsrxSW4YWwFNl3kVTvxus6w8SsPJT3KTQtH0wf/YcXF7gvStx/+zml+BOidLMHwVFT3X9Aw==
   dependencies:
     cron "1.8.2"
-    uuid "3.4.0"
+    uuid "7.0.2"
 
 "@nestjs/schematics@^6.8.2", "@nestjs/schematics@^6.9.4":
   version "6.9.4"
@@ -551,12 +551,12 @@
     optional "0.1.4"
     tslib "1.11.1"
 
-"@nestjs/typeorm@^6.3.3":
-  version "6.3.3"
-  resolved "https://registry.yarnpkg.com/@nestjs/typeorm/-/typeorm-6.3.3.tgz#a096d0fe7412eacea7a99d7c46f17ff7f11b0b47"
-  integrity sha512-N6rKvZfblmkMF3G93QilLRY8nhFwfqYRUwjcOMRxfffuyV9+don5MPG1P3p/SimWoWaizYMD5lfhEFOfRHMJ9g==
+"@nestjs/typeorm@^6.3.4":
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/@nestjs/typeorm/-/typeorm-6.3.4.tgz#d73ee782080500f7d314ec5131fe9cb32817d2a4"
+  integrity sha512-qMUHaTMo+U5WOlMfL0ogNm8C2T/Kej/v+NnjSixx/UmtluLvTbNYuZUfbHI9ePCmtCXDV0lMRvIAi+U5LCjsbA==
   dependencies:
-    uuid "3.4.0"
+    uuid "^7.0.2"
 
 "@nestjs/websockets@^6.11.11":
   version "6.11.11"
@@ -1495,10 +1495,10 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-aws-sdk@^2.636.0:
-  version "2.636.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.636.0.tgz#247124540b5b88a217aa6c282ce662b2f539721f"
-  integrity sha512-Zd/jed8qSNCm4pT2+8BuFfveouZrqUqmsOdhzpi3ZB3GYqV5eD+dmsl8OY+qvMgIJIFCB34a1SMucsC4zdBokg==
+aws-sdk@^2.638.0:
+  version "2.638.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.638.0.tgz#43df5a956696177c577b841ea21b4007a81dbdaa"
+  integrity sha512-DOSwedH2YkPVs3c2AQezK6FHuGRIDffgULGvmpY9ZmZ/x45Sw+p7WHCYPgWfw/Z1fJWzMjaIpu531xG7pyJV4A==
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -2281,14 +2281,13 @@ clone@^1.0.1, clone@^1.0.2:
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
 
-cloudinary@^1.19.0:
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/cloudinary/-/cloudinary-1.19.0.tgz#333dafb53ee32efea5457e28a80ecb8f6d31e48c"
-  integrity sha512-oEz4Fsqshd9SI7UAvF1CCyAmt3wgsv8tK1eRY0900gQaq+wP8TAzpruxpbQCmxvF6gL9Po7OpO0m0Jefx6uK8w==
+cloudinary@^1.20.0:
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/cloudinary/-/cloudinary-1.20.0.tgz#88f3964be91cc9808b5c7834bf06e03d22954636"
+  integrity sha512-/e76lEr5PS5gefvWUJ2Ou90zuEQCc0agTq8hrx2uxfFhUGlzEQ9mPPcwAeHFY1gj9caq0iHLuvTDvBbLSRhX9w==
   dependencies:
     lodash "^4.17.11"
     q "^1.5.1"
-    typescript "^2.9.2"
 
 cluster-key-slot@^1.1.0:
   version "1.1.0"
@@ -6456,10 +6455,10 @@ node-pre-gyp@0.14.0:
     semver "^5.3.0"
     tar "^4.4.2"
 
-nodemailer@^6.4.4:
-  version "6.4.4"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.4.4.tgz#f4bb26a833786e8908b3ac8afbf2d0382ac24feb"
-  integrity sha512-2GqGu5o3FBmDibczU3+LZh9lCEiKmNx7LvHl512p8Kj+Kn5FQVOICZv85MDFz/erK0BDd5EJp3nqQLpWCZD1Gg==
+nodemailer@^6.4.5:
+  version "6.4.5"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.4.5.tgz#45614c6454d1a947242105eeddae03df87e29916"
+  integrity sha512-NH7aNVQyZLAvGr2+EOto7znvz+qJ02Cb/xpou98ApUt5tEAUSVUxhvHvgV/8I5dhjKTYqUw0nasoKzLNBJKrDQ==
 
 noms@0.0.0:
   version "0.0.0"
@@ -9020,7 +9019,7 @@ typescript@2.9.1:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.1.tgz#fdb19d2c67a15d11995fd15640e373e09ab09961"
   integrity sha512-h6pM2f/GDchCFlldnriOhs1QHuwbnmj6/v7499eMHqPeW4V2G0elua2eIc2nu8v2NdHV0Gm+tzX83Hr6nUFjQA==
 
-typescript@^2.4.2, typescript@^2.9.2:
+typescript@^2.4.2:
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
   integrity sha512-Gr4p6nFNaoufRIY4NMdpQRNmgxVIGMs4Fcu/ujdYk3nAZqk7supzBE9idmvfZIlH/Cuj//dvi+019qEue9lV0w==
@@ -9199,25 +9198,25 @@ uuid@3.3.2:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
 
-uuid@3.4.0, uuid@^3.0.0, uuid@^3.3.2, uuid@^3.3.3:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
-  integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
-
 uuid@7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.1.tgz#95ed6ff3d8c881cbf85f0f05cc3915ef994818ef"
   integrity sha512-yqjRXZzSJm9Dbl84H2VDHpM3zMjzSJQ+hn6C4zqd5ilW+7P4ZmLEEqwho9LjP+tGuZlF4xrHQXT0h9QZUS/pWA==
+
+uuid@7.0.2, uuid@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.2.tgz#7ff5c203467e91f5e0d85cfcbaaf7d2ebbca9be6"
+  integrity sha512-vy9V/+pKG+5ZTYKf+VcphF5Oc6EFiu3W8Nv3P3zIh0EqVI80ZxOzuPfe9EHjkFNvf8+xuTHVeei4Drydlx4zjw==
 
 uuid@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
   integrity sha1-Z+LoY3lyFVMN/zGOW/nc6/1Hsho=
 
-uuid@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.2.tgz#7ff5c203467e91f5e0d85cfcbaaf7d2ebbca9be6"
-  integrity sha512-vy9V/+pKG+5ZTYKf+VcphF5Oc6EFiu3W8Nv3P3zIh0EqVI80ZxOzuPfe9EHjkFNvf8+xuTHVeei4Drydlx4zjw==
+uuid@^3.0.0, uuid@^3.3.2, uuid@^3.3.3:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
+  integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
 v8-compile-cache@^2.0.3:
   version "2.1.0"

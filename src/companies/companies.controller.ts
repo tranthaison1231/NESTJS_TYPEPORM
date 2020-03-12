@@ -1,6 +1,6 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Post, Body, Param, ParseUUIDPipe } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Company } from './companies.entity';
 import { CompaniesService } from './companies.service';
 import { CreateCompaniesDto } from './dto/companies.dto';
@@ -24,4 +24,12 @@ import { CreateCompaniesDto } from './dto/companies.dto';
 @Controller('companies')
 export class CompaniesController implements CrudController<Company> {
   constructor(public service: CompaniesService) {}
+
+  @ApiOperation({
+    summary: 'Add new user for company',
+  })
+  @Post(':id/users')
+  addUser(@Param('id', ParseUUIDPipe) id: string): void {
+    console.log(id);
+  }
 }

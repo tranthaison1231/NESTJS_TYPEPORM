@@ -6,6 +6,7 @@ import { ProductsModule } from '@/products/products.module';
 import { AuthModule } from '@/auth/auth.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpErrorFilter } from '@/shared/http-error.filter';
+// import here
 import { TasksModule } from '@/tasks/tasks.module';
 import { UsersModule } from '@/users/user.module';
 import { EventsModule } from './events/events.module';
@@ -14,6 +15,7 @@ import { CompaniesModule } from './companies/companies.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
+    // add here
     ProductsModule,
     AuthModule,
     TasksModule,

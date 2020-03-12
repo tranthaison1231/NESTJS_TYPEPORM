@@ -5,10 +5,12 @@ import {
   Unique,
   OneToMany,
   Column,
+  ManyToOne,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Product } from '@/products/product.entity';
 import { BaseModel } from '@/shared/base.entity';
+import { Company } from '@/companies/companies.entity';
 
 @Entity()
 export class User extends BaseModel {
@@ -30,4 +32,14 @@ export class User extends BaseModel {
     { eager: true },
   )
   products: Product[];
+
+  @ManyToOne(
+    type => Company,
+    company => company.user,
+    {
+      eager: false,
+      onDelete: 'CASCADE',
+    },
+  )
+  company: Company;
 }

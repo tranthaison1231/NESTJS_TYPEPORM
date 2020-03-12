@@ -62,7 +62,7 @@ export class ProductsService {
     }
   }
 
-  async removeAllProduct(id: number): Promise<void> {
+  async removeAllProduct(id: string): Promise<void> {
     try {
       await this.productRepository.delete(id);
     } catch (error) {

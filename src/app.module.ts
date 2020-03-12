@@ -9,6 +9,7 @@ import { HttpErrorFilter } from '@/shared/http-error.filter';
 import { TasksModule } from '@/tasks/tasks.module';
 import { UsersModule } from '@/users/user.module';
 import { EventsModule } from './events/events.module';
+import { CompaniesModule } from './companies/companies.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { EventsModule } from './events/events.module';
     TasksModule,
     UsersModule,
     EventsModule,
+    CompaniesModule,
   ],
   providers: [
     {

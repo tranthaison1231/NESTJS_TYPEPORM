@@ -1,4 +1,9 @@
-import { PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import {
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 export class BaseVm {
   constructor(
@@ -9,12 +14,20 @@ export class BaseVm {
 }
 
 export class BaseModel extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @Column()
+  @CreateDateColumn({
+    default: () => 'CURRENT_TIMESTAMP',
+    type: 'timestamp',
+    name: 'create_at',
+  })
   createdAt: Date;
 
-  @Column()
+  @UpdateDateColumn({
+    default: () => 'CURRENT_TIMESTAMP',
+    type: 'timestamp',
+    name: 'update_at',
+  })
   updatedAt: Date;
 }

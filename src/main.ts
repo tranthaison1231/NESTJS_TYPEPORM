@@ -25,7 +25,7 @@ async function bootstrap() {
       cors: true,
     });
 
-    // body parser
+    // body parsers
     app.use(bodyParser.json({ limit: '2mb' }));
     app.use(
       bodyParser.urlencoded({

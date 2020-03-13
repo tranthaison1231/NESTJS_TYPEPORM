@@ -35,7 +35,7 @@ export class User extends BaseModel {
 
   @ManyToOne(
     type => Company,
-    company => company.user,
+    company => company.users,
     {
       eager: false,
       onDelete: 'CASCADE',

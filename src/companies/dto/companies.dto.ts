@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsEmail } from 'class-validator';
+import { IsNotEmpty, IsEmail, IsArray } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCompaniesDto {
@@ -9,4 +9,10 @@ export class CreateCompaniesDto {
   @ApiProperty()
   @IsNotEmpty()
   name: string;
+}
+
+export class CreateUsersDto {
+  @ApiProperty()
+  @IsArray()
+  userID: string[];
 }

@@ -15,5 +15,5 @@ export class Company extends BaseModel {
     user => user.company,
     { eager: true },
   )
-  user: User[];
+  users: User[];
 }

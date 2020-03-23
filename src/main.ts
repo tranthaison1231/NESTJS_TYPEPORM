@@ -5,7 +5,7 @@ import { Logger, InternalServerErrorException } from '@nestjs/common';
 import * as bodyParser from 'body-parser';
 import { NODE_ENV, PORT } from '@/environments';
 import { setupSwagger } from '@/swagger';
-import { Transport } from '@nestjs/common/enums/transport.enum';
+import { Transport } from '@nestjs/microservices';
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';
@@ -69,6 +69,6 @@ async function bootstrap() {
     throw new InternalServerErrorException(error);
   }
 }
-bootstrap().catch(e => {
+bootstrap().catch((e) => {
   throw e;
 });

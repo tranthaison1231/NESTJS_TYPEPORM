@@ -19,10 +19,7 @@ export class ValidationErrorFilter implements ExceptionFilter<HttpException> {
       timestamp: new Date().toLocaleDateString(),
       path: request.url,
       method: request.method,
-      message:
-        exception.message.message ||
-        exception.message.error ||
-        exception.message,
+      message: exception.message,
     };
 
     Logger.error(

@@ -1,4 +1,4 @@
-import { Transport } from '@nestjs/common/enums/transport.enum';
+import { Transport } from '@nestjs/microservices';
 
 export const microserviceOptions = {
   transport: Transport.REDIS,

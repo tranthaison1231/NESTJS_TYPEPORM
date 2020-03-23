@@ -11,6 +11,7 @@ import { TasksModule } from '@/tasks/tasks.module';
 import { UsersModule } from '@/users/user.module';
 import { EventsModule } from './events/events.module';
 import { CompaniesModule } from './companies/companies.module';
+import { CardsModule } from './cards/cards.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CompaniesModule } from './companies/companies.module';
     UsersModule,
     EventsModule,
     CompaniesModule,
+    CardsModule,
   ],
   providers: [
     {

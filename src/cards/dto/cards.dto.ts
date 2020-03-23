@@ -11,6 +11,5 @@ export class CreateCardsDto {
   name: string;
 
   @ApiProperty()
-  @IsNotEmpty()
-  amount: string;
+  amount: number;
 }

@@ -6,7 +6,7 @@ export class Card extends BaseModel {
   @Column()
   amount: number;
 
-  @Column()
+  @Column({ default: 0 })
   name: string;
 
   @Column()

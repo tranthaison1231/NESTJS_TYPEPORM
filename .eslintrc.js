@@ -13,6 +13,12 @@ module.exports = {
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
+    describe: 'readonly',
+    it: 'readonly',
+    beforeEach: 'readonly',
+    beforeAll: 'readonly',
+    expect: 'readonly',
+    afterAll: 'readonly',
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -23,6 +29,7 @@ module.exports = {
   rules: {
     'import/prefer-default-export': 0,
     'import/no-unresolved': 0,
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'no-unused-vars': 0,
     'no-useless-constructor': 0,
     'no-empty-function': 0,

@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Post,
-  Body,
-  Param,
-  ParseUUIDPipe,
-  ValidationPipe,
-  Put,
-} from '@nestjs/common';
+import { Controller, Param, ParseUUIDPipe, Put } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Card } from './cards.entity';

@@ -1,4 +1,4 @@
-import { Controller, Param, ParseUUIDPipe, Put } from '@nestjs/common';
+import { Controller, Param, ParseUUIDPipe, Post } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Card } from './cards.entity';
@@ -30,7 +30,7 @@ export class CardsController implements CrudController<Card> {
   @ApiOperation({
     summary: 'Payment with card',
   })
-  @Put(':id/pay')
+  @Post(':id/pay')
   payment(@Param('id', ParseUUIDPipe) id: string): Promise<Card> {
     return this.service.payment(id);
   }

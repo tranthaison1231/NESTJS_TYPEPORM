@@ -10,11 +10,11 @@ import { Card } from './cards.entity';
 
 @Injectable()
 export class CardsService extends TypeOrmCrudService<Card> {
-  constructor(@InjectRepository(Card) cardsService: Repository<void>) {
+  constructor(@InjectRepository(Card) cardsService: Repository<Card>) {
     super(cardsService);
   }
 
-  async payment(id: string): Promise<Card> {
+  async payment(id: string): Promise<void> {
     const card = await this.findOne(id);
     if (!card) {
       throw new NotFoundException(`Card with ID "${id}" not found`);

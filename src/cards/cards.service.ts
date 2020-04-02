@@ -10,7 +10,7 @@ import { Card } from './cards.entity';
 
 @Injectable()
 export class CardsService extends TypeOrmCrudService<Card> {
-  constructor(@InjectRepository(Card) cardsService: Repository<Card>) {
+  constructor(@InjectRepository(Card) cardsService: Repository<void>) {
     super(cardsService);
   }
 
@@ -24,6 +24,5 @@ export class CardsService extends TypeOrmCrudService<Card> {
     }
     card.amount -= 2000;
     await card.save();
-    return card;
   }
 }

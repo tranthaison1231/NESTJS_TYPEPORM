@@ -12,6 +12,8 @@ import { UsersModule } from '@/users/user.module';
 import { EventsModule } from './events/events.module';
 import { CompaniesModule } from './companies/companies.module';
 import { CardsModule } from './cards/cards.module';
+import { AppController } from './app.controller';
+import { AwsService } from './shared/aws.service';
 
 @Module({
   imports: [
@@ -25,7 +27,9 @@ import { CardsModule } from './cards/cards.module';
     CompaniesModule,
     CardsModule,
   ],
+  controllers: [AppController],
   providers: [
+    AwsService,
     {
       provide: APP_FILTER,
       useClass: HttpErrorFilter,

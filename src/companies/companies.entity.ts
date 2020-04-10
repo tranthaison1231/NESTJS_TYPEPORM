@@ -10,10 +10,6 @@ export class Company extends BaseModel {
   @Column({ nullable: true })
   name: string;
 
-  @OneToMany(
-    type => User,
-    user => user.company,
-    { eager: true },
-  )
+  @OneToMany((type) => User, (user) => user.company, { eager: true })
   users: User[];
 }

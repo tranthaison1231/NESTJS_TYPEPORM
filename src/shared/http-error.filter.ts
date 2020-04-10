@@ -6,6 +6,7 @@ import {
   Logger,
 } from '@nestjs/common';
 
+
 @Catch(HttpException)
 export class HttpErrorFilter implements ExceptionFilter<HttpException> {
   catch(exception: HttpException, host: ArgumentsHost) {
@@ -15,11 +16,10 @@ export class HttpErrorFilter implements ExceptionFilter<HttpException> {
     const status = exception.getStatus();
 
     const errorResponse = {
-      statusCode: status,
       timestamp: new Date().toLocaleDateString(),
       path: request.url,
       method: request.method,
-      message: exception.message,
+      ...exception.getResponse() as object,
     };
 
     Logger.error(

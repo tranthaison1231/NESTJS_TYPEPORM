@@ -33,7 +33,6 @@ export class UserRepository extends Repository<User> {
       await user.save();
       return user.username;
     } catch (error) {
-      console.log(error);
       if (error.code === '23505') {
         // duplicate username && email
         throw new ConflictException(error.detail);
@@ -48,9 +47,8 @@ export class UserRepository extends Repository<User> {
     const user = await this.findOne({ username });
     if (user && (await comparePassword(password, user.password))) {
       return user.username;
-    } 
-      return null;
-    
+    }
+    return null;
   }
 
   async getAllUser(page: number, limit: number): Promise<Pagination<User>> {

@@ -25,14 +25,10 @@ export class Product extends BaseEntity {
   @Column()
   status: ProductStatus;
 
-  @ManyToOne(
-    type => User,
-    user => user.products,
-    {
-      eager: false,
-      onDelete: 'CASCADE',
-    },
-  )
+  @ManyToOne((type) => User, (user) => user.products, {
+    eager: false,
+    onDelete: 'CASCADE',
+  })
   user: User;
 
   @Column()

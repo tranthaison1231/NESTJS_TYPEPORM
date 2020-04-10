@@ -16,7 +16,7 @@ export class CompaniesService extends TypeOrmCrudService<Company> {
 
   async addUser(id: string, userID: string[]): Promise<Company> {
     const company = await this.findOne(id);
-    userID.forEach(async e => {
+    userID.forEach(async (e) => {
       const user = await this.userRepository.findOne(e);
       company.users = await [...company.users, user];
     });

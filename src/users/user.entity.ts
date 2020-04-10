@@ -26,20 +26,12 @@ export class User extends BaseModel {
   @Column()
   salt: string;
 
-  @OneToMany(
-    type => Product,
-    product => product.user,
-    { eager: true },
-  )
+  @OneToMany((type) => Product, (product) => product.user, { eager: true })
   products: Product[];
 
-  @ManyToOne(
-    type => Company,
-    company => company.users,
-    {
-      eager: false,
-      onDelete: 'CASCADE',
-    },
-  )
+  @ManyToOne((type) => Company, (company) => company.users, {
+    eager: false,
+    onDelete: 'CASCADE',
+  })
   company: Company;
 }

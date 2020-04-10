@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/user.entity';
 import { Pagination } from 'nestjs-typeorm-paginate';
@@ -44,9 +49,18 @@ export class UsersService {
   }
 
   async updateUser(id: string, userDto: UserDto): Promise<User> {
-    const user = await this.getUser(id);
-    user.email = userDto.email;
-    await user.save();
-    return user;
+    try {
+      const user = await this.getUser(id);
+      user.email = userDto.email;
+      await user.save();
+      return user;
+    } catch (error) {
+      if (error.code === '23505') {
+        // duplicate username && email
+        throw new ConflictException(error.detail);
+      } else {
+        throw new InternalServerErrorException();
+      }
+    }
   }
 }

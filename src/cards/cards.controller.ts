@@ -6,6 +6,7 @@ import {
   Body,
   ValidationPipe,
   UsePipes,
+  Put,
 } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
@@ -49,7 +50,7 @@ export class CardsController implements CrudController<Card> {
   @ApiOperation({
     summary: 'Topup with card',
   })
-  @Post(':id/topup')
+  @Put(':id/topup')
   @UsePipes(ValidationPipe)
   topup(
     @Body() topupDto: TopupDto,

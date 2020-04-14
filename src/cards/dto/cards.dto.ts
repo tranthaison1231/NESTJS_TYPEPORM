@@ -1,4 +1,11 @@
-import { IsNotEmpty, IsEmail, IsArray } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsEmail,
+  IsArray,
+  Min,
+  Max,
+  IsNumber,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCardsDto {
@@ -11,5 +18,16 @@ export class CreateCardsDto {
   name: string;
 
   @ApiProperty()
+  @IsNotEmpty()
+  @Min(10000)
+  @Max(1000000)
+  amount: number;
+}
+
+export class TopupDto {
+  @ApiProperty()
+  @Min(10000)
+  @Max(1000000)
+  @IsNumber()
   amount: number;
 }

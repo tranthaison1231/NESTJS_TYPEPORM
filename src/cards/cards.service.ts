@@ -7,6 +7,7 @@ import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Card } from './cards.entity';
+import { TopupDto } from './dto/cards.dto';
 
 @Injectable()
 export class CardsService extends TypeOrmCrudService<Card> {
@@ -23,6 +24,16 @@ export class CardsService extends TypeOrmCrudService<Card> {
       throw new NotAcceptableException('User is not enough money for paying');
     }
     card.amount -= 2000;
+    await card.save();
+    return card;
+  }
+
+  async topup(id: string, topupDto: TopupDto): Promise<Card> {
+    const card = await this.findOne(id);
+    if (!card) {
+      throw new NotFoundException(`Card with ID "${id}" not found`);
+    }
+    card.amount += topupDto.amount;
     await card.save();
     return card;
   }

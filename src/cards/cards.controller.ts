@@ -1,9 +1,17 @@
-import { Controller, Param, ParseUUIDPipe, Post } from '@nestjs/common';
+import {
+  Controller,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Body,
+  ValidationPipe,
+  UsePipes,
+} from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Card } from './cards.entity';
 import { CardsService } from './cards.service';
-import { CreateCardsDto } from './dto/cards.dto';
+import { CreateCardsDto, TopupDto } from './dto/cards.dto';
 
 @Crud({
   model: {
@@ -21,6 +29,9 @@ import { CreateCardsDto } from './dto/cards.dto';
       primary: true,
     },
   },
+  query: {
+    maxLimit: 100,
+  },
 })
 @ApiTags('Cards')
 @Controller('cards')
@@ -33,5 +44,17 @@ export class CardsController implements CrudController<Card> {
   @Post(':id/pay')
   payment(@Param('id', ParseUUIDPipe) id: string): Promise<Card> {
     return this.service.payment(id);
+  }
+
+  @ApiOperation({
+    summary: 'Topup with card',
+  })
+  @Post(':id/topup')
+  @UsePipes(ValidationPipe)
+  topup(
+    @Body() topupDto: TopupDto,
+    @Param('id', ParseUUIDPipe) id: string,
+  ): Promise<Card> {
+    return this.service.topup(id, topupDto);
   }
 }

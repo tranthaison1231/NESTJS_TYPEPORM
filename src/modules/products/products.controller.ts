@@ -18,8 +18,8 @@ import {
   ParseUUIDPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from 'src/users/get-user-decorator';
-import { User } from 'src/users/user.entity';
+import { GetUser } from '@/modules/users/get-user-decorator';
+import { User } from '@/modules/users/user.entity';
 import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiTags,

@@ -7,7 +7,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { AwsService } from './shared/aws.service';
-import { FileUploadDto } from './users/dto/user.dto';
+import { FileUploadDto } from './modules/users/dto/user.dto';
 
 @Controller('api')
 export class AppController {

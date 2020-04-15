@@ -5,7 +5,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/users/user.entity';
+import { User } from '@/modules/users/user.entity';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { UserRepository } from './user.repository';
 import { UserDto } from './dto/user.dto';

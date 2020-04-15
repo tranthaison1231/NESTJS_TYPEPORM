@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { BaseModel } from '@/shared/base.entity';
-import { User } from '@/users/user.entity';
+import { User } from '@/modules/users/user.entity';
 
 @Entity()
 export class Company extends BaseModel {

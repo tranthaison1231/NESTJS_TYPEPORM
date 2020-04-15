@@ -8,9 +8,9 @@ import {
   ManyToOne,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { Product } from '@/products/product.entity';
+import { Product } from '@/modules/products/product.entity';
 import { BaseModel } from '@/shared/base.entity';
-import { Company } from '@/companies/companies.entity';
+import { Company } from '@/modules/companies/companies.entity';
 
 @Entity()
 export class User extends BaseModel {

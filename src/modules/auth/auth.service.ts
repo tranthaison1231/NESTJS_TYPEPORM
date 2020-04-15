@@ -7,10 +7,10 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserRepository } from '@/users/user.repository';
+import { UserRepository } from '@/modules/users/user.repository';
 import { sendEmail } from '@/utils/sendEmail';
 import { confirmEmailLink } from '@/utils/confirmEmailLink';
-import { User } from 'src/users/user.entity';
+import { User } from '@/modules/users/user.entity';
 import { redis } from '@/redis';
 import { forgotPasswordPrefix } from '@/constants/redisPrefixes';
 import { hashPassword } from '@/utils/password';

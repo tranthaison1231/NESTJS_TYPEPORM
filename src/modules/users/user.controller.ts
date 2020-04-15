@@ -14,18 +14,22 @@ import {
   Put,
 } from '@nestjs/common';
 
-import { GetUser } from 'src/users/get-user-decorator';
-import { User } from 'src/users/user.entity';
+import { GetUser } from '@/modules/users/get-user-decorator';
+import { User } from '@/modules/users/user.entity';
 import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { UsersService } from './user.service';
-import { UserDto, PhoneDto, GetUsersQueryDto } from './dto/user.dto';
-import { nexmo } from '../config/nexmo.config';
+import {
+  UserDto,
+  PhoneDto,
+  GetUsersQueryDto,
+  FileUploadDto,
+} from './dto/user.dto';
+import { nexmo } from '../../config/nexmo.config';
 import { ProductsService } from '../products/products.service';
-import { uploadImage } from '../config/cloudinary.config';
-import { multerOptions } from '../config/multer.config';
-import { FileUploadDto } from '../users/dto/user.dto';
+import { uploadImage } from '../../config/cloudinary.config';
+import { multerOptions } from '../../config/multer.config';
 
 @ApiTags('Users')
 @Controller('users')

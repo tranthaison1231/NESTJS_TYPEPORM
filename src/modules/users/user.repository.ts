@@ -1,9 +1,9 @@
 import { Repository, EntityRepository } from 'typeorm';
-import { User } from 'src/users/user.entity';
+import { User } from '@/modules/users/user.entity';
 import {
   AuthCredentialsDto,
   SignInDto,
-} from 'src/auth/dto/auth-credentials.dto';
+} from '@/modules/auth/dto/auth-credentials.dto';
 import {
   ConflictException,
   InternalServerErrorException,

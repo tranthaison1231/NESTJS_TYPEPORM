@@ -7,7 +7,7 @@ import {
   UseGuards,
   Get,
 } from '@nestjs/common';
-import { User } from '@/users/user.entity';
+import { User } from '@/modules/users/user.entity';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import {

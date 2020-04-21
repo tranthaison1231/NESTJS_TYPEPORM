@@ -36,14 +36,14 @@ export class AuthController {
   @Post('/signup')
   signUp(
     @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ data: { token: string } }> {
+  ): Promise<{ token: string }> {
     return this.authService.signUp(authCredentialsDto);
   }
 
   @Post('/signin')
   signIn(
     @Body(ValidationPipe) signInDto: SignInDto,
-  ): Promise<{ data: { token: string } }> {
+  ): Promise<{ token: string }> {
     return this.authService.signIn(signInDto);
   }
 

@@ -43,9 +43,7 @@ export class AuthService {
     );
 
     return {
-      data: {
-        token: accessToken,
-      },
+      token: accessToken,
     };
   }
 
@@ -62,9 +60,7 @@ export class AuthService {
     );
 
     return {
-      data: {
-        token: accessToken,
-      },
+      token: accessToken,
     };
   }
 

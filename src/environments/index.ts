@@ -61,3 +61,21 @@ export const AWS_SECRET_ACCESS_KEY: string = accessEnv(
   'AWS_SECRET_ACCESS_KEY',
   'xxx',
 );
+
+export const NEXMO_KEY: string = accessEnv('NEXMO_KEY', 'xxx');
+
+export const NEXMO_SECRET_KEY: string = accessEnv('NEXMO_SECRET_KEY', 'xxx');
+
+export const TELERIVET_KEY: string = accessEnv('TELERIVET_KEY', 'xxx');
+
+export const TELERIVET_PROJECT_ID_KEY: string = accessEnv(
+  'TELERIVET_PROJECT_ID_KEY',
+  'xxx',
+);
+
+export const TWILIO_ACCOUNT_SID: string = accessEnv(
+  'TWILIO_ACCOUNT_SID',
+  'xxx',
+);
+
+export const TWILIO_AUTH_TOKEN: string = accessEnv('TWILIO_AUTH_TOKEN', 'xxx');

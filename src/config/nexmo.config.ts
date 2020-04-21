@@ -1,6 +1,8 @@
+import { NEXMO_KEY, NEXMO_SECRET_KEY } from '../environments';
+
 const Nexmo = require('nexmo');
 
 export const nexmo = new Nexmo({
-  apiKey: '415d89a1',
-  apiSecret: 'EqLM5u5ug1bY3hTg',
+  apiKey: NEXMO_KEY,
+  apiSecret: NEXMO_SECRET_KEY,
 });

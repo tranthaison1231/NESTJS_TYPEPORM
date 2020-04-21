@@ -79,3 +79,10 @@ export const TWILIO_ACCOUNT_SID: string = accessEnv(
 );
 
 export const TWILIO_AUTH_TOKEN: string = accessEnv('TWILIO_AUTH_TOKEN', 'xxx');
+
+export const SPEED_SMS_AUTH_TOKEN: string = accessEnv(
+  'SPEED_SMS_AUTH_TOKEN',
+  'xxx',
+);
+
+export const SPEED_SMS_SENDER: string = accessEnv('SPEED_SMS_SENDER', 'xxx');

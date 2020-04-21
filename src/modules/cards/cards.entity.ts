@@ -6,9 +6,12 @@ export class Card extends BaseModel {
   @Column()
   amount: number;
 
-  @Column({ default: 0 })
+  @Column({ default: null })
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
+
+  @Column({ unique: true, nullable: true })
+  phoneNumber: string;
 }

@@ -27,7 +27,7 @@ export class CardsService extends TypeOrmCrudService<Card> {
     if (!card) {
       throw new NotFoundException(`Card with ID "${id}" not found`);
     }
-    if (card.amount === 0) {
+    if (card.amount < 2000) {
       const content =
         'Not enought money, please contact admin (+84915520981) to topup your pocket';
       this.httpService

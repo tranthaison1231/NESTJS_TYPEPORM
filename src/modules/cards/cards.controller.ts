@@ -8,7 +8,7 @@ import {
   UsePipes,
   Put,
 } from '@nestjs/common';
-import { Crud, CrudController } from '@nestjsx/crud';
+import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Card } from './cards.entity';
 import { CardsService } from './cards.service';
@@ -32,8 +32,10 @@ import { CreateCardsDto, TopupDto } from './dto/cards.dto';
   },
   query: {
     maxLimit: 100,
+    limit: 10,
+    alwaysPaginate: true,
   },
-})
+} as CrudOptions)
 @ApiTags('Cards')
 @Controller('cards')
 export class CardsController implements CrudController<Card> {

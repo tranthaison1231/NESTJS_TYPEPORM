@@ -9,11 +9,11 @@ import { HttpErrorFilter } from '@/shared/http-error.filter';
 // import here
 import { TasksModule } from '@/modules/tasks/tasks.module';
 import { UsersModule } from '@/modules/users/user.module';
-import { EventsModule } from './modules/events/events.module';
-import { CompaniesModule } from './modules/companies/companies.module';
-import { CardsModule } from './modules/cards/cards.module';
+import { EventsModule } from './events/events.module';
+import { CompaniesModule } from './companies/companies.module';
+import { CardsModule } from './cards/cards.module';
 import { AppController } from './app.controller';
-import { AwsService } from './shared/aws.service';
+import { AwsService } from '../shared/aws.service';
 
 @Module({
   imports: [

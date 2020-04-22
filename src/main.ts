@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from '@/app.module';
+import { AppModule } from '@/modules/app.module';
 import { Logger, InternalServerErrorException } from '@nestjs/common';
 import * as bodyParser from 'body-parser';
 import { NODE_ENV, PORT } from '@/environments';

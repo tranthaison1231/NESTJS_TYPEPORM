@@ -39,7 +39,6 @@ export class AwsService {
           return err;
         },
       );
-    console.log(data);
     return data;
   }
 }

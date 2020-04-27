@@ -3,6 +3,7 @@ import {
   BaseEntity,
   CreateDateColumn,
   UpdateDateColumn,
+  Column,
 } from 'typeorm';
 
 export class BaseVm {

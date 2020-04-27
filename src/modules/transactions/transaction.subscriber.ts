@@ -18,9 +18,6 @@ export class TransactionSubscriber
     const cardRepo: Repository<Card> = event.connection.manager.getRepository<
       Card
     >('card');
-    const transactionRepo: Repository<Transaction> = event.connection.manager.getRepository<
-      Transaction
-    >('transaction');
 
     const card = await cardRepo.findOne({ id: event.entity.cardId });
     card.totalTransaction += 1;

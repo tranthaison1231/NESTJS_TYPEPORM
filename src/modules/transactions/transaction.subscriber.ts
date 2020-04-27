@@ -22,15 +22,8 @@ export class TransactionSubscriber
       Transaction
     >('transaction');
 
-    transactionRepo
-      .count({
-        where: { card: { id: event.entity.cardId } },
-      })
-      .then((count: number) => {
-        cardRepo.update(
-          { id: event.entity.cardId },
-          { totalTransaction: count },
-        );
-      });
+    const card = await cardRepo.findOne({ id: event.entity.cardId });
+    card.totalTransaction += 1;
+    card.save();
   }
 }

@@ -14,6 +14,7 @@ import { CompaniesModule } from './companies/companies.module';
 import { CardsModule } from './cards/cards.module';
 import { AppController } from './app.controller';
 import { AwsService } from '../shared/aws.service';
+import { TransactionsModule } from './transactions/transaction.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AwsService } from '../shared/aws.service';
     EventsModule,
     CompaniesModule,
     CardsModule,
+    TransactionsModule,
   ],
   controllers: [AppController],
   providers: [

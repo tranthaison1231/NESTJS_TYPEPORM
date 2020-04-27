@@ -17,4 +17,5 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   database: RDS_DB_NAME,
   entities: [`${__dirname}/../**/*.entity.{js,ts}`],
   synchronize: true,
+  subscribers: [`${__dirname}/../**/*.subscriber.{js,ts}`],
 };

@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseModel } from '../../shared/base.entity';
-import { Transaction } from './transactions.entity';
+import { Transaction } from '../transactions/transactions.entity';
 
 @Entity()
 export class Card extends BaseModel {
@@ -16,8 +16,6 @@ export class Card extends BaseModel {
   @Column({ unique: true, nullable: true })
   phoneNumber: string;
 
-  @OneToMany((type) => Transaction, (transaction) => transaction.card, {
-    eager: true,
-  })
-  transactions: Transaction[];
+  @Column({ default: 0 })
+  totalTransaction: number;
 }

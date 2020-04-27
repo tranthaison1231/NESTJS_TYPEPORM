@@ -33,7 +33,7 @@ export class CompaniesController implements CrudController<Company> {
   constructor(public service: CompaniesService) {}
 
   @ApiOperation({
-    summary: 'Add new user for company',
+    summary: 'Add new users for company',
   })
   @Post(':id/users')
   addUser(

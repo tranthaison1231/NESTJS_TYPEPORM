@@ -33,21 +33,21 @@ export class CardsService extends TypeOrmCrudService<Card> {
     if (card.amount < 2000) {
       const content =
         'Not enought money, please contact admin (+84915520981) to topup your pocket';
-      this.httpService.post(
-        `https://api.speedsms.vn/index.php/sms/send?access-token=${SPEED_SMS_AUTH_TOKEN}&to=+84${card.phoneNumber.slice(
-          1,
-        )}&content=${content}&type=4&sender=${SPEED_SMS_SENDER}`,
-      );
+      if (card?.phoneNumber) {
+        this.httpService.post(
+          `https://api.speedsms.vn/index.php/sms/send?access-token=${SPEED_SMS_AUTH_TOKEN}&to=+84${card.phoneNumber.slice(
+            1,
+          )}&content=${content}&type=4&sender=${SPEED_SMS_SENDER}`,
+        );
+      }
       throw new NotAcceptableException('User is not enough money for paying');
     }
-
     card.amount -= 2000;
 
-    this.transactionService.addTransaction({
+    await this.transactionService.addTransaction({
       amount: 2000,
       cardId: id,
     });
-
     await card.save();
     return card;
   }

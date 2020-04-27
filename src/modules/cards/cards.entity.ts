@@ -16,6 +16,6 @@ export class Card extends BaseModel {
   @Column({ unique: true, nullable: true })
   phoneNumber: string;
 
-  @Column({ default: 0 })
+  @Column({ default: 0, type: 'int' })
   totalTransaction: number;
 }

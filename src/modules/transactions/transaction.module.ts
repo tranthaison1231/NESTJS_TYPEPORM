@@ -2,8 +2,9 @@ import { Module, HttpModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntityManager } from 'typeorm';
 import { TransactionsService } from './transactions.service';
-import { Transaction, TransactionSubscriber } from './transactions.entity';
+import { Transaction } from './transactions.entity';
 import { TransactionsController } from './transaction.controller';
+import { TransactionSubscriber } from './transaction.subscriber';
 
 @Module({
   controllers: [TransactionsController],

@@ -33,7 +33,7 @@ export class CardsService extends TypeOrmCrudService<Card> {
     if (card.amount < 2000) {
       const content =
         'Not enought money, please contact admin (+84915520981) to topup your pocket';
-      if (card?.phoneNumber) {
+      if (card.phoneNumber) {
         this.httpService.post(
           `https://api.speedsms.vn/index.php/sms/send?access-token=${SPEED_SMS_AUTH_TOKEN}&to=+84${card.phoneNumber.slice(
             1,

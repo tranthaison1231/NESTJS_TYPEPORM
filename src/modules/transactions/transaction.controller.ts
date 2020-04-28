@@ -37,6 +37,12 @@ import {
     maxLimit: 100,
     limit: 10,
     alwaysPaginate: true,
+    sort: [
+      {
+        field: 'createdAt',
+        order: 'DESC',
+      },
+    ],
   },
 } as CrudOptions)
 @ApiTags('Transactions')

@@ -7,6 +7,8 @@ import {
   IsNumber,
   IsMobilePhone,
   IsUUID,
+  IsDateString,
+  IsDate,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 

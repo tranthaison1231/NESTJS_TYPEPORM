@@ -50,7 +50,10 @@ export class TransactionsController implements CrudController<Transaction> {
   @Get('/analysis')
   async analytic(
     @Query(ValidationPipe) filterDto: AnalyticFilterDto,
-  ): Promise<void> {
+  ): Promise<{
+    totalTransaction: string;
+    totalAmount: string;
+  }> {
     return this.service.analytic(filterDto);
   }
 }

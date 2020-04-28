@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, getRepository } from 'typeorm';
+import { Repository, createQueryBuilder } from 'typeorm';
 import { Transaction } from './transactions.entity';
 import {
   CreateTransactionDto,
@@ -41,9 +41,19 @@ export class TransactionsService extends TypeOrmCrudService<Transaction> {
     }
   }
 
-  async analytic(filterDto: AnalyticFilterDto): Promise<void> {
-    const value = await getRepository(Transaction)
-      .createQueryBuilder('transaction')
-      .getRawMany();
+  async analytic(
+    filterDto: AnalyticFilterDto,
+  ): Promise<{
+    totalTransaction: string;
+    totalAmount: string;
+  }> {
+    const value = await createQueryBuilder('transaction')
+      .select('COUNT(id)', 'totalTransaction')
+      .addSelect('SUM(amount)', 'totalAmount')
+      .where(
+        `create_at between '${filterDto.startTime} 00:00:00' and '${filterDto.endTime} 23:00:00'`,
+      )
+      .getRawOne();
+    return value;
   }
 }

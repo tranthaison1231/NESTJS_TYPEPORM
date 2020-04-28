@@ -7,12 +7,17 @@ import {
   ValidationPipe,
   UsePipes,
   Put,
+  Get,
+  Query,
 } from '@nestjs/common';
 import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { TransactionsService } from './transactions.service';
 import { Transaction } from './transactions.entity';
-import { CreateTransactionDto } from './dto/transactions.dto';
+import {
+  CreateTransactionDto,
+  AnalyticFilterDto,
+} from './dto/transactions.dto';
 
 @Crud({
   model: {
@@ -38,4 +43,14 @@ import { CreateTransactionDto } from './dto/transactions.dto';
 @Controller('transactions')
 export class TransactionsController implements CrudController<Transaction> {
   constructor(public service: TransactionsService) {}
+
+  @ApiOperation({
+    summary: 'Payment with card',
+  })
+  @Get('/analysis')
+  async analytic(
+    @Query(ValidationPipe) filterDto: AnalyticFilterDto,
+  ): Promise<void> {
+    return this.service.analytic(filterDto);
+  }
 }

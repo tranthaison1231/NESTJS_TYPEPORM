@@ -21,3 +21,11 @@ export class CreateTransactionDto {
   @IsUUID()
   cardId: string;
 }
+
+export class AnalyticFilterDto {
+  @ApiProperty()
+  startTime: string;
+
+  @ApiProperty()
+  endTime: string;
+}

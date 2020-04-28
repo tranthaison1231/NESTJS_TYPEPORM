@@ -45,7 +45,7 @@ export class CardsController implements CrudController<Card> {
     summary: 'Payment with card',
   })
   @Post(':id/pay')
-  payment(@Param('id', ParseUUIDPipe) id: string): Promise<Card> {
+  payment(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
     return this.service.payment(id);
   }
 

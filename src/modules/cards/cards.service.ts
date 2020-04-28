@@ -25,7 +25,7 @@ export class CardsService extends TypeOrmCrudService<Card> {
     super(cardsService);
   }
 
-  async payment(id: string): Promise<Card> {
+  async payment(id: string): Promise<void> {
     const card = await this.findOne(id);
     if (!card) {
       throw new NotFoundException(`Card with ID "${id}" not found`);
@@ -42,14 +42,11 @@ export class CardsService extends TypeOrmCrudService<Card> {
       }
       throw new NotAcceptableException('User is not enough money for paying');
     }
-    card.amount -= 2000;
 
     await this.transactionService.addTransaction({
       amount: 2000,
       cardId: id,
     });
-    await card.save();
-    return card;
   }
 
   async topup(id: string, topupDto: TopupDto): Promise<Card> {

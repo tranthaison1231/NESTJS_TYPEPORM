@@ -7,9 +7,12 @@ import {
 } from '@nestjs/common';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 import { Transaction } from './transactions.entity';
-import { CreateTransactionDto } from './dto/transactions.dto';
+import {
+  CreateTransactionDto,
+  AnalyticFilterDto,
+} from './dto/transactions.dto';
 
 @Injectable()
 export class TransactionsService extends TypeOrmCrudService<Transaction> {
@@ -27,7 +30,8 @@ export class TransactionsService extends TypeOrmCrudService<Transaction> {
     transaction.amount = amount;
     transaction.cardId = cardId;
     try {
-      await transaction.save();
+      const response = await transaction.save();
+      return response;
     } catch (error) {
       this.logger.error(
         `Failed to create a task for transactionID "${transaction.id}. Data: ${createDto}`,
@@ -35,5 +39,11 @@ export class TransactionsService extends TypeOrmCrudService<Transaction> {
       );
       throw new InternalServerErrorException();
     }
+  }
+
+  async analytic(filterDto: AnalyticFilterDto): Promise<void> {
+    const value = await getRepository(Transaction)
+      .createQueryBuilder('transaction')
+      .getRawMany();
   }
 }

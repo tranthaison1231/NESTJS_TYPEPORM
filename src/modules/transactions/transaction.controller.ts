@@ -18,6 +18,7 @@ import {
   CreateTransactionDto,
   AnalyticFilterDto,
 } from './dto/transactions.dto';
+import { Analytic } from './transactions.interface';
 
 @Crud({
   model: {
@@ -56,10 +57,7 @@ export class TransactionsController implements CrudController<Transaction> {
   @Get('/analysis')
   async analytic(
     @Query(ValidationPipe) filterDto: AnalyticFilterDto,
-  ): Promise<{
-    totalTransaction: string;
-    totalAmount: string;
-  }> {
+  ): Promise<Analytic> {
     return this.service.analytic(filterDto);
   }
 }

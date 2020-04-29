@@ -17,6 +17,6 @@ export class Transaction extends BaseModel {
   @Column()
   amount: number;
 
-  @Column()
+  @Column({ name: 'card_id' })
   cardId: string;
 }

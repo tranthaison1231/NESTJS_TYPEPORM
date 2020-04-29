@@ -13,6 +13,7 @@ import {
   CreateTransactionDto,
   AnalyticFilterDto,
 } from './dto/transactions.dto';
+import { Analytic } from './transactions.interface';
 
 @Injectable()
 export class TransactionsService extends TypeOrmCrudService<Transaction> {
@@ -41,19 +42,20 @@ export class TransactionsService extends TypeOrmCrudService<Transaction> {
     }
   }
 
-  async analytic(
-    filterDto: AnalyticFilterDto,
-  ): Promise<{
-    totalTransaction: string;
-    totalAmount: string;
-  }> {
+  async analytic(filterDto: AnalyticFilterDto): Promise<Analytic> {
     const value = await createQueryBuilder('transaction')
       .select('COUNT(id)', 'totalTransaction')
       .addSelect('SUM(amount)', 'totalAmount')
+      .addSelect('COUNT(DISTINCT card_id)', 'totalCustomers')
       .where(
         `create_at between '${filterDto.startTime} 00:00:00' and '${filterDto.endTime} 23:00:00'`,
       )
       .getRawOne();
-    return value;
+
+    return {
+      totalAmount: +value.totalAmount,
+      totalTransaction: +value.totalTransaction,
+      totalCustomers: +value.totalCustomers,
+    };
   }
 }

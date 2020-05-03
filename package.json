@@ -25,8 +25,8 @@
     "compodoc": "npx compodoc -p tsconfig.json -s",
     "docker:up": "docker-compose -p nestjs-api-boilerplate up -d",
     "docker:down": "docker-compose -p nestjs-api-boilerplate down",
-    "seed:config": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js config -r src/database/config -n typeorm.config.ts",
-    "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed -r src/database/config -n typeorm.config.ts"
+    "seed:config": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js config -r src/database -n typeorm.config.ts",
+    "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed -r src/database -n typeorm.config.ts"
   },
   "dependencies": {
     "@nestjs/common": "^7.0.9",
@@ -44,6 +44,7 @@
     "@nestjsx/crud-typeorm": "^4.4.5",
     "@types/bcrypt": "^3.0.0",
     "@types/express": "^4.17.6",
+    "@types/faker": "^4.1.11",
     "@types/node": "^13.13.4",
     "aws-sdk": "^2.665.0",
     "bcrypt": "^4.0.1",
@@ -53,6 +54,7 @@
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
     "express-rate-limit": "^5.1.1",
+    "faker": "^4.1.0",
     "fs": "^0.0.2",
     "helmet": "^3.22.0",
     "ioredis": "^4.16.3",
@@ -74,6 +76,7 @@
     "ts-node": "^8.9.1",
     "twilio": "^3.42.2",
     "typeorm": "^0.2.24",
+    "typeorm-seeding": "^1.6.1",
     "typescript": "^3.8.3",
     "uuid": "^7.0.3"
   },

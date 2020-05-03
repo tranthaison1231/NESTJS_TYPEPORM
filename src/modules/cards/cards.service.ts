@@ -9,6 +9,7 @@ import {
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import * as messages from '../../language/messages.json';
 import { Card } from './cards.entity';
 import { TopupDto } from './dto/cards.dto';
 import { twilio } from '../../config/twilio.config';
@@ -40,7 +41,9 @@ export class CardsService extends TypeOrmCrudService<Card> {
           )}&content=${content}&type=4&sender=${SPEED_SMS_SENDER}`,
         );
       }
-      throw new NotAcceptableException('User is not enough money for paying');
+      throw new NotAcceptableException({
+        messages: messages.notEnoughMoney,
+      });
     }
 
     await this.transactionService.addTransaction({

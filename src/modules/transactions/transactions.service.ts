@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, createQueryBuilder } from 'typeorm';
+import { Repository, createQueryBuilder, getConnection } from 'typeorm';
 import { Transaction } from './transactions.entity';
 import {
   CreateTransactionDto,
@@ -51,11 +51,18 @@ export class TransactionsService extends TypeOrmCrudService<Transaction> {
         `create_at between '${filterDto.startTime} 00:00:00' and '${filterDto.endTime} 23:00:00'`,
       )
       .getRawOne();
+    const chart = await getConnection().query(`
+        with a as( select generate_series('${filterDto.startTime}'::timestamp,'${filterDto.endTime}'::timestamp,'1 days') as date)
+        select coalesce(sum(ad.amount), 0) as amount, a.date from public.transaction ad
+        right join a on a.date = ad.create_at::TIMESTAMP::DATE
+        group by a.date order by a.date
+    `);
 
     return {
       totalAmount: +value.totalAmount,
       totalTransaction: +value.totalTransaction,
       totalCustomers: +value.totalCustomers,
+      chart,
     };
   }
 }

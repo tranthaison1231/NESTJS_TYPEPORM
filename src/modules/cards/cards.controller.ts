@@ -33,7 +33,14 @@ import { CreateCardsDto, TopupDto } from './dto/cards.dto';
   query: {
     maxLimit: 100,
     limit: 10,
+    cache: 2000,
     alwaysPaginate: true,
+    sort: [
+      {
+        field: 'createdAt',
+        order: 'ASC',
+      },
+    ],
   },
 } as CrudOptions)
 @ApiTags('Cards')

@@ -14,6 +14,7 @@ import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Trip } from './trips.entity';
 import { TripsService } from './trips.service';
+import { CreateTripsDto } from './dto/trips.dto';
 
 @Crud({
   model: {
@@ -25,6 +26,9 @@ import { TripsService } from './trips.service';
       type: 'uuid',
       primary: true,
     },
+  },
+  dto: {
+    create: CreateTripsDto,
   },
   query: {
     maxLimit: 100,

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable import/no-extraneous-dependencies */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '@/modules/app.module';

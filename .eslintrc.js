@@ -36,5 +36,7 @@ module.exports = {
     'class-methods-use-this': 0,
     'max-classes-per-file': 0,
     'import/extensions': 0,
+    'max-len': ['error', 150],
+    'max-lines-per-function': ['error', 40],
   },
 };

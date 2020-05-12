@@ -38,7 +38,7 @@ import { CreateCardsDto, TopupDto } from './dto/cards.dto';
     sort: [
       {
         field: 'createdAt',
-        order: 'ASC',
+        order: 'DESC',
       },
     ],
   },

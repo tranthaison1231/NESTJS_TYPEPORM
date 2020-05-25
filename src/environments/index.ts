@@ -86,3 +86,5 @@ export const SPEED_SMS_AUTH_TOKEN: string = accessEnv(
 );
 
 export const SPEED_SMS_SENDER: string = accessEnv('SPEED_SMS_SENDER', 'xxx');
+
+export const SLACK_REMINDER: string = accessEnv('SLACK_REMINDER', 'xxx');

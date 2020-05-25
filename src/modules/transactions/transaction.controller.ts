@@ -60,4 +60,12 @@ export class TransactionsController implements CrudController<Transaction> {
   ): Promise<Analytic> {
     return this.service.analytic(filterDto);
   }
+
+  @ApiOperation({
+    summary: 'Payment with card',
+  })
+  @Get('/prediction')
+  async prediction(): Promise<number> {
+    return this.service.prediction();
+  }
 }

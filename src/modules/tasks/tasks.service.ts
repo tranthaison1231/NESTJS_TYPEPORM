@@ -11,9 +11,9 @@ export class TasksService {
 
   @Cron('00 00 07 * * *')
   handleCron() {
-    this.slackService.sendMessage(
-      'Hello, chào buổi sáng, anh đẹp trai dễ thương',
-    );
+    this.slackService
+      .sendMessage('Hello, chào buổi sáng, anh đẹp trai dễ thương')
+      .subscribe();
     this.logger.debug('Called when the second is 45');
   }
 

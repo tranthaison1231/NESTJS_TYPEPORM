@@ -6,7 +6,7 @@ import { SLACK_REMINDER } from '../../environments';
 export class SlackService {
   constructor(private httpService: HttpService) {}
 
-  sendMessage(text: string): void {
-    this.httpService.post(SLACK_REMINDER, { text }).subscribe();
+  sendMessage(text: string) {
+    return this.httpService.post(SLACK_REMINDER, { text });
   }
 }

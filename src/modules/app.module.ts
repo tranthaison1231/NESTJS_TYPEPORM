@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 // import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TerminusModule } from '@nestjs/terminus';
 import { typeOrmConfig } from '@/database/typeorm.config';
 import { ProductsModule } from '@/modules/products/products.module';
 import { AuthModule } from '@/modules/auth/auth.module';
@@ -20,6 +21,7 @@ import { TripsModule } from './trips/trips.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
+    TerminusModule,
     // add here
     ProductsModule,
     AuthModule,

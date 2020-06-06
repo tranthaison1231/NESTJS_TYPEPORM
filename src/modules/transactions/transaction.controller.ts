@@ -27,6 +27,9 @@ import { Analytic } from './transactions.interface';
   dto: {
     create: CreateTransactionDto,
   },
+  routes: {
+    only: ['getManyBase', 'getOneBase'],
+  },
   params: {
     id: {
       field: 'id',
@@ -38,6 +41,11 @@ import { Analytic } from './transactions.interface';
     maxLimit: 100,
     limit: 10,
     alwaysPaginate: true,
+    join: {
+      card: {
+        eager: true,
+      },
+    },
     sort: [
       {
         field: 'createdAt',

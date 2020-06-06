@@ -19,7 +19,7 @@ export class TransactionSubscriber
       Card
     >('card');
 
-    const card = await cardRepo.findOne({ id: event.entity.cardId });
+    const card = await cardRepo.findOne({ id: event.entity.card.id });
     card.totalTransaction += 1;
     card.amount -= 2000;
     await card.save();

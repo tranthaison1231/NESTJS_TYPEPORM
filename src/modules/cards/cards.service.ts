@@ -48,7 +48,7 @@ export class CardsService extends TypeOrmCrudService<Card> {
 
     await this.transactionService.addTransaction({
       amount: 2000,
-      cardId: id,
+      card,
     });
   }
 

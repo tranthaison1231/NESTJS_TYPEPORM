@@ -6,6 +6,8 @@ import {
   Repository,
   InsertEvent,
   EntitySubscriberInterface,
+  JoinColumn,
+  PrimaryColumn,
 } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { IsDateString } from 'class-validator';
@@ -17,6 +19,10 @@ export class Transaction extends BaseModel {
   @Column()
   amount: number;
 
-  @Column({ name: 'card_id' })
-  cardId: string;
+  @ManyToOne(() => Card, (card) => card.transactions, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'card_id' })
+  card: Card;
 }

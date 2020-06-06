@@ -11,6 +11,7 @@ import {
   IsDate,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Card } from '../../cards/cards.entity';
 
 export class CreateTransactionDto {
   @ApiProperty()
@@ -20,8 +21,7 @@ export class CreateTransactionDto {
   amount: number;
 
   @ApiProperty()
-  @IsUUID()
-  cardId: string;
+  card: Card;
 }
 
 export class AnalyticFilterDto {

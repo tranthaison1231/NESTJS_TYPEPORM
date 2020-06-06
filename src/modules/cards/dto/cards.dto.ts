@@ -30,6 +30,10 @@ export class CreateCardsDto {
   phoneNumber: string;
 }
 
+export class CardsDto {
+  email: string;
+}
+
 export class TopupDto {
   @ApiProperty()
   @Min(10000)

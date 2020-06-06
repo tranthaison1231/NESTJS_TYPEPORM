@@ -12,7 +12,7 @@ import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Card } from './cards.entity';
 import { CardsService } from './cards.service';
-import { CreateCardsDto, TopupDto } from './dto/cards.dto';
+import { CreateCardsDto, TopupDto, CardsDto } from './dto/cards.dto';
 
 @Crud({
   model: {
@@ -22,6 +22,9 @@ import { CreateCardsDto, TopupDto } from './dto/cards.dto';
     create: CreateCardsDto,
     update: CreateCardsDto,
     replace: CreateCardsDto,
+  },
+  routes: {
+    only: ['getManyBase', 'getOneBase', 'createOneBase'],
   },
   params: {
     id: {
@@ -35,6 +38,11 @@ import { CreateCardsDto, TopupDto } from './dto/cards.dto';
     limit: 10,
     cache: 2000,
     alwaysPaginate: true,
+    join: {
+      transactions: {
+        eager: true,
+      },
+    },
     sort: [
       {
         field: 'createdAt',

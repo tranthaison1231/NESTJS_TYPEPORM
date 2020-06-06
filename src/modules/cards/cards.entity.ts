@@ -3,6 +3,7 @@ import { MaxLength, IsOptional, IsString } from 'class-validator';
 import { CrudValidationGroups } from '@nestjsx/crud';
 import { BaseModel } from '../../shared/base.entity';
 import { Transaction } from '../transactions/transactions.entity';
+import { Gender } from './gender.enum';
 
 const { CREATE, UPDATE } = CrudValidationGroups;
 
@@ -17,6 +18,12 @@ export class Card extends BaseModel {
   @Column({ type: 'varchar', length: 100, nullable: true })
   name: string;
 
+  @Column({ nullable: true })
+  avatar: string;
+
+  @Column({ nullable: true })
+  gender: Gender;
+
   @Column({ unique: true })
   email: string;
 
@@ -25,4 +32,10 @@ export class Card extends BaseModel {
 
   @Column({ default: 0, type: 'int' })
   totalTransaction: number;
+
+  @OneToMany(() => Transaction, (transaciton) => transaciton.card, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
+  transactions: Transaction[];
 }

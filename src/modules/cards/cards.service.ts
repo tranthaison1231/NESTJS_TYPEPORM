@@ -60,8 +60,4 @@ export class CardsService extends TypeOrmCrudService<Card> {
   async topup(id: string, topupDto: TopupDto): Promise<Card> {
     return this.cardRepository.topup(id, topupDto);
   }
-
-  async getTopClient(): Promise<Card[]> {
-    return this.cardRepository.getTopClient();
-  }
 }

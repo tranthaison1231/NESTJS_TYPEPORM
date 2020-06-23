@@ -7,6 +7,7 @@ import {
   ValidationPipe,
   UsePipes,
   Put,
+  Get,
 } from '@nestjs/common';
 import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
@@ -74,5 +75,13 @@ export class CardsController implements CrudController<Card> {
     @Param('id', ParseUUIDPipe) id: string,
   ): Promise<Card> {
     return this.service.topup(id, topupDto);
+  }
+
+  @ApiOperation({
+    summary: 'Get top client',
+  })
+  @Get('/top-client')
+  getTopClient(): Promise<Card[]> {
+    return this.service.getTopClient();
   }
 }

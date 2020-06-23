@@ -30,7 +30,7 @@ export class Card extends BaseModel {
   @Column({ unique: true, nullable: true })
   phoneNumber: string;
 
-  @Column({ default: 0, type: 'int' })
+  @Column({ default: 0, type: 'int', name: 'total_transaction' })
   totalTransaction: number;
 
   @OneToMany(() => Transaction, (transaciton) => transaciton.card, {

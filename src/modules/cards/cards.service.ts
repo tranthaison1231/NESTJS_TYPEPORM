@@ -5,29 +5,34 @@ import {
   Logger,
   HttpService,
   Inject,
+  InternalServerErrorException,
 } from '@nestjs/common';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import * as messages from '../../language/messages.json';
+import { Repository, createQueryBuilder } from 'typeorm';
 import { Card } from './cards.entity';
 import { TopupDto } from './dto/cards.dto';
 import { twilio } from '../../config/twilio.config';
-import { SPEED_SMS_AUTH_TOKEN, SPEED_SMS_SENDER } from '../../environments';
 import { TransactionsService } from '../transactions/transactions.service';
-
+import { CardRepository } from './cards.repository';
+import { SPEED_SMS_SENDER, SPEED_SMS_AUTH_TOKEN } from '../../environments';
+import * as messages from '../../language/messages.json';
 @Injectable()
 export class CardsService extends TypeOrmCrudService<Card> {
+  private logger = new Logger('CardsService');
+
   constructor(
     @InjectRepository(Card) cardsService: Repository<Card>,
-    private readonly transactionService: TransactionsService,
+    @InjectRepository(CardRepository)
+    private cardRepository: CardRepository,
+    private transactionService: TransactionsService,
     private httpService: HttpService,
   ) {
     super(cardsService);
   }
 
   async payment(id: string): Promise<void> {
-    const card = await this.findOne(id);
+    const card = await this.cardRepository.findOne(id);
     if (!card) {
       throw new NotFoundException(`Card with ID "${id}" not found`);
     }
@@ -44,21 +49,19 @@ export class CardsService extends TypeOrmCrudService<Card> {
       throw new NotAcceptableException({
         messages: messages.notEnoughMoney,
       });
+    } else {
+      await this.transactionService.addTransaction({
+        amount: 2000,
+        card,
+      });
     }
-
-    await this.transactionService.addTransaction({
-      amount: 2000,
-      card,
-    });
   }
 
   async topup(id: string, topupDto: TopupDto): Promise<Card> {
-    const card = await this.findOne(id);
-    if (!card) {
-      throw new NotFoundException(`Card with ID "${id}" not found`);
-    }
-    card.amount += topupDto.amount;
-    await card.save();
-    return card;
+    return this.cardRepository.topup(id, topupDto);
+  }
+
+  async getTopClient(): Promise<Card[]> {
+    return this.cardRepository.getTopClient();
   }
 }

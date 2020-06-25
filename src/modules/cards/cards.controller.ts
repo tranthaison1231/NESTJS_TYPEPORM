@@ -76,12 +76,4 @@ export class CardsController implements CrudController<Card> {
   ): Promise<Card> {
     return this.service.topup(id, topupDto);
   }
-
-  @ApiOperation({
-    summary: 'Get top client',
-  })
-  @Get('/top-client')
-  getTopClient(): Promise<Card[]> {
-    return this.service.getTopClient();
-  }
 }

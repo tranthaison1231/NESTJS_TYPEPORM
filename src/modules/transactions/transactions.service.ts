@@ -13,106 +13,9 @@ import {
   CreateTransactionDto,
   AnalyticFilterDto,
 } from './dto/transactions.dto';
-import { Analytic } from './transactions.interface';
-
-const DATA_EXAMPLE = [
-  {
-    tripID: '8652b269-c166-4050-984c-d62ae97f6e9a',
-    month: 1,
-    timeOfDay: '8h-12h',
-    totalPeople: 9,
-  },
-  {
-    tripID: '17c7fc67-d664-49d9-a88c-a9edb70e5fe6',
-    month: 1,
-    timeOfDay: '13h-17h',
-    totalPeople: 200,
-  },
-  {
-    tripID: '8652b269-c166-4050-984c-d62ae97f6e9a',
-    month: 2,
-    timeOfDay: '13h-17h',
-    totalPeople: 200,
-  },
-  {
-    tripID: '17c7fc67-d664-49d9-a88c-a9edb70e5fe6',
-    month: 3,
-    timeOfDay: '17h-21h',
-    totalPeople: 100,
-  },
-  {
-    tripID: '17c7fc67-d664-49d9-a88c-a9edb70e5fe6',
-    month: 4,
-    timeOfDay: '17h-21h',
-    totalPeople: 100,
-  },
-  {
-    tripID: '17c7fc67-d664-49d9-a88c-a9edb70e5fe6',
-    month: 5,
-    timeOfDay: '17h-21h',
-    totalPeople: 100,
-  },
-  {
-    tripID: 'b0030ada-c141-4e61-8f99-4a62735ec7f6',
-    month: 6,
-    timeOfDay: '17h-21h',
-    totalPeople: 100,
-  },
-  {
-    tripID: 'b0030ada-c141-4e61-8f99-4a62735ec7f6',
-    month: 8,
-    timeOfDay: '17h-21h',
-    totalPeople: 100,
-  },
-  {
-    tripID: '761d95d9-3628-434c-9696-69b0ad05d6b7',
-    month: 9,
-    timeOfDay: '17h-21h',
-    totalPeople: 100,
-  },
-  {
-    tripID: '761d95d9-3628-434c-9696-69b0ad05d6b7',
-    month: 10,
-    timeOfDay: '17h-21h',
-    totalPeople: 100,
-  },
-  {
-    tripID: '761d95d9-3628-434c-9696-69b0ad05d6b7',
-    month: 11,
-    timeOfDay: '17h-21h',
-    totalPeople: 300,
-  },
-  {
-    tripID: '761d95d9-3628-434c-9696-69b0ad05d6b7',
-    month: 12,
-    timeOfDay: '8h-12h',
-    totalPeople: 100,
-  },
-  {
-    tripID: '761d95d9-3628-434c-9696-69b0ad05d6b7',
-    month: 12,
-    timeOfDay: '17h-21h',
-    totalPeople: 200,
-  },
-  {
-    tripID: '761d95d9-3628-434c-9696-69b0ad05d6b7',
-    month: 12,
-    timeOfDay: '8h-12h',
-    totalPeople: 100,
-  },
-  {
-    tripID: '761d95d9-3628-434c-9696-69b0ad05d6b7',
-    month: 1,
-    timeOfDay: '8h-12h',
-    totalPeople: 200,
-  },
-  {
-    tripID: '761d95d9-3628-434c-9696-69b0ad05d6b7',
-    month: 2,
-    timeOfDay: '8h-12h',
-    totalPeople: 300,
-  },
-];
+import { Analytic, Predict } from './transactions.interface';
+import { predictData, ComputeSMA } from '../../utils/timeseries';
+import { DATA_SET } from '../../data/dataset';
 
 @Injectable()
 export class TransactionsService extends TypeOrmCrudService<Transaction> {
@@ -141,8 +44,27 @@ export class TransactionsService extends TypeOrmCrudService<Transaction> {
     }
   }
 
-  async prediction(): Promise<number> {
-    return 15;
+  async predict(): Promise<Predict[]> {
+    const predict = await predictData();
+    const sma = ComputeSMA(
+      DATA_SET.map((e) => e.amount),
+      12,
+    );
+    const ouput = [
+      ...DATA_SET.map((e, index) => {
+        return index > 10
+          ? {
+              ...e,
+              sma: sma[index - 11],
+            }
+          : e;
+      }),
+      {
+        date: '2020-06-27T17:00:00.000Z',
+        predict,
+      },
+    ];
+    return ouput;
   }
 
   async analytic(filterDto: AnalyticFilterDto): Promise<Analytic> {

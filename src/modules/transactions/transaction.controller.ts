@@ -18,7 +18,7 @@ import {
   CreateTransactionDto,
   AnalyticFilterDto,
 } from './dto/transactions.dto';
-import { Analytic } from './transactions.interface';
+import { Analytic, Predict } from './transactions.interface';
 
 @Crud({
   model: {
@@ -70,10 +70,10 @@ export class TransactionsController implements CrudController<Transaction> {
   }
 
   @ApiOperation({
-    summary: 'Payment with card',
+    summary: 'Predict',
   })
-  @Get('/prediction')
-  async prediction(): Promise<number> {
-    return this.service.prediction();
+  @Get('/predict')
+  async predict(): Promise<Predict[]> {
+    return this.service.predict();
   }
 }

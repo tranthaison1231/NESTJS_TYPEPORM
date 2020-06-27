@@ -2,6 +2,7 @@ import { Injectable, Logger, HttpService } from '@nestjs/common';
 import { Cron, Interval, Timeout } from '@nestjs/schedule';
 import { SlackService } from '../../shared/slack/slack.service';
 import { SLACK_REMINDER } from '../../environments';
+import { trainData } from '../../utils/timeseries';
 
 @Injectable()
 export class TasksService {
@@ -23,7 +24,9 @@ export class TasksService {
   // }
 
   // @Timeout(5000)
-  // handleTimeout() {
+  // async handleTimeout() {
   //   this.logger.debug('Called once after 5 seconds');
+  //   await trainData();
+  //   this.logger.log('Success');
   // }
 }

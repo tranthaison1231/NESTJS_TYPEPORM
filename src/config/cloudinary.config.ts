@@ -6,6 +6,7 @@ import {
   CLOUDINARY_NAME,
   CLOUDINARY_FORDER,
 } from '@/environments';
+import { v4 } from 'uuid';
 
 const cloudinary = require('cloudinary');
 
@@ -16,7 +17,7 @@ export const uploadImage = async (file: any): Promise<string> => {
     api_secret: CLOUDINARY_SECRET_KEY,
   });
 
-  const uniqueFilename = new Date().toISOString();
+  const uniqueFilename = v4();
 
   const result = await new Promise(async (resolve, reject) => {
     cloudinary.v2.uploader

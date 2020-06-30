@@ -12,6 +12,7 @@ import {
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Card } from '../../cards/cards.entity';
+// import { TransactionType } from '../transactions.enum';
 
 export class CreateTransactionDto {
   @ApiProperty()
@@ -19,6 +20,9 @@ export class CreateTransactionDto {
   @Min(10000)
   @Max(1000000)
   amount: number;
+
+  // @ApiProperty()
+  // type: TransactionType;
 
   @ApiProperty()
   card: Card;

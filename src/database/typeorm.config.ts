@@ -19,4 +19,13 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   entities: [`${__dirname}/../**/*.entity.{js,ts}`],
   synchronize: true,
   subscribers: [`${__dirname}/../**/*.subscriber.{js,ts}`],
+  // We are using migrations, synchronize should be set to false.
+  // synchronize: process.env.TYPEORM_MIGRATIONS_RUN !== 'true',
+  // dropSchema: false,
+  // migrationsRun: process.env.TYPEORM_MIGRATIONS_RUN === 'true',
+  // migrations: [join(__dirname, 'migrations/*{.ts,.js}')],
+  // logging: ['warn', 'error'],
+  // cli: {
+  //   migrationsDir: 'src/database/migrations',
+  // },
 };

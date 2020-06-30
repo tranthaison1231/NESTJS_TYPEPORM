@@ -17,6 +17,7 @@ import { TransactionsService } from '../transactions/transactions.service';
 import { CardRepository } from './cards.repository';
 import { SPEED_SMS_SENDER, SPEED_SMS_AUTH_TOKEN } from '../../environments';
 import * as messages from '../../language/messages.json';
+import { TransactionType } from '../transactions/transactions.enum';
 @Injectable()
 export class CardsService extends TypeOrmCrudService<Card> {
   private logger = new Logger('CardsService');
@@ -52,6 +53,7 @@ export class CardsService extends TypeOrmCrudService<Card> {
     } else {
       await this.transactionService.addTransaction({
         amount: 2000,
+        // type: TransactionType.PAY,
         card,
       });
     }

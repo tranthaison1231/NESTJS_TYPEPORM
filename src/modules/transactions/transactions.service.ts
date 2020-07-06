@@ -60,7 +60,7 @@ export class TransactionsService extends TypeOrmCrudService<Transaction> {
           : e;
       }),
       {
-        date: '2020-07-02T17:00:00.000Z',
+        date: '2020-07-07T17:00:00.000Z',
         predict,
       },
     ];

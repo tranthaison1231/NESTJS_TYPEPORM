@@ -14,18 +14,17 @@ import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { Card } from './cards.entity';
 import { CardsService } from './cards.service';
 import { CreateCardsDto, TopupDto, CardsDto } from './dto/cards.dto';
+import { nexmo } from '../../config/nexmo.config';
 
 @Crud({
   model: {
     type: Card,
   },
   dto: {
-    create: CreateCardsDto,
     update: CreateCardsDto,
-    replace: CreateCardsDto,
   },
   routes: {
-    only: ['getManyBase', 'getOneBase', 'createOneBase'],
+    only: ['getManyBase', 'getOneBase', 'updateOneBase'],
   },
   params: {
     id: {
@@ -63,6 +62,20 @@ export class CardsController implements CrudController<Card> {
   @Post(':id/pay')
   payment(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
     return this.service.payment(id);
+  }
+
+  @Post()
+  sendSMS(): void {
+    nexmo.verify.request(
+      {
+        number: '84901989847',
+        brand: 'Nexmo',
+        code_length: '4',
+      },
+      (err, result) => {
+        console.log(err || result);
+      },
+    );
   }
 
   @ApiOperation({

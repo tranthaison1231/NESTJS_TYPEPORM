@@ -7,35 +7,34 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserRepository } from '@/modules/users/user.repository';
 import { sendEmail } from '@/utils/sendEmail';
 import { confirmEmailLink } from '@/utils/confirmEmailLink';
-import { User } from '@/modules/users/user.entity';
 import { redis } from '@/redis';
 import { forgotPasswordPrefix } from '@/constants/redisPrefixes';
 import { hashPassword } from '@/utils/password';
-import { JwtPayload } from './jwt-payload.interface';
 import {
   AuthCredentialsDto,
   ForgotPasswordDto,
   ChangePasswordDto,
   SignInDto,
 } from './dto/auth-credentials.dto';
+import { JwtPayload } from '../../shared/jwt/jwt-payload.interface';
+import { CardRepository } from '../cards/cards.repository';
+import { Card } from '../cards/cards.entity';
+import { Token } from './auth.interface';
 
 @Injectable()
 export class AuthService {
   private logger = new Logger('AuthService');
 
   constructor(
-    @InjectRepository(UserRepository)
-    private userRepository: UserRepository,
+    @InjectRepository(CardRepository)
+    private cardRepository: CardRepository,
     private jwtService: JwtService,
   ) {}
 
-  async signUp(
-    authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ token: string }> {
-    const username = await this.userRepository.signUp(authCredentialsDto);
+  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<Token> {
+    const username = await this.cardRepository.signUp(authCredentialsDto);
     const payload: JwtPayload = { username };
     const accessToken = await this.jwtService.sign(payload);
     this.logger.debug(
@@ -47,8 +46,8 @@ export class AuthService {
     };
   }
 
-  async signIn(signInDto: SignInDto): Promise<{ token: string }> {
-    const username = await this.userRepository.validateUserPassword(signInDto);
+  async signIn(signInDto: SignInDto): Promise<Token> {
+    const username = await this.cardRepository.validateUserPassword(signInDto);
     if (!username) {
       throw new UnauthorizedException('Invalid credentials');
     }
@@ -65,7 +64,7 @@ export class AuthService {
   }
 
   async forgotPassword({ email }: ForgotPasswordDto): Promise<void> {
-    const user = await this.userRepository.findOne({ email });
+    const user = await this.cardRepository.findOne({ email });
     if (user) {
       await sendEmail(email, await confirmEmailLink(user.id));
     } else {
@@ -73,12 +72,12 @@ export class AuthService {
     }
   }
 
-  async changePassword({ token, password }: ChangePasswordDto): Promise<User> {
+  async changePassword({ token, password }: ChangePasswordDto): Promise<Card> {
     const userId = await redis.get(forgotPasswordPrefix + token);
     if (!userId) {
       return null;
     }
-    const user = await this.userRepository.findOne(userId);
+    const user = await this.cardRepository.findOne(userId);
     if (!user) {
       throw new ConflictException('User not found');
     }
@@ -88,7 +87,7 @@ export class AuthService {
       await user.save();
       return user;
     } catch (error) {
-      throw new InternalServerErrorException();
+      throw new InternalServerErrorException(error);
     }
   }
 }

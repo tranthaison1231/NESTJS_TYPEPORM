@@ -5,7 +5,7 @@ import {
   ValidatorConstraintInterface,
   ValidationArguments,
 } from 'class-validator';
-import { UserRepository } from '../modules/users/user.repository';
+import { CardRepository } from '../modules/cards/cards.repository';
 
 export function IsLongerThan(
   property: string,

@@ -7,7 +7,6 @@ import {
   UseGuards,
   Get,
 } from '@nestjs/common';
-import { User } from '@/modules/users/user.entity';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import {
@@ -17,7 +16,8 @@ import {
   SignInDto,
 } from './dto/auth-credentials.dto';
 import { AuthService } from './auth.service';
-import { GetUser } from '../users/get-user-decorator';
+import { GetUser } from '../../decorators/get-user.decorator';
+import { Card } from '../cards/cards.entity';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -27,10 +27,8 @@ export class AuthController {
   @Get('/info')
   @ApiBearerAuth()
   @UseGuards(AuthGuard())
-  getInfo(@GetUser() user: User): { data: User } {
-    return {
-      data: user,
-    };
+  getInfo(@GetUser() card: Card): Card {
+    return card;
   }
 
   @Post('/signup')
@@ -57,7 +55,7 @@ export class AuthController {
   @Post('/change-password')
   changePassword(
     @Body(ValidationPipe) changePasswordDto: ChangePasswordDto,
-  ): Promise<User> {
+  ): Promise<Card> {
     return this.authService.changePassword(changePasswordDto);
   }
 }

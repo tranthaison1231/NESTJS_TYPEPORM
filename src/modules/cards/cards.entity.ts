@@ -4,12 +4,13 @@ import { CrudValidationGroups } from '@nestjsx/crud';
 import { BaseModel } from '../../shared/base.entity';
 import { Transaction } from '../transactions/transactions.entity';
 import { Gender } from './gender.enum';
+import { UserRole } from './user.interface';
 
 const { CREATE, UPDATE } = CrudValidationGroups;
 
 @Entity()
 export class Card extends BaseModel {
-  @Column()
+  @Column({ default: 0 })
   amount: number;
 
   @IsOptional({ groups: [UPDATE] })
@@ -26,6 +27,18 @@ export class Card extends BaseModel {
 
   @Column({ unique: true })
   email: string;
+
+  @Column({ unique: true, nullable: true })
+  username: string;
+
+  @Column({ nullable: true })
+  password: string;
+
+  @Column({ nullable: true })
+  salt: string;
+
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
+  role: UserRole;
 
   @Column({ unique: true, nullable: true })
   phoneNumber: string;

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserRepository } from '@/modules/users/user.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JWT_SECRET, EXPIRES_IN } from '@/environments';
-import { JwtStrategy } from './jwt.strategy';
+import { JwtStrategy } from '../../shared/jwt/jwt.strategy';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
+import { CardRepository } from '../cards/cards.repository';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { AuthController } from './auth.controller';
         expiresIn: EXPIRES_IN,
       },
     }),
-    TypeOrmModule.forFeature([UserRepository]),
+    TypeOrmModule.forFeature([CardRepository]),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],

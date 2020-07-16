@@ -3,15 +3,12 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TerminusModule } from '@nestjs/terminus';
 import { typeOrmConfig } from '@/database/typeorm.config';
-import { ProductsModule } from '@/modules/products/products.module';
 import { AuthModule } from '@/modules/auth/auth.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpErrorFilter } from '@/shared/http-error.filter';
 // import here
 import { TasksModule } from '@/modules/tasks/tasks.module';
-import { UsersModule } from '@/modules/users/user.module';
 import { EventsModule } from './events/events.module';
-import { CompaniesModule } from './companies/companies.module';
 import { CardsModule } from './cards/cards.module';
 import { AppController } from './app.controller';
 import { AwsService } from '../shared/aws.service';
@@ -23,12 +20,9 @@ import { TripsModule } from './trips/trips.module';
     TypeOrmModule.forRoot(typeOrmConfig),
     TerminusModule,
     // add here
-    ProductsModule,
     AuthModule,
     TasksModule,
-    UsersModule,
     EventsModule,
-    CompaniesModule,
     CardsModule,
     TransactionsModule,
     TripsModule,

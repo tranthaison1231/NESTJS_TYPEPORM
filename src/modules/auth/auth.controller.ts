@@ -18,6 +18,8 @@ import {
 import { AuthService } from './auth.service';
 import { GetUser } from '../../decorators/get-user.decorator';
 import { Card } from '../cards/cards.entity';
+import { TokenPayloadDto } from './dto/TokenPayloadDto';
+import { UserDto } from '../cards/dto/cards.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -27,21 +29,19 @@ export class AuthController {
   @Get('/info')
   @ApiBearerAuth()
   @UseGuards(AuthGuard())
-  getInfo(@GetUser() card: Card): Card {
-    return card;
+  getInfo(@GetUser() user: Card): UserDto {
+    return new UserDto(user);
   }
 
   @Post('/signup')
   signUp(
     @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ token: string }> {
+  ): Promise<TokenPayloadDto> {
     return this.authService.signUp(authCredentialsDto);
   }
 
   @Post('/signin')
-  signIn(
-    @Body(ValidationPipe) signInDto: SignInDto,
-  ): Promise<{ token: string }> {
+  signIn(@Body(ValidationPipe) signInDto: SignInDto): Promise<TokenPayloadDto> {
     return this.authService.signIn(signInDto);
   }
 

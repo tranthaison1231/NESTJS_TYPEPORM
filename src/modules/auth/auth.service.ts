@@ -21,7 +21,8 @@ import {
 import { JwtPayload } from '../../shared/jwt/jwt-payload.interface';
 import { CardRepository } from '../cards/cards.repository';
 import { Card } from '../cards/cards.entity';
-import { Token } from './auth.interface';
+import { TokenPayloadDto } from './dto/TokenPayloadDto';
+import { EXPIRES_IN } from '../../environments';
 
 @Injectable()
 export class AuthService {
@@ -33,34 +34,36 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<Token> {
+  async createToken(payload: { username: string }): Promise<TokenPayloadDto> {
+    return new TokenPayloadDto({
+      expiresIn: EXPIRES_IN,
+      accessToken: await this.jwtService.sign(payload),
+    });
+  }
+
+  async signUp(
+    authCredentialsDto: AuthCredentialsDto,
+  ): Promise<TokenPayloadDto> {
     const username = await this.cardRepository.signUp(authCredentialsDto);
     const payload: JwtPayload = { username };
-    const accessToken = await this.jwtService.sign(payload);
     this.logger.debug(
       `Generated JWT Token with payload ${JSON.stringify(payload)}`,
     );
 
-    return {
-      token: accessToken,
-    };
+    return this.createToken(payload);
   }
 
-  async signIn(signInDto: SignInDto): Promise<Token> {
+  async signIn(signInDto: SignInDto): Promise<TokenPayloadDto> {
     const username = await this.cardRepository.validateUserPassword(signInDto);
     if (!username) {
       throw new UnauthorizedException('Invalid credentials');
     }
-
     const payload: JwtPayload = { username };
-    const accessToken = await this.jwtService.sign(payload);
     this.logger.debug(
       `Generated JWT Token with payload ${JSON.stringify(payload)}`,
     );
 
-    return {
-      token: accessToken,
-    };
+    return this.createToken(payload);
   }
 
   async forgotPassword({ email }: ForgotPasswordDto): Promise<void> {

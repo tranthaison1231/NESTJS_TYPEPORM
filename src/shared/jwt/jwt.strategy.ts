@@ -11,7 +11,7 @@ import { CardRepository } from '../../modules/cards/cards.repository';
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     @InjectRepository(CardRepository)
-    private cardRepository: CardRepository,
+    private userRepository: CardRepository,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

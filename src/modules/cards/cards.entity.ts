@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { MaxLength, IsOptional, IsString } from 'class-validator';
 import { CrudValidationGroups } from '@nestjsx/crud';
+import { Exclude } from 'class-transformer';
 import { BaseModel } from '../../shared/base.entity';
 import { Transaction } from '../transactions/transactions.entity';
 import { Gender } from './gender.enum';

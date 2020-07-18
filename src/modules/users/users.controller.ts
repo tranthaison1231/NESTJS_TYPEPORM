@@ -22,7 +22,7 @@ import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from './users.entity';
 import { UsersService } from './users.service';
-import { CreateUsersDto, TopupDto, UserDto } from './dto/Users.dto';
+import { CreateUsersDto, TopupDto, UserDto } from './dto/users.dto';
 import { nexmo } from '../../config/nexmo.config';
 
 @Crud({

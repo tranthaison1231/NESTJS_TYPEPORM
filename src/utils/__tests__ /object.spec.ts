@@ -1,7 +1,7 @@
 import { isEmpty } from '../object';
 
 describe('Object util test', () => {
-  test('Should return ', () => {
+  test('Is empty object return true', () => {
     expect(isEmpty({})).toBe(true);
     expect(
       isEmpty({

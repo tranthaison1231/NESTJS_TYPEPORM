@@ -5,8 +5,8 @@ import {
   EntitySubscriberInterface,
   InsertEvent,
 } from 'typeorm';
-import { Card } from '../cards/cards.entity';
 import { Transaction } from './transactions.entity';
+import { User } from '../users/users.entity';
 
 @EventSubscriber()
 @Injectable()
@@ -15,11 +15,11 @@ export class TransactionSubscriber
   listenTo = () => Transaction;
 
   async afterInsert(event: InsertEvent<Transaction>) {
-    const cardRepo: Repository<Card> = event.connection.manager.getRepository<
-      Card
-    >('card');
+    const cardRepo: Repository<User> = event.connection.manager.getRepository<
+      User
+    >('user');
 
-    const card = await cardRepo.findOne({ id: event.entity.card.id });
+    const card = await cardRepo.findOne({ id: event.entity.user.id });
     card.totalTransaction += 1;
     card.amount -= 2000;
     await card.save();

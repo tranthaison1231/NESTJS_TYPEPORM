@@ -19,18 +19,18 @@ import {
   SignInDto,
 } from './dto/auth-credentials.dto';
 import { JwtPayload } from '../../shared/jwt/jwt-payload.interface';
-import { CardRepository } from '../cards/cards.repository';
-import { Card } from '../cards/cards.entity';
+import { UserRepository } from '../users/users.repository';
 import { TokenPayloadDto } from './dto/TokenPayloadDto';
 import { EXPIRES_IN } from '../../environments';
+import { User } from '../users/users.entity';
 
 @Injectable()
 export class AuthService {
   private logger = new Logger('AuthService');
 
   constructor(
-    @InjectRepository(CardRepository)
-    private cardRepository: CardRepository,
+    @InjectRepository(UserRepository)
+    private userRepository: UserRepository,
     private jwtService: JwtService,
   ) {}
 
@@ -44,7 +44,7 @@ export class AuthService {
   async signUp(
     authCredentialsDto: AuthCredentialsDto,
   ): Promise<TokenPayloadDto> {
-    const username = await this.cardRepository.signUp(authCredentialsDto);
+    const username = await this.userRepository.signUp(authCredentialsDto);
     const payload: JwtPayload = { username };
     this.logger.debug(
       `Generated JWT Token with payload ${JSON.stringify(payload)}`,
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   async signIn(signInDto: SignInDto): Promise<TokenPayloadDto> {
-    const username = await this.cardRepository.validateUserPassword(signInDto);
+    const username = await this.userRepository.validateUserPassword(signInDto);
     if (!username) {
       throw new UnauthorizedException('Invalid credentials');
     }
@@ -67,7 +67,7 @@ export class AuthService {
   }
 
   async forgotPassword({ email }: ForgotPasswordDto): Promise<void> {
-    const user = await this.cardRepository.findOne({ email });
+    const user = await this.userRepository.findOne({ email });
     if (user) {
       await sendEmail(email, await confirmEmailLink(user.id));
     } else {
@@ -75,12 +75,12 @@ export class AuthService {
     }
   }
 
-  async changePassword({ token, password }: ChangePasswordDto): Promise<Card> {
+  async changePassword({ token, password }: ChangePasswordDto): Promise<User> {
     const userId = await redis.get(forgotPasswordPrefix + token);
     if (!userId) {
       return null;
     }
-    const user = await this.cardRepository.findOne(userId);
+    const user = await this.userRepository.findOne(userId);
     if (!user) {
       throw new ConflictException('User not found');
     }

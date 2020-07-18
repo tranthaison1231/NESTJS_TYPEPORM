@@ -4,13 +4,12 @@ import { CrudValidationGroups } from '@nestjsx/crud';
 import { Exclude } from 'class-transformer';
 import { BaseModel } from '../../shared/base.entity';
 import { Transaction } from '../transactions/transactions.entity';
-import { Gender } from './gender.enum';
-import { UserRole } from './user.interface';
+import { UserRole, Gender } from './user.interface';
 
 const { CREATE, UPDATE } = CrudValidationGroups;
 
 @Entity()
-export class Card extends BaseModel {
+export class User extends BaseModel {
   @Column({ default: 0 })
   amount: number;
 
@@ -23,7 +22,7 @@ export class Card extends BaseModel {
   @Column({ nullable: true })
   avatar: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'enum', enum: Gender, default: Gender.FEMALE })
   gender: Gender;
 
   @Column({ unique: true })
@@ -47,7 +46,7 @@ export class Card extends BaseModel {
   @Column({ default: 0, type: 'int', name: 'total_transaction' })
   totalTransaction: number;
 
-  @OneToMany(() => Transaction, (transaciton) => transaciton.card, {
+  @OneToMany(() => Transaction, (transaciton) => transaciton.user, {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   })

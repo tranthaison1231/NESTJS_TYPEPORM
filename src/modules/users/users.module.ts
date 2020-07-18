@@ -1,18 +1,18 @@
 import { Module, HttpModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CardsService } from './cards.service';
-import { CardsController } from './cards.controller';
+import { UsersService } from './users.service';
+import { UsersController } from './users.controller';
 import { TransactionsService } from '../transactions/transactions.service';
 import { TransactionsModule } from '../transactions/transaction.module';
-import { CardRepository } from './cards.repository';
+import { UserRepository } from './users.repository';
 
 @Module({
-  controllers: [CardsController],
-  providers: [CardsService],
+  controllers: [UsersController],
+  providers: [UsersService],
   imports: [
-    TypeOrmModule.forFeature([CardRepository]),
+    TypeOrmModule.forFeature([UserRepository]),
     HttpModule,
     TransactionsModule,
   ],
 })
-export class CardsModule {}
+export class UsersModule {}

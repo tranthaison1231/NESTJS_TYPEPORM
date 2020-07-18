@@ -6,7 +6,7 @@ import { JWT_SECRET, EXPIRES_IN } from '@/environments';
 import { JwtStrategy } from '../../shared/jwt/jwt.strategy';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { CardRepository } from '../cards/cards.repository';
+import { UserRepository } from '../users/users.repository';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { CardRepository } from '../cards/cards.repository';
         expiresIn: EXPIRES_IN,
       },
     }),
-    TypeOrmModule.forFeature([CardRepository]),
+    TypeOrmModule.forFeature([UserRepository]),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],

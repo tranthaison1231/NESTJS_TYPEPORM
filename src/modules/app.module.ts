@@ -9,7 +9,7 @@ import { HttpErrorFilter } from '@/shared/http-error.filter';
 // import here
 import { TasksModule } from '@/modules/tasks/tasks.module';
 import { EventsModule } from './events/events.module';
-import { CardsModule } from './cards/cards.module';
+import { UsersModule } from './users/users.module';
 import { AppController } from './app.controller';
 import { AwsService } from '../shared/aws.service';
 import { TransactionsModule } from './transactions/transaction.module';
@@ -23,7 +23,7 @@ import { TripsModule } from './trips/trips.module';
     AuthModule,
     TasksModule,
     EventsModule,
-    CardsModule,
+    UsersModule,
     TransactionsModule,
     TripsModule,
   ],

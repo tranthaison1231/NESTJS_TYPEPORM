@@ -8,20 +8,29 @@ import {
   UsePipes,
   Put,
   Get,
+  UseGuards,
 } from '@nestjs/common';
-import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { Card } from './cards.entity';
-import { CardsService } from './cards.service';
-import { CreateCardsDto, TopupDto, CardsDto } from './dto/cards.dto';
+import {
+  Crud,
+  CrudController,
+  CrudOptions,
+  ParsedRequest,
+  Override,
+  CrudRequest,
+} from '@nestjsx/crud';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
+import { User } from './users.entity';
+import { UsersService } from './users.service';
+import { CreateUsersDto, TopupDto, UserDto } from './dto/Users.dto';
 import { nexmo } from '../../config/nexmo.config';
 
 @Crud({
   model: {
-    type: Card,
+    type: User,
   },
   dto: {
-    update: CreateCardsDto,
+    update: CreateUsersDto,
   },
   routes: {
     only: ['getManyBase', 'getOneBase', 'updateOneBase'],
@@ -51,13 +60,13 @@ import { nexmo } from '../../config/nexmo.config';
     ],
   },
 } as CrudOptions)
-@ApiTags('Cards')
-@Controller('cards')
-export class CardsController implements CrudController<Card> {
-  constructor(public service: CardsService) {}
+@ApiTags('Users')
+@Controller('users')
+export class UsersController implements CrudController<User> {
+  constructor(public service: UsersService) {}
 
   @ApiOperation({
-    summary: 'Payment with card',
+    summary: 'Payment',
   })
   @Post(':id/pay')
   payment(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
@@ -79,14 +88,14 @@ export class CardsController implements CrudController<Card> {
   }
 
   @ApiOperation({
-    summary: 'Topup with card',
+    summary: 'Topup with User',
   })
   @Put(':id/topup')
   @UsePipes(ValidationPipe)
   topup(
     @Body() topupDto: TopupDto,
     @Param('id', ParseUUIDPipe) id: string,
-  ): Promise<Card> {
+  ): Promise<UserDto> {
     return this.service.topup(id, topupDto);
   }
 }

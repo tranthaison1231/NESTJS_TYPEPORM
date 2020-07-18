@@ -8,9 +8,9 @@ import {
   ConflictException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { Card } from './cards.entity';
+import { User } from './users.entity';
 
-import { TopupDto } from './dto/cards.dto';
+import { TopupDto, UserDto } from './dto/users.dto';
 import { TransactionsService } from '../transactions/transactions.service';
 import { hashPassword, comparePassword } from '../../utils/password';
 import {
@@ -19,24 +19,24 @@ import {
 } from '../auth/dto/auth-credentials.dto';
 import { ERROR_CODE } from '../../constants/error-code';
 
-@EntityRepository(Card)
-export class CardRepository extends Repository<Card> {
-  private logger = new Logger('CardRepository');
+@EntityRepository(User)
+export class UserRepository extends Repository<User> {
+  private logger = new Logger('UserRepository');
 
-  async topup(id: string, topupDto: TopupDto): Promise<Card> {
-    const card = await this.findOne(id);
-    if (!card) {
-      throw new NotFoundException(`Card with ID "${id}" not found`);
+  async topup(id: string, topupDto: TopupDto): Promise<UserDto> {
+    const user = await this.findOne(id);
+    if (!user) {
+      throw new NotFoundException(`User with ID "${id}" not found`);
     }
-    card.amount += topupDto.amount;
+    user.amount += topupDto.amount;
 
-    await card.save();
-    return card;
+    await user.save();
+    return new UserDto(user);
   }
 
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<string> {
     const { username, password, email } = authCredentialsDto;
-    const user = new Card();
+    const user = new User();
     user.email = email;
     user.username = username;
     user.salt = await bcrypt.genSalt();

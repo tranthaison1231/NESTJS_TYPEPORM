@@ -17,9 +17,9 @@ import {
 } from './dto/auth-credentials.dto';
 import { AuthService } from './auth.service';
 import { GetUser } from '../../decorators/get-user.decorator';
-import { Card } from '../cards/cards.entity';
 import { TokenPayloadDto } from './dto/TokenPayloadDto';
-import { UserDto } from '../cards/dto/cards.dto';
+import { UserDto } from '../users/dto/users.dto';
+import { User } from '../users/users.entity';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -29,7 +29,7 @@ export class AuthController {
   @Get('/info')
   @ApiBearerAuth()
   @UseGuards(AuthGuard())
-  getInfo(@GetUser() user: Card): UserDto {
+  getInfo(@GetUser() user: User): UserDto {
     return new UserDto(user);
   }
 
@@ -55,7 +55,7 @@ export class AuthController {
   @Post('/change-password')
   changePassword(
     @Body(ValidationPipe) changePasswordDto: ChangePasswordDto,
-  ): Promise<Card> {
+  ): Promise<User> {
     return this.authService.changePassword(changePasswordDto);
   }
 }

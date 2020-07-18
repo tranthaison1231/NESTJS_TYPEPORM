@@ -11,7 +11,7 @@ import {
   IsDate,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Card } from '../../cards/cards.entity';
+import { UserDto } from '../../users/dto/users.dto';
 // import { TransactionType } from '../transactions.enum';
 
 export class CreateTransactionDto {
@@ -25,7 +25,7 @@ export class CreateTransactionDto {
   // type: TransactionType;
 
   @ApiProperty()
-  card: Card;
+  user: UserDto;
 }
 
 export class AnalyticFilterDto {

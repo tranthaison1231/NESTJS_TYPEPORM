@@ -29,9 +29,9 @@ export class TransactionsService extends TypeOrmCrudService<Transaction> {
 
   async addTransaction(createDto: CreateTransactionDto) {
     const transaction = new Transaction();
-    const { amount, card } = createDto;
+    const { amount, user } = createDto;
     transaction.amount = amount;
-    transaction.card = card;
+    transaction.user = user;
     try {
       const response = await transaction.save();
       return response;

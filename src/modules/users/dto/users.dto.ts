@@ -8,11 +8,11 @@ import {
   IsMobilePhone,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { UserRole } from '../user.interface';
-import { Card } from '../cards.entity';
+import { UserRole, Gender } from '../user.interface';
 import { BaseDto } from '../../../shared/base.dto';
+import { User } from '../users.entity';
 
-export class CreateCardsDto {
+export class CreateUsersDto {
   @ApiProperty()
   @IsEmail()
   email: string;
@@ -55,17 +55,25 @@ export class UserDto extends BaseDto {
   @ApiPropertyOptional()
   email: string;
 
+  @ApiPropertyOptional({ enum: Gender })
+  gender: Gender;
+
+  @ApiPropertyOptional()
+  amount: number;
+
   @ApiPropertyOptional()
   avatar: string;
 
   @ApiPropertyOptional()
   phoneNumber: string;
 
-  constructor(user: Card) {
+  constructor(user: User) {
     super(user);
     this.username = user.username;
     this.role = user.role;
     this.email = user.email;
+    this.amount = user.amount;
+    this.gender = user.gender;
     this.avatar = user.avatar;
     this.phoneNumber = user.phoneNumber;
   }

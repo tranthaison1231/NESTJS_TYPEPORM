@@ -12,7 +12,8 @@ import {
 import { Injectable } from '@nestjs/common';
 import { IsDateString } from 'class-validator';
 import { BaseModel } from '../../shared/base.entity';
-import { Card } from '../cards/cards.entity';
+import { User } from '../users/users.entity';
+import { UserDto } from '../users/dto/users.dto';
 // import { TransactionType } from './transactions.enum';
 
 @Entity()
@@ -23,10 +24,10 @@ export class Transaction extends BaseModel {
   // @Column()
   // type: TransactionType;
 
-  @ManyToOne(() => Card, (card) => card.transactions, {
+  @ManyToOne(() => User, (user) => user.transactions, {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'card_id' })
-  card: Card;
+  user: UserDto;
 }

@@ -45,6 +45,14 @@ export class TopupDto {
   amount: number;
 }
 
+export class PaymentDto {
+  @ApiProperty()
+  userId: string;
+
+  @ApiProperty()
+  tripId: string;
+}
+
 export class UserDto extends BaseDto {
   @ApiPropertyOptional()
   username: string;

@@ -22,7 +22,7 @@ import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from './users.entity';
 import { UsersService } from './users.service';
-import { CreateUsersDto, TopupDto, UserDto } from './dto/users.dto';
+import { CreateUsersDto, TopupDto, UserDto, PaymentDto } from './dto/users.dto';
 import { nexmo } from '../../config/nexmo.config';
 
 @Crud({
@@ -48,9 +48,8 @@ import { nexmo } from '../../config/nexmo.config';
     cache: 2000,
     alwaysPaginate: true,
     join: {
-      transactions: {
-        eager: true,
-      },
+      transactions: { eager: true },
+      'transactions.trip': { eager: true, allow: ['id', 'title'] },
     },
     sort: [
       {
@@ -69,8 +68,8 @@ export class UsersController implements CrudController<User> {
     summary: 'Payment',
   })
   @Post(':id/pay')
-  payment(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
-    return this.service.payment(id);
+  payment(@Param('id', ParseUUIDPipe) paymentDto: PaymentDto): Promise<void> {
+    return this.service.payment(paymentDto);
   }
 
   @Post()

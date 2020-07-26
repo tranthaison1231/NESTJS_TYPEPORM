@@ -7,11 +7,13 @@ import {
   InsertEvent,
   EntitySubscriberInterface,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { IsDateString } from 'class-validator';
 import { BaseModel } from '../../shared/base.entity';
 import { Driver } from '../drivers/drivers.entity';
+import { Transaction } from '../transactions/transactions.entity';
 
 @Entity()
 export class Trip extends BaseModel {
@@ -30,4 +32,10 @@ export class Trip extends BaseModel {
   })
   @JoinColumn()
   driver: Driver;
+
+  @OneToMany(() => Transaction, (transaciton) => transaciton.trip, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
+  transactions: Transaction[];
 }

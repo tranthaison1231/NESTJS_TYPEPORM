@@ -5,6 +5,7 @@ import { UsersController } from './users.controller';
 import { TransactionsService } from '../transactions/transactions.service';
 import { TransactionsModule } from '../transactions/transaction.module';
 import { UserRepository } from './users.repository';
+import { TripsModule } from '../trips/trips.module';
 
 @Module({
   controllers: [UsersController],
@@ -13,6 +14,7 @@ import { UserRepository } from './users.repository';
     TypeOrmModule.forFeature([UserRepository]),
     HttpModule,
     TransactionsModule,
+    TripsModule,
   ],
 })
 export class UsersModule {}

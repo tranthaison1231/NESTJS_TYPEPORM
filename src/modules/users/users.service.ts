@@ -18,6 +18,7 @@ import { UserRepository } from './users.repository';
 import { SPEED_SMS_SENDER, SPEED_SMS_AUTH_TOKEN } from '../../environments';
 import * as messages from '../../language/messages.json';
 import { TransactionType } from '../transactions/transactions.enum';
+import { TripsService } from '../trips/trips.service';
 
 @Injectable()
 export class UsersService extends TypeOrmCrudService<User> {
@@ -28,15 +29,20 @@ export class UsersService extends TypeOrmCrudService<User> {
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
     private transactionService: TransactionsService,
+    private tripService: TripsService,
     private httpService: HttpService,
   ) {
     super(usersService);
   }
 
-  async payment(id: string): Promise<void> {
-    const user = await this.userRepository.findOne(id);
+  async payment({ userId, tripId }): Promise<void> {
+    const user = await this.userRepository.findOne(userId);
+    const trip = await this.tripService.findOne(tripId);
     if (!user) {
-      throw new NotFoundException(`User with ID "${id}" not found`);
+      throw new NotFoundException(`User with ID "${userId}" not found`);
+    }
+    if (!trip) {
+      throw new NotFoundException(`Trip with ID "${tripId}" not found`);
     }
     if (user.amount < 2000) {
       await this.sendMessages(user.phoneNumber);
@@ -47,6 +53,7 @@ export class UsersService extends TypeOrmCrudService<User> {
       await this.transactionService.addTransaction({
         amount: 2000,
         user,
+        trip,
       });
     }
   }

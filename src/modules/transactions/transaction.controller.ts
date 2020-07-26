@@ -43,6 +43,7 @@ import { Analytic, Predict } from './transactions.interface';
     alwaysPaginate: true,
     join: {
       user: { eager: true, allow: ['id', 'username'] },
+      trip: { eager: true, allow: ['id', 'title'] },
     },
     sort: [
       {

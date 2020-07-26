@@ -29,6 +29,7 @@ import { CreateTripsDto } from './dto/trips.dto';
   },
   dto: {
     create: CreateTripsDto,
+    update: CreateTripsDto,
   },
   query: {
     maxLimit: 100,
@@ -36,6 +37,7 @@ import { CreateTripsDto } from './dto/trips.dto';
     alwaysPaginate: true,
     join: {
       driver: { eager: true, allow: ['id', 'username'] },
+      'driver.user': { eager: true, allow: ['username'] },
     },
   },
 } as CrudOptions)

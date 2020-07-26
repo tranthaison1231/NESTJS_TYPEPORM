@@ -37,7 +37,10 @@ import { CreateTripsDto } from './dto/trips.dto';
     alwaysPaginate: true,
     join: {
       driver: { eager: true, allow: ['id', 'username'] },
-      'driver.user': { eager: true, allow: ['username'] },
+      'driver.user': {
+        eager: true,
+        allow: ['username', 'gender', 'phoneNumber', 'avatar'],
+      },
     },
   },
 } as CrudOptions)

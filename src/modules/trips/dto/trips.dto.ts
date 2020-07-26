@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from '../../users/users.entity';
 
 interface Location {
   start: {
@@ -20,5 +21,8 @@ export class CreateTripsDto {
   title: string;
 
   @ApiProperty()
-  location: Location;
+  location: string;
+
+  @ApiProperty()
+  driver: string;
 }

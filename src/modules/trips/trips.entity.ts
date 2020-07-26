@@ -6,10 +6,12 @@ import {
   Repository,
   InsertEvent,
   EntitySubscriberInterface,
+  JoinColumn,
 } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { IsDateString } from 'class-validator';
 import { BaseModel } from '../../shared/base.entity';
+import { Driver } from '../drivers/drivers.entity';
 
 @Entity()
 export class Trip extends BaseModel {
@@ -21,4 +23,11 @@ export class Trip extends BaseModel {
 
   @Column()
   location: string;
+
+  @ManyToOne(() => Driver, (driver) => driver.trips, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn()
+  driver: Driver;
 }

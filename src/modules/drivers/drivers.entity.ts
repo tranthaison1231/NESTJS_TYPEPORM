@@ -7,27 +7,28 @@ import {
   InsertEvent,
   EntitySubscriberInterface,
   JoinColumn,
-  PrimaryColumn,
+  OneToOne,
+  OneToMany,
 } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { IsDateString } from 'class-validator';
 import { BaseModel } from '../../shared/base.entity';
 import { User } from '../users/users.entity';
-import { UserDto } from '../users/dto/users.dto';
-// import { TransactionType } from './transactions.enum';
+import { Trip } from '../trips/trips.entity';
 
 @Entity()
-export class Transaction extends BaseModel {
+export class Driver extends BaseModel {
   @Column()
-  amount: number;
+  salary: number;
 
-  // @Column()
-  // type: TransactionType;
+  @OneToOne((type) => User)
+  @JoinColumn()
+  user: User;
 
-  @ManyToOne((type) => User, (user) => user.transactions, {
+  @OneToMany((type) => Trip, (trip) => trip.driver, {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: 'user_id' })
-  user: UserDto;
+  @JoinColumn()
+  trips: Trip[];
 }

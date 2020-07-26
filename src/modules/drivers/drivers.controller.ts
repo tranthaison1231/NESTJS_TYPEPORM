@@ -12,13 +12,13 @@ import {
 } from '@nestjs/common';
 import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
-import { Trip } from './trips.entity';
-import { TripsService } from './trips.service';
-import { CreateTripsDto } from './dto/trips.dto';
+import { Driver } from './drivers.entity';
+import { DriversService } from './drivers.service';
+import { CreateDriversDto } from './dto/drivers.dto';
 
 @Crud({
   model: {
-    type: Trip,
+    type: Driver,
   },
   params: {
     id: {
@@ -28,19 +28,20 @@ import { CreateTripsDto } from './dto/trips.dto';
     },
   },
   dto: {
-    create: CreateTripsDto,
+    create: CreateDriversDto,
   },
   query: {
     maxLimit: 100,
     limit: 10,
     alwaysPaginate: true,
     join: {
-      driver: { eager: true, allow: ['id', 'username'] },
+      user: { eager: true, allow: ['id', 'username'] },
+      trips: { eager: true, allow: ['id'] },
     },
   },
 } as CrudOptions)
-@ApiTags('Trips')
-@Controller('Trips')
-export class TripsController implements CrudController<Trip> {
-  constructor(public service: TripsService) {}
+@ApiTags('Drivers')
+@Controller('Drivers')
+export class DriversController implements CrudController<Driver> {
+  constructor(public service: DriversService) {}
 }

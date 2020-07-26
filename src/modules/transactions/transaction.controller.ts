@@ -42,9 +42,7 @@ import { Analytic, Predict } from './transactions.interface';
     limit: 10,
     alwaysPaginate: true,
     join: {
-      card: {
-        eager: true,
-      },
+      user: { eager: true, allow: ['id', 'username'] },
     },
     sort: [
       {

@@ -14,6 +14,7 @@ import { AppController } from './app.controller';
 import { AwsService } from '../shared/aws.service';
 import { TransactionsModule } from './transactions/transaction.module';
 import { TripsModule } from './trips/trips.module';
+import { DriversModule } from './drivers/drivers.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { TripsModule } from './trips/trips.module';
     UsersModule,
     TransactionsModule,
     TripsModule,
+    DriversModule,
   ],
   controllers: [AppController],
   providers: [

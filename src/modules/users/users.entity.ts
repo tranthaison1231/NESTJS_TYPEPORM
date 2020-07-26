@@ -5,6 +5,7 @@ import { Exclude } from 'class-transformer';
 import { BaseModel } from '../../shared/base.entity';
 import { Transaction } from '../transactions/transactions.entity';
 import { UserRole, Gender } from './user.interface';
+import { Trip } from '../trips/trips.entity';
 
 const { CREATE, UPDATE } = CrudValidationGroups;
 

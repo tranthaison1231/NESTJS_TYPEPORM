@@ -35,7 +35,10 @@ import { CreateDriversDto } from './dto/drivers.dto';
     limit: 10,
     alwaysPaginate: true,
     join: {
-      user: { eager: true, allow: ['id', 'username'] },
+      user: {
+        eager: true,
+        allow: ['id', 'username', 'gender', 'phoneNumber', 'avatar'],
+      },
       trips: { eager: true, allow: ['id'] },
     },
   },

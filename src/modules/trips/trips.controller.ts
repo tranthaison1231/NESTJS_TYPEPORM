@@ -39,7 +39,7 @@ import { CreateTripsDto } from './dto/trips.dto';
       driver: { eager: true, allow: ['id', 'username'] },
       'driver.user': {
         eager: true,
-        allow: ['username', 'gender', 'phoneNumber', 'avatar'],
+        allow: ['username'],
       },
     },
   },

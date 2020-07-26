@@ -5,6 +5,7 @@ import { URL } from '@/environments';
 
 export const confirmEmailLink = async (userId: string) => {
   const token = v4();
-  await redis.set(confirmationPrefix + token, userId, 'ex', 60 * 60 * 24); // 1 day expiration
+  const expiredToken = 60 * 60 * 24;
+  await redis.set(confirmationPrefix + token, userId, 'ex', expiredToken); // 1 day expiration
   return `https://${URL}/auth/change-password/${token}`;
 };

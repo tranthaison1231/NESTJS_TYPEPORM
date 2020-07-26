@@ -37,7 +37,7 @@ import { CreateDriversDto } from './dto/drivers.dto';
     join: {
       user: {
         eager: true,
-        allow: ['id', 'username', 'gender', 'phoneNumber', 'avatar'],
+        allow: ['id', 'username', 'gender', 'phoneNumber', 'avatar', 'email'],
       },
       trips: { eager: true, allow: ['id'] },
     },

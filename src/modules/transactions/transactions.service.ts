@@ -71,7 +71,7 @@ export class TransactionsService extends TypeOrmCrudService<Transaction> {
     const value = await createQueryBuilder('transaction')
       .select('COUNT(id)', 'totalTransaction')
       .addSelect('SUM(amount)', 'totalAmount')
-      .addSelect('COUNT(DISTINCT card_id)', 'totalCustomers')
+      .addSelect('COUNT(DISTINCT userId)', 'totalCustomers')
       .where(
         `create_at between '${filterDto.startTime} 00:00:00' and '${filterDto.endTime} 23:00:00'`,
       )

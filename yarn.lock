@@ -6900,6 +6900,13 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+nestjs-easyconfig@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/nestjs-easyconfig/-/nestjs-easyconfig-2.0.2.tgz#c16fa27670dd2a49de960e679c5d472ec5efb2b9"
+  integrity sha512-irgqnLoDfjNbVPofx2rMTwml7YCTwWpzLga7qQ9rEFrZ9ozVcBNCdRCP/S6xDabH9/WJ6rpdLr+UK1VI3T+1MQ==
+  dependencies:
+    dotenv "^8.2.0"
+
 nestjsx-automapper@^3.0.19:
   version "3.0.19"
   resolved "https://registry.yarnpkg.com/nestjsx-automapper/-/nestjsx-automapper-3.0.19.tgz#e5562bac0f1aeeba5351da9539f4bf959f996f82"

@@ -8,6 +8,7 @@ import { APP_FILTER } from '@nestjs/core';
 import { HttpErrorFilter } from '@/shared/http-error.filter';
 // import here
 import { TasksModule } from '@/modules/tasks/tasks.module';
+import { EasyconfigModule } from 'nestjs-easyconfig';
 import { EventsModule } from './events/events.module';
 import { UsersModule } from './users/users.module';
 import { AppController } from './app.controller';
@@ -18,6 +19,7 @@ import { DriversModule } from './drivers/drivers.module';
 
 @Module({
   imports: [
+    // EasyconfigModule.register({ path: './config/.env', safe: true }),
     TypeOrmModule.forRoot(typeOrmConfig),
     TerminusModule,
     // add here

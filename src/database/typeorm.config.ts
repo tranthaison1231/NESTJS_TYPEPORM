@@ -1,5 +1,4 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import 'dotenv/config';
 import { join } from 'path';
 import {
   RDS_DB_NAME,

@@ -53,7 +53,7 @@ export class UserRepository extends Repository<User> {
     }
   }
 
-  async validateUserPassword(signInDto: SignInDto): Promise<string> {
+  async validateUserPassword(signInDto: SignInDto): Promise<string | null> {
     const { username, password } = signInDto;
     const user = await this.findOne({ username });
     if (user && (await comparePassword(password, user.password))) {

@@ -1,13 +1,15 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 // import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TerminusModule } from '@nestjs/terminus';
 import { typeOrmConfig } from '@/database/typeorm.config';
 import { AuthModule } from '@/modules/auth/auth.module';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { HttpErrorFilter } from '@/shared/http-error.filter';
 // import here
 import { TasksModule } from '@/modules/tasks/tasks.module';
+import { ThrottlerGuard, ThrottlerModule } from 'nestjs-throttler';
+import * as rateLimit from 'express-rate-limit';
 import { EventsModule } from './events/events.module';
 import { UsersModule } from './users/users.module';
 import { AppController } from './app.controller';
@@ -38,4 +40,16 @@ import { DriversModule } from './drivers/drivers.module';
     },
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(
+        rateLimit({
+          windowMs: 5 * 60 * 1000, // 10 minutes
+          max: 10, // limit each IP to 100 requests per windowMs
+          message: '{"message": "Request so much. Let try after 5 minute."}',
+        }),
+      )
+      .forRoutes({ path: 'auth/signin', method: RequestMethod.POST });
+  }
+}

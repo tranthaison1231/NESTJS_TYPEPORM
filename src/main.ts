@@ -25,6 +25,8 @@ async function bootstrap() {
       // httpsOptions,
       cors: true,
     });
+    // Set trust proxy
+    app.set('trust proxy', 1);
 
     // body parsers
     app.use(bodyParser.json({ limit: '2mb' }));
@@ -46,6 +48,10 @@ async function bootstrap() {
       rateLimit({
         windowMs: 15 * 60 * 1000, // 15 minutes
         max: 100, // limit each IP to 100 requests per windowMs
+        message: '{"message": "Request so much. Let try after 15 minute."}',
+        onLimitReached: (req) => {
+          Logger.error(`\`${req.ip}\` is spamming endpoint`);
+        },
       }),
     );
 

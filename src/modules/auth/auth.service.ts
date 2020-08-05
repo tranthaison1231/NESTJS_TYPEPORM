@@ -80,7 +80,14 @@ export class AuthService {
         url: confirmEmailLink,
       },
     });
-    await sendEmail(email, resetPasswordTempalate);
+    await sendEmail({
+      to: email,
+      dynamicTemplateData: {
+        content: resetPasswordTempalate,
+        subject: '[Bus Bus] Reset Password',
+        preheader: 'Bạn yêu cầu thay đổi mật khẩu',
+      },
+    });
   }
 
   async changePassword({

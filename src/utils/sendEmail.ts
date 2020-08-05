@@ -1,44 +1,62 @@
 /* eslint-disable no-console */
-import * as nodemailer from 'nodemailer';
-import { EMAIL_SEND } from '@/environments';
+import { EMAIL_SEND, SENDGRID_API_KEY } from '@/environments';
 import * as handlebars from 'handlebars';
-import * as fs from 'fs';
+import * as sgMail from '@sendgrid/mail';
+import * as fs from 'fs-extra';
 import * as path from 'path';
-import * as util from 'util';
 
-import { mailConfig } from '../config/mail.config';
+sgMail.setApiKey(SENDGRID_API_KEY);
 
-const asyncReadFile = util.promisify(fs.readFile);
+export interface EmailTemplateOptions {
+  template: string;
+  data: any;
+}
 
-const transporter = nodemailer.createTransport({
-  host: mailConfig.host,
-  port: mailConfig.port,
-  secure: mailConfig.secure,
-  auth: {
-    user: mailConfig.auth.user,
-    pass: mailConfig.auth.pass,
-  },
-});
-
-export const renderEmailContent = async ({ template, data }) => {
+export const renderEmailContent = async ({
+  template,
+  data,
+}: EmailTemplateOptions): Promise<string> => {
   const templatePath = path.join(
     __dirname,
     '..',
     'templates',
     `${template}.hbs`,
   );
-  const rawContent = await asyncReadFile(templatePath, 'utf8');
+  const rawContent = await fs.readFile(templatePath, 'utf8');
   return handlebars.compile(rawContent)(data);
 };
 
-export const sendEmail = async (email: string, content: string) => {
+export interface DynamicTemplateData {
+  subject: string;
+  preheader: string;
+  content: string;
+}
+
+export interface EmailOptions {
+  from?: string;
+  to: string;
+  html?: string;
+  templateId?: string;
+  text?: string;
+  dynamicTemplateData: DynamicTemplateData;
+}
+
+export const sendEmail = async ({
+  from = EMAIL_SEND,
+  to,
+  html,
+  templateId = 'd-e2a11c581ce64bf4b13c422819352d7f',
+  text = 'Hello world?',
+  dynamicTemplateData,
+}: EmailOptions): Promise<void> => {
   try {
-    const info = await transporter.sendMail({
-      from: EMAIL_SEND,
-      to: email,
-      subject: 'Hello ✔',
-      text: 'Hello world?',
-      html: content,
+    const info = await sgMail.send({
+      from,
+      to,
+      html,
+      text,
+      templateId,
+      dynamicTemplateData,
     });
   } catch (error) {
     console.error(`Error: ${error}`);

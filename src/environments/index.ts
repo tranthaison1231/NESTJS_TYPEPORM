@@ -4,7 +4,7 @@ export const NODE_ENV: string = accessEnv('NODE_ENV', 'development');
 
 export const PORT: number = +accessEnv('PORT', '8080');
 
-export const URL: string = accessEnv('URL');
+export const WEB_URL: string = accessEnv('WEB_URL');
 
 export const BCRYPT_SALT: number = +accessEnv('BCRYPT_SALT', '10');
 
@@ -88,3 +88,5 @@ export const SPEED_SMS_AUTH_TOKEN: string = accessEnv(
 export const SPEED_SMS_SENDER: string = accessEnv('SPEED_SMS_SENDER', 'xxx');
 
 export const SLACK_REMINDER: string = accessEnv('SLACK_REMINDER', 'xxx');
+
+export const EMAIL_SEND: string = 'thanhhuyenpoo13@gmail.com';

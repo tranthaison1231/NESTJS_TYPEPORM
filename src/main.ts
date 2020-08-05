@@ -40,6 +40,7 @@ async function bootstrap() {
     app.use(compression());
 
     // Security
+    // @ts-ignore
     app.use(helmet());
     app.use(
       rateLimit({

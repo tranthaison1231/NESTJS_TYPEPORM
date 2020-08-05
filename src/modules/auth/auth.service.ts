@@ -7,8 +7,8 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { sendEmail } from '@/utils/sendEmail';
-import { confirmEmailLink } from '@/utils/confirmEmailLink';
+import { sendEmail, renderEmailContent } from '@/utils/sendEmail';
+import { generateConfirmEmailLink } from '@/utils/generateConfirmEmailLink';
 import { redis } from '@/redis';
 import { forgotPasswordPrefix } from '@/constants/redisPrefixes';
 import { hashPassword } from '@/utils/password';
@@ -69,7 +69,15 @@ export class AuthService {
   async forgotPassword({ email }: ForgotPasswordDto): Promise<void> {
     const user = await this.userRepository.findOne({ email });
     if (user) {
-      await sendEmail(email, await confirmEmailLink(user.id));
+      const confirmEmailLink = await generateConfirmEmailLink(user.id);
+      const resetPasswordTempalate = await renderEmailContent({
+        template: 'reset-password',
+        data: {
+          name: user.username,
+          url: confirmEmailLink,
+        },
+      });
+      await sendEmail(email, resetPasswordTempalate);
     } else {
       throw new ConflictException('Email not found');
     }

@@ -1,29 +1,45 @@
+/* eslint-disable no-console */
 import * as nodemailer from 'nodemailer';
-import { SENDGRID_API_KEY } from '@/environments';
+import { EMAIL_SEND } from '@/environments';
+import * as handlebars from 'handlebars';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as util from 'util';
 
-export const sendEmail = async (email: string, link: string) => {
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.sendgrid.net',
-    port: 465,
-    secure: true,
-    auth: {
-      user: 'apikey',
-      pass: SENDGRID_API_KEY,
-    },
-  });
+import { mailConfig } from '../config/mail.config';
 
-  const MAIL_BODY = `<b>Hello world?</b> <a href="${link}">confirm Email</a>`;
+const asyncReadFile = util.promisify(fs.readFile);
 
+const transporter = nodemailer.createTransport({
+  host: mailConfig.host,
+  port: mailConfig.port,
+  secure: mailConfig.secure,
+  auth: {
+    user: mailConfig.auth.user,
+    pass: mailConfig.auth.pass,
+  },
+});
+
+export const renderEmailContent = async ({ template, data }) => {
+  const templatePath = path.join(
+    __dirname,
+    '..',
+    'templates',
+    `${template}.hbs`,
+  );
+  const rawContent = await asyncReadFile(templatePath, 'utf8');
+  return handlebars.compile(rawContent)(data);
+};
+
+export const sendEmail = async (email: string, content: string) => {
   try {
     const info = await transporter.sendMail({
-      from: '<thanhhuyenpoo13@gmail.com>',
+      from: EMAIL_SEND,
       to: email,
       subject: 'Hello ✔',
       text: 'Hello world?',
-      html: MAIL_BODY,
+      html: content,
     });
-    console.log(info);
-    console.log(`Message sent: ${email}`);
   } catch (error) {
     console.error(`Error: ${error}`);
   }

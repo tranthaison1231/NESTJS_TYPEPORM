@@ -4,11 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TerminusModule } from '@nestjs/terminus';
 import { typeOrmConfig } from '@/database/typeorm.config';
 import { AuthModule } from '@/modules/auth/auth.module';
-import { APP_FILTER, APP_GUARD } from '@nestjs/core';
+import { APP_FILTER } from '@nestjs/core';
 import { HttpErrorFilter } from '@/shared/http-error.filter';
 // import here
 import { TasksModule } from '@/modules/tasks/tasks.module';
-import { ThrottlerGuard, ThrottlerModule } from 'nestjs-throttler';
 import * as rateLimit from 'express-rate-limit';
 import { EventsModule } from './events/events.module';
 import { UsersModule } from './users/users.module';

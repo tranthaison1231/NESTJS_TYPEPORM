@@ -9,9 +9,10 @@ import {
   Put,
   Get,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { TransactionsService } from './transactions.service';
 import { Transaction } from './transactions.entity';
 import {
@@ -19,6 +20,7 @@ import {
   AnalyticFilterDto,
 } from './dto/transactions.dto';
 import { Analytic, Predict } from './transactions.interface';
+import { JwtAuthGuard } from '../../guards/jwt.guard';
 
 @Crud({
   model: {
@@ -53,6 +55,8 @@ import { Analytic, Predict } from './transactions.interface';
     ],
   },
 } as CrudOptions)
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 @ApiTags('Transactions')
 @Controller('transactions')
 export class TransactionsController implements CrudController<Transaction> {

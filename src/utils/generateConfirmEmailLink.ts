@@ -1,11 +1,11 @@
 import { v4 } from 'uuid';
 import { redis } from '@/redis';
-import { confirmationPrefix } from '@/constants/redisPrefixes';
+import { forgotPasswordPrefix } from '@/constants/redisPrefixes';
 import { WEB_URL } from '@/environments';
 
 export const generateConfirmEmailLink = async (userId: string) => {
-  const token = v4();
-  const expiredToken = 60 * 60 * 24;
-  await redis.set(confirmationPrefix + token, userId, 'ex', expiredToken); // 1 day expiration
-  return `${WEB_URL}/change-password?token=${token}`;
+  const verifyCode = v4();
+  const expired = 60 * 60 * 24;
+  await redis.set(forgotPasswordPrefix + verifyCode, userId, 'ex', expired); // 1 day expiration
+  return `${WEB_URL}/change-password?verify-code=${verifyCode}`;
 };

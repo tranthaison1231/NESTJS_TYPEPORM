@@ -9,12 +9,14 @@ import {
   Put,
   Get,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { Trip } from './trips.entity';
 import { TripsService } from './trips.service';
 import { CreateTripsDto } from './dto/trips.dto';
+import { JwtAuthGuard } from '../../guards/jwt.guard';
 
 @Crud({
   model: {
@@ -44,6 +46,8 @@ import { CreateTripsDto } from './dto/trips.dto';
     },
   },
 } as CrudOptions)
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 @ApiTags('Trips')
 @Controller('Trips')
 export class TripsController implements CrudController<Trip> {

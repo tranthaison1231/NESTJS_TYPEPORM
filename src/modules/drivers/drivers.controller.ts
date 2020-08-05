@@ -9,12 +9,20 @@ import {
   Put,
   Get,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiBasicAuth,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 import { Driver } from './drivers.entity';
 import { DriversService } from './drivers.service';
 import { CreateDriversDto } from './dto/drivers.dto';
+import { JwtAuthGuard } from '../../guards/jwt.guard';
 
 @Crud({
   model: {
@@ -43,6 +51,8 @@ import { CreateDriversDto } from './dto/drivers.dto';
     },
   },
 } as CrudOptions)
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 @ApiTags('Drivers')
 @Controller('Drivers')
 export class DriversController implements CrudController<Driver> {

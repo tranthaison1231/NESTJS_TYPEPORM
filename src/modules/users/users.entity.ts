@@ -32,9 +32,11 @@ export class User extends BaseModel {
   @Column({ unique: true, nullable: true })
   username: string;
 
+  @Exclude()
   @Column({ nullable: true })
   password: string;
 
+  @Exclude()
   @Column({ nullable: true })
   salt: string;
 

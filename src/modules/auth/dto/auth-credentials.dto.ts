@@ -5,6 +5,7 @@ import {
   IsEmail,
   IsNotEmpty,
   IsJWT,
+  IsUUID,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsPassword } from '@/utils/classVaidator';
@@ -37,8 +38,8 @@ export class ForgotPasswordDto {
 
 export class ChangePasswordDto {
   @ApiProperty()
-  @IsJWT()
-  token: string;
+  @IsUUID()
+  verifyCode: string;
 
   @ApiProperty()
   @MinLength(8)

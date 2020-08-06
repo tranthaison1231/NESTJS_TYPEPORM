@@ -58,7 +58,7 @@ import { JwtAuthGuard } from '../../guards/jwt.guard';
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @ApiTags('Transactions')
-@Controller('transactions')
+@Controller('api/transactions')
 export class TransactionsController implements CrudController<Transaction> {
   constructor(public service: TransactionsService) {}
 

@@ -54,7 +54,7 @@ import { JwtAuthGuard } from '../../guards/jwt.guard';
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @ApiTags('Drivers')
-@Controller('Drivers')
+@Controller('api/drivers')
 export class DriversController implements CrudController<Driver> {
   constructor(public service: DriversService) {}
 }

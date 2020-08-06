@@ -3,24 +3,41 @@ import {
   Post,
   UseInterceptors,
   UploadedFile,
+  UseGuards,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiConsumes, ApiBody } from '@nestjs/swagger';
+import {
+  ApiConsumes,
+  ApiBody,
+  ApiOperation,
+  ApiTags,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
+import { uploadImage } from '@/config/cloudinary.config';
+import { multerOptions } from '@/config/multer.config';
+import { AuthGuard } from '@nestjs/passport';
 import { AwsService } from '../shared/aws.service';
-// import { FileUploadDto } from './users/dto/user.dto';
+import { FileUploadDto } from '../shared/upload/file-upload.dto';
 
 @Controller('api')
+@ApiTags('Default')
 export class AppController {
   constructor(private awsService: AwsService) {}
 
-  // @Post('uploadFile')
-  // @ApiConsumes('multipart/form-data')
-  // @ApiBody({
-  //   description: 'Product image',
-  //   type: FileUploadDto,
-  // })
-  // @UseInterceptors(FileInterceptor('file'))
-  // async uploadFile(@UploadedFile() file: any) {
-  //   await this.awsService.uploadFile(file);
-  // }
+  @Post('uploads')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard())
+  @UseInterceptors(FileInterceptor('file', multerOptions))
+  @ApiConsumes('multipart/form-data')
+  @ApiOperation({
+    summary: 'Up load image',
+  })
+  @ApiBody({
+    description: 'Image',
+    type: FileUploadDto,
+  })
+  async uploadFile(@UploadedFile() file): Promise<string> {
+    const result = await uploadImage(file);
+    return result;
+  }
 }

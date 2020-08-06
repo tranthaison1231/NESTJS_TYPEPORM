@@ -60,7 +60,7 @@ import { nexmo } from '../../config/nexmo.config';
   },
 } as CrudOptions)
 @ApiTags('Users')
-@Controller('users')
+@Controller('api/users')
 export class UsersController implements CrudController<User> {
   constructor(public service: UsersService) {}
 

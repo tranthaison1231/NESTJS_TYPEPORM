@@ -49,7 +49,7 @@ import { JwtAuthGuard } from '../../guards/jwt.guard';
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 @ApiTags('Trips')
-@Controller('Trips')
+@Controller('api/trips')
 export class TripsController implements CrudController<Trip> {
   constructor(public service: TripsService) {}
 }

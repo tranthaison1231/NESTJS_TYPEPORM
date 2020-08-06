@@ -22,7 +22,7 @@ import { UserDto } from '../users/dto/users.dto';
 import { User } from '../users/users.entity';
 
 @ApiTags('Auth')
-@Controller('auth')
+@Controller('api/auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 

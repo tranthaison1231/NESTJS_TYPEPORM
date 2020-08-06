@@ -8,33 +8,36 @@ import {
   IsMobilePhone,
   IsString,
   IsUrl,
+  IsOptional,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { UserRole, Gender } from '../user.interface';
 import { BaseDto } from '../../../shared/base.dto';
 import { User } from '../users.entity';
 
-export class CreateUsersDto {
+export class UpdateUsersDto {
   @ApiProperty()
+  @IsOptional()
   @IsEmail()
   email: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   username: string;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @Min(10000)
   @Max(1000000)
   amount: number;
 
   @ApiProperty()
-  @IsNotEmpty()
+  @IsOptional()
   @IsMobilePhone('vi-VN')
   phoneNumber: string;
 
   @ApiProperty()
+  @IsOptional()
   @IsUrl()
   avatar: string;
 }

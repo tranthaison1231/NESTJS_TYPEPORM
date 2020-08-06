@@ -22,7 +22,7 @@ import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from './users.entity';
 import { UsersService } from './users.service';
-import { CreateUsersDto, TopupDto, UserDto, PaymentDto } from './dto/users.dto';
+import { UpdateUsersDto, TopupDto, UserDto, PaymentDto } from './dto/users.dto';
 import { nexmo } from '../../config/nexmo.config';
 
 @Crud({
@@ -30,7 +30,7 @@ import { nexmo } from '../../config/nexmo.config';
     type: User,
   },
   dto: {
-    update: CreateUsersDto,
+    update: UpdateUsersDto,
   },
   routes: {
     only: ['getManyBase', 'getOneBase', 'updateOneBase'],

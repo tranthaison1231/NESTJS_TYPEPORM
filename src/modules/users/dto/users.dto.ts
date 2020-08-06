@@ -6,6 +6,8 @@ import {
   Max,
   IsNumber,
   IsMobilePhone,
+  IsString,
+  IsUrl,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { UserRole, Gender } from '../user.interface';
@@ -31,6 +33,10 @@ export class CreateUsersDto {
   @IsNotEmpty()
   @IsMobilePhone('vi-VN')
   phoneNumber: string;
+
+  @ApiProperty()
+  @IsUrl()
+  avatar: string;
 }
 
 export class CardsDto {

@@ -40,10 +40,6 @@ export class RefreshTokenDto {
   @ApiProperty()
   @IsJWT()
   token: string;
-
-  @ApiProperty()
-  @IsUUID()
-  userId: string;
 }
 
 export class ChangePasswordDto {

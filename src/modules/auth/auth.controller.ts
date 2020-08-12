@@ -56,7 +56,7 @@ export class AuthController {
   @Post('/refresh-token')
   refreshToken(
     @Body(ValidationPipe) refreshTokenDto: RefreshTokenDto,
-  ): Promise<void> {
+  ): Promise<TokenPayloadDto> {
     return this.authService.refreshToken(refreshTokenDto);
   }
 

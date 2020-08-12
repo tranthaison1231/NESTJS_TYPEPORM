@@ -91,7 +91,10 @@ export class AuthService {
     });
   }
 
-  async refreshToken({ token, userId }: RefreshTokenDto) {
+  async refreshToken({
+    token,
+    userId,
+  }: RefreshTokenDto): Promise<TokenPayloadDto> {
     const refreshObject = await this.refreshTokenRepository.findOne({
       userId,
       token,
@@ -101,6 +104,7 @@ export class AuthService {
     }
     try {
       await this.refreshTokenRepository.delete({ id: refreshObject.id });
+      return this.createToken({ userId });
     } catch (error) {
       throw new InternalServerErrorException(error);
     }

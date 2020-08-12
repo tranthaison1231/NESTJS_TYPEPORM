@@ -18,12 +18,15 @@ import {
   ForgotPasswordDto,
   ChangePasswordDto,
   SignInDto,
+  RefreshTokenDto,
 } from './dto/auth-credentials.dto';
 import { JwtPayload } from '../../shared/jwt/jwt-payload.interface';
 import { UserRepository } from '../users/users.repository';
 import { TokenPayloadDto } from './dto/TokenPayloadDto';
 import { EXPIRES_IN } from '../../environments';
 import { User } from '../users/users.entity';
+import { RefreshTokenRepository } from '../refresh-token/refresh-token.repository';
+import { CreateToken } from './auth.interface';
 
 @Injectable()
 export class AuthService {
@@ -33,38 +36,38 @@ export class AuthService {
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
     private jwtService: JwtService,
+    private refreshTokenRepository: RefreshTokenRepository,
   ) {}
 
-  async createToken(payload: { username: string }): Promise<TokenPayloadDto> {
+  async createToken({ userId, token }: CreateToken): Promise<TokenPayloadDto> {
+    const accessToken = await this.jwtService.sign({ userId });
+    const refreshToken = await this.refreshTokenRepository.createOne(userId);
+    this.logger.debug(
+      `Generated JWT Token with payload ${JSON.stringify({ userId })}`,
+    );
     return new TokenPayloadDto({
+      tokenType: 'Bearer',
       expiresIn: EXPIRES_IN,
-      accessToken: await this.jwtService.sign(payload),
+      accessToken,
+      refreshToken,
     });
   }
 
   async signUp(
     authCredentialsDto: AuthCredentialsDto,
   ): Promise<TokenPayloadDto> {
-    const username = await this.userRepository.signUp(authCredentialsDto);
-    const payload: JwtPayload = { username };
-    this.logger.debug(
-      `Generated JWT Token with payload ${JSON.stringify(payload)}`,
-    );
-
-    return this.createToken(payload);
+    const userId = await this.userRepository.signUp(authCredentialsDto);
+    return this.createToken({ userId });
   }
 
   async signIn(signInDto: SignInDto): Promise<TokenPayloadDto> {
-    const username = await this.userRepository.validateUserPassword(signInDto);
-    if (!username) {
+    const userId = await this.userRepository.validateUserPassword(signInDto);
+    if (!userId) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    const payload: JwtPayload = { username };
-    this.logger.debug(
-      `Generated JWT Token with payload ${JSON.stringify(payload)}`,
-    );
+    const payload: JwtPayload = { userId };
 
-    return this.createToken(payload);
+    return this.createToken({ userId });
   }
 
   async forgotPassword({ email }: ForgotPasswordDto): Promise<void> {
@@ -86,6 +89,25 @@ export class AuthService {
       subject: '[Bus Bus] Reset Password',
       text: 'Bạn muốn thay đổi mật khẩu',
     });
+  }
+
+  async refreshToken({
+    token,
+    userId,
+  }: RefreshTokenDto): Promise<TokenPayloadDto> {
+    const refreshObject = await this.refreshTokenRepository.findOne({
+      userId,
+      token,
+    });
+    if (!refreshObject) {
+      throw new UnauthorizedException('Refresh token not found or not valid');
+    }
+    try {
+      await this.refreshTokenRepository.delete({ id: refreshObject.id });
+      return this.createToken({ userId });
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   async changePassword({

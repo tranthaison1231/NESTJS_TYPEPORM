@@ -14,6 +14,7 @@ import {
   ForgotPasswordDto,
   ChangePasswordDto,
   SignInDto,
+  RefreshTokenDto,
 } from './dto/auth-credentials.dto';
 import { AuthService } from './auth.service';
 import { GetUser } from '../../decorators/get-user.decorator';
@@ -50,6 +51,13 @@ export class AuthController {
     @Body(ValidationPipe) forgotPasswordDto: ForgotPasswordDto,
   ): Promise<void> {
     return this.authService.forgotPassword(forgotPasswordDto);
+  }
+
+  @Post('/refresh-token')
+  refreshToken(
+    @Body(ValidationPipe) refreshTokenDto: RefreshTokenDto,
+  ): Promise<TokenPayloadDto> {
+    return this.authService.refreshToken(refreshTokenDto);
   }
 
   @Post('/change-password')

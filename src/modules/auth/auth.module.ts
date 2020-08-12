@@ -7,6 +7,7 @@ import { JwtStrategy } from '../../shared/jwt/jwt.strategy';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UserRepository } from '../users/users.repository';
+import { RefreshTokenRepository } from '../refresh-token/refresh-token.repository';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { UserRepository } from '../users/users.repository';
         expiresIn: EXPIRES_IN,
       },
     }),
-    TypeOrmModule.forFeature([UserRepository]),
+    TypeOrmModule.forFeature([UserRepository, RefreshTokenRepository]),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],

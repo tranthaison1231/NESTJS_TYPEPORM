@@ -100,7 +100,7 @@ export class AuthService {
       token,
     });
     if (!refreshObject) {
-      throw new UnauthorizedException('Refresh token not found or not valid');
+      throw new BadRequestException('Refresh token not found or not valid');
     }
     try {
       await this.refreshTokenRepository.delete({ id: refreshObject.id });

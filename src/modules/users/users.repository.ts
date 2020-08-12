@@ -43,7 +43,7 @@ export class UserRepository extends Repository<User> {
     user.password = await hashPassword(password, user.salt);
     try {
       await user.save();
-      return user.username;
+      return user.id;
     } catch (error) {
       if (error.code === ERROR_CODE.CONFLICT) {
         throw new ConflictException(error.detail);
@@ -57,7 +57,7 @@ export class UserRepository extends Repository<User> {
     const { username, password } = signInDto;
     const user = await this.findOne({ username });
     if (user && (await comparePassword(password, user.password))) {
-      return user.username;
+      return user.id;
     }
     return null;
   }

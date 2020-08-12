@@ -36,6 +36,16 @@ export class ForgotPasswordDto {
   email: string;
 }
 
+export class RefreshTokenDto {
+  @ApiProperty()
+  @IsJWT()
+  token: string;
+
+  @ApiProperty()
+  @IsUUID()
+  userId: string;
+}
+
 export class ChangePasswordDto {
   @ApiProperty()
   @IsUUID()

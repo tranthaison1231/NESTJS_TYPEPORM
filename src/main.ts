@@ -49,7 +49,6 @@ async function bootstrap() {
         windowMs: 5 * 60 * 1000, // 5 minutes
         max: 100, // limit each IP to 100 requests per windowMs
         message: '{"message": "Request so much. Let try after 15 minute."}',
-      
         onLimitReached: (req) => {
           Logger.error(`\`${req.ip}\` is spamming endpoint`);
         },

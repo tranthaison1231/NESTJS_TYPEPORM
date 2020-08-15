@@ -19,7 +19,6 @@ import {
   CrudRequest,
 } from '@nestjsx/crud';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 import { User } from './users.entity';
 import { UsersService } from './users.service';
 import { UpdateUsersDto, TopupDto, UserDto, PaymentDto } from './dto/users.dto';

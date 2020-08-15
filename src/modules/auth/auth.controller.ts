@@ -8,7 +8,6 @@ import {
   Get,
 } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 import {
   AuthCredentialsDto,
   ForgotPasswordDto,
@@ -21,6 +20,7 @@ import { GetUser } from '../../decorators/get-user.decorator';
 import { TokenPayloadDto } from './dto/TokenPayloadDto';
 import { UserDto } from '../users/dto/users.dto';
 import { User } from '../users/users.entity';
+import { JwtAuthGuard } from '../../guards/jwt.guard';
 
 @ApiTags('Auth')
 @Controller('api/auth')
@@ -29,7 +29,7 @@ export class AuthController {
 
   @Get('/info')
   @ApiBearerAuth()
-  @UseGuards(AuthGuard())
+  @UseGuards(JwtAuthGuard)
   getInfo(@GetUser() user: User): UserDto {
     return new UserDto(user);
   }

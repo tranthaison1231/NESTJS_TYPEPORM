@@ -15,9 +15,9 @@ import {
 } from '@nestjs/swagger';
 import { uploadImage } from '@/config/cloudinary.config';
 import { multerOptions } from '@/config/multer.config';
-import { AuthGuard } from '@nestjs/passport';
 import { AwsService } from '../shared/aws.service';
 import { FileUploadDto } from '../shared/upload/file-upload.dto';
+import { JwtAuthGuard } from '../guards/jwt.guard';
 
 @Controller('api')
 @ApiTags('Default')
@@ -26,7 +26,7 @@ export class AppController {
 
   @Post('uploads')
   @ApiBearerAuth()
-  @UseGuards(AuthGuard())
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('file', multerOptions))
   @ApiConsumes('multipart/form-data')
   @ApiOperation({

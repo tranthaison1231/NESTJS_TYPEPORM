@@ -18,7 +18,6 @@ import {
   ApiBasicAuth,
   ApiBearerAuth,
 } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 import { Driver } from './drivers.entity';
 import { DriversService } from './drivers.service';
 import { CreateDriversDto } from './dto/drivers.dto';

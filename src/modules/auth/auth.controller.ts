@@ -8,19 +8,19 @@ import {
   Get,
 } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from '@/guards/jwt.guard';
+import { AuthService } from '@/modules/auth/auth.service';
+import { User } from '@/modules/users/users.entity';
+import { GetUser } from '@/decorators/get-user.decorator';
+import { TokenPayloadDto } from '@/modules/auth/dto/TokenPayloadDto';
+import { UserDto } from '@/modules/users/dto/users.dto';
 import {
   AuthCredentialsDto,
   ForgotPasswordDto,
   ChangePasswordDto,
   SignInDto,
   RefreshTokenDto,
-} from './dto/auth-credentials.dto';
-import { AuthService } from './auth.service';
-import { GetUser } from '../../decorators/get-user.decorator';
-import { TokenPayloadDto } from './dto/TokenPayloadDto';
-import { UserDto } from '../users/dto/users.dto';
-import { User } from '../users/users.entity';
-import { JwtAuthGuard } from '../../guards/jwt.guard';
+} from '@/modules/auth/dto/auth-credentials.dto';
 
 @ApiTags('Auth')
 @Controller('api/auth')

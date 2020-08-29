@@ -13,8 +13,7 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@/environments/*": ["src/environments/*"]
+      "@/*": ["src/*"]
     }
   },
   "include": ["./**/*.ts"],

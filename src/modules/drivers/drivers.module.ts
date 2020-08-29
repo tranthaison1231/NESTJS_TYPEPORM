@@ -1,9 +1,9 @@
 import { Module, HttpModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EntityManager } from 'typeorm';
-import { DriversService } from './drivers.service';
-import { Driver } from './drivers.entity';
-import { DriversController } from './drivers.controller';
+import { DriversService } from '@/modules/drivers/drivers.service';
+import { Driver } from '@/modules/drivers/drivers.entity';
+import { DriversController } from '@/modules/drivers/drivers.controller';
 
 @Module({
   controllers: [DriversController],

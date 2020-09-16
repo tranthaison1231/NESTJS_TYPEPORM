@@ -1,8 +1,6 @@
 import {
   registerDecorator,
   ValidationOptions,
-  ValidatorConstraint,
-  ValidatorConstraintInterface,
   ValidationArguments,
 } from 'class-validator';
 
@@ -44,7 +42,7 @@ export function IsPassword() {
       constraints: [],
       options: validationOptions,
       validator: {
-        validate(value: any, args: ValidationArguments) {
+        validate(value: any) {
           return (
             typeof value === 'string' &&
             /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/.test(value)

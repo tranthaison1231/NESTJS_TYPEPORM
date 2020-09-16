@@ -3,7 +3,6 @@ import {
   MinLength,
   MaxLength,
   IsEmail,
-  IsNotEmpty,
   IsJWT,
   IsUUID,
 } from 'class-validator';

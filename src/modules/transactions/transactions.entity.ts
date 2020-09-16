@@ -1,17 +1,5 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  EventSubscriber,
-  Repository,
-  InsertEvent,
-  EntitySubscriberInterface,
-  JoinColumn,
-  PrimaryColumn,
-  OneToOne,
-} from 'typeorm';
-import { Injectable } from '@nestjs/common';
-import { IsDateString } from 'class-validator';
+import { Column, Entity, ManyToOne, JoinColumn } from 'typeorm';
+
 import { BaseModel } from '../../shared/base.entity';
 import { User } from '../users/users.entity';
 import { UserDto } from '../users/dto/users.dto';
@@ -26,14 +14,14 @@ export class Transaction extends BaseModel {
   // @Column()
   // type: TransactionType;
 
-  @ManyToOne((type) => User, (user) => user.transactions, {
+  @ManyToOne(() => User, (user) => user.transactions, {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'user_id' })
   user: UserDto;
 
-  @ManyToOne((type) => Trip, (trip) => trip.transactions, {
+  @ManyToOne(() => Trip, (trip) => trip.transactions, {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   })

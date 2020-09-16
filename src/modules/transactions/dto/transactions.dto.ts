@@ -1,15 +1,4 @@
-import {
-  IsNotEmpty,
-  IsEmail,
-  IsArray,
-  Min,
-  Max,
-  IsNumber,
-  IsMobilePhone,
-  IsUUID,
-  IsDateString,
-  IsDate,
-} from 'class-validator';
+import { IsNotEmpty, Min, Max } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { UserDto } from '../../users/dto/users.dto';
 import { Trip } from '../../trips/trips.entity';

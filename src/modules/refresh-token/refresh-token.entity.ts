@@ -1,5 +1,5 @@
-import { Column, Entity, JoinColumn, PrimaryColumn, OneToOne } from 'typeorm';
-import { Injectable } from '@nestjs/common';
+import { Column, Entity } from 'typeorm';
+
 import { BaseModel } from '../../shared/base.entity';
 
 @Entity()

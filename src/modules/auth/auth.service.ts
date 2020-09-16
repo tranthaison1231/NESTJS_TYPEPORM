@@ -20,7 +20,7 @@ import {
   SignInDto,
   RefreshTokenDto,
 } from './dto/auth-credentials.dto';
-import { JwtPayload } from '../../shared/jwt/jwt-payload.interface';
+
 import { UserRepository } from '../users/users.repository';
 import { TokenPayloadDto } from './dto/TokenPayloadDto';
 import { EXPIRES_IN } from '../../environments';
@@ -39,7 +39,7 @@ export class AuthService {
     private refreshTokenRepository: RefreshTokenRepository,
   ) {}
 
-  async createToken({ userId, token }: CreateToken): Promise<TokenPayloadDto> {
+  async createToken({ userId }: CreateToken): Promise<TokenPayloadDto> {
     const accessToken = await this.jwtService.sign({ userId });
     const refreshToken = await this.refreshTokenRepository.createOne(userId);
     this.logger.debug(
@@ -65,7 +65,6 @@ export class AuthService {
     if (!userId) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    const payload: JwtPayload = { userId };
 
     return this.createToken({ userId });
   }

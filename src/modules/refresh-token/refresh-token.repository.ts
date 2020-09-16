@@ -1,12 +1,5 @@
 import { Repository, EntityRepository } from 'typeorm';
-import {
-  Logger,
-  InternalServerErrorException,
-  NotAcceptableException,
-  NotFoundException,
-  HttpService,
-  ConflictException,
-} from '@nestjs/common';
+
 import * as crypto from 'crypto';
 import { RefreshToken } from './refresh-token.entity';
 

@@ -1,12 +1,9 @@
 import {
-  IsNotEmpty,
   IsEmail,
-  IsArray,
   Min,
   Max,
   IsNumber,
   IsMobilePhone,
-  IsString,
   IsUrl,
   IsOptional,
 } from 'class-validator';

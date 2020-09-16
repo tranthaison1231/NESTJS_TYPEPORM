@@ -1,28 +1,19 @@
 import {
+  Body,
   Controller,
   Param,
   ParseUUIDPipe,
   Post,
-  Body,
-  ValidationPipe,
-  UsePipes,
   Put,
-  Get,
-  UseGuards,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
-import {
-  Crud,
-  CrudController,
-  CrudOptions,
-  ParsedRequest,
-  Override,
-  CrudRequest,
-} from '@nestjsx/crud';
-import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
+import { nexmo } from '../../config/nexmo.config';
+import { PaymentDto, TopupDto, UpdateUsersDto, UserDto } from './dto/users.dto';
 import { User } from './users.entity';
 import { UsersService } from './users.service';
-import { UpdateUsersDto, TopupDto, UserDto, PaymentDto } from './dto/users.dto';
-import { nexmo } from '../../config/nexmo.config';
 
 @Crud({
   model: {

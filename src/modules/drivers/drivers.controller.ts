@@ -1,23 +1,6 @@
-import {
-  Controller,
-  Param,
-  ParseUUIDPipe,
-  Post,
-  Body,
-  ValidationPipe,
-  UsePipes,
-  Put,
-  Get,
-  Query,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common';
 import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBasicAuth,
-  ApiBearerAuth,
-} from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { Driver } from './drivers.entity';
 import { DriversService } from './drivers.service';
 import { CreateDriversDto } from './dto/drivers.dto';

@@ -6,7 +6,7 @@ import { Logger, InternalServerErrorException } from '@nestjs/common';
 import * as bodyParser from 'body-parser';
 import { NODE_ENV, PORT } from '@/environments';
 import { setupSwagger } from '@/swagger';
-import { Transport } from '@nestjs/microservices';
+
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as rateLimit from 'express-rate-limit';

@@ -4,20 +4,18 @@ import {
   NotFoundException,
   Logger,
   HttpService,
-  Inject,
-  InternalServerErrorException,
 } from '@nestjs/common';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, createQueryBuilder } from 'typeorm';
+import { Repository } from 'typeorm';
+import * as messages from '@/language/messages.json';
+import { SPEED_SMS_SENDER, SPEED_SMS_AUTH_TOKEN } from '@/environments';
+
 import { User } from './users.entity';
 import { TopupDto, UserDto } from './dto/users.dto';
-import { twilio } from '../../config/twilio.config';
 import { TransactionsService } from '../transactions/transactions.service';
 import { UserRepository } from './users.repository';
-import { SPEED_SMS_SENDER, SPEED_SMS_AUTH_TOKEN } from '../../environments';
-import * as messages from '../../language/messages.json';
-import { TransactionType } from '../transactions/transactions.enum';
+
 import { TripsService } from '../trips/trips.service';
 
 @Injectable()

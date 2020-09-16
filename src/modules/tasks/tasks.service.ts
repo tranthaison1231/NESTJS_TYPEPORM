@@ -1,8 +1,6 @@
-import { Injectable, Logger, HttpService } from '@nestjs/common';
-import { Cron, Interval, Timeout } from '@nestjs/schedule';
+import { Injectable, Logger } from '@nestjs/common';
+import { Cron } from '@nestjs/schedule';
 import { SlackService } from '../../shared/slack/slack.service';
-import { SLACK_REMINDER } from '../../environments';
-import { trainData } from '../../utils/timeseries';
 
 @Injectable()
 export class TasksService {

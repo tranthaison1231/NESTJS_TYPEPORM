@@ -1,13 +1,12 @@
-import { Column, Entity, OneToMany } from 'typeorm';
-import { MaxLength, IsOptional, IsString } from 'class-validator';
 import { CrudValidationGroups } from '@nestjsx/crud';
 import { Exclude } from 'class-transformer';
+import { IsOptional, IsString, MaxLength } from 'class-validator';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseModel } from '../../shared/base.entity';
 import { Transaction } from '../transactions/transactions.entity';
-import { UserRole, Gender } from './user.interface';
-import { Trip } from '../trips/trips.entity';
+import { Gender, UserRole } from './user.interface';
 
-const { CREATE, UPDATE } = CrudValidationGroups;
+const { UPDATE } = CrudValidationGroups;
 
 @Entity()
 export class User extends BaseModel {

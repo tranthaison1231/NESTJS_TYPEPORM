@@ -26,7 +26,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'nestjs'],
+  plugins: ['@typescript-eslint', 'nestjs', 'unused-imports'],
   rules: {
     'import/prefer-default-export': 0,
     'import/no-unresolved': 0,
@@ -39,5 +39,15 @@ module.exports = {
     'import/extensions': 0,
     'max-len': ['error', 150],
     'max-lines-per-function': ['error', 40],
+    'unused-imports/no-unused-imports-ts': 'error',
+    'unused-imports/no-unused-vars-ts': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
+    ],
   },
 };

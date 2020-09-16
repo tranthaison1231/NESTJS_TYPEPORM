@@ -1,18 +1,6 @@
-import {
-  Controller,
-  Param,
-  ParseUUIDPipe,
-  Post,
-  Body,
-  ValidationPipe,
-  UsePipes,
-  Put,
-  Get,
-  Query,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common';
 import { Crud, CrudController, CrudOptions } from '@nestjsx/crud';
-import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { Trip } from './trips.entity';
 import { TripsService } from './trips.service';
 import { CreateTripsDto } from './dto/trips.dto';

@@ -1,11 +1,9 @@
 /* eslint-disable no-console */
-import * as nodemailer from 'nodemailer';
 import { EMAIL_SEND } from '@/environments';
-import * as handlebars from 'handlebars';
 import * as fs from 'fs-extra';
+import * as handlebars from 'handlebars';
+import * as nodemailer from 'nodemailer';
 import * as path from 'path';
-import * as util from 'util';
-
 import { mailConfig } from '../config/mail.config';
 
 const transporter = nodemailer.createTransport({

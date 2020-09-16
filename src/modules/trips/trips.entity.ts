@@ -1,16 +1,5 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  EventSubscriber,
-  Repository,
-  InsertEvent,
-  EntitySubscriberInterface,
-  JoinColumn,
-  OneToMany,
-} from 'typeorm';
-import { Injectable } from '@nestjs/common';
-import { IsDateString } from 'class-validator';
+import { Column, Entity, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+
 import { BaseModel } from '../../shared/base.entity';
 import { Driver } from '../drivers/drivers.entity';
 import { Transaction } from '../transactions/transactions.entity';

@@ -1,5 +1,5 @@
 import { Injectable, HttpService } from '@nestjs/common';
-import { Observable } from 'rxjs';
+
 import { SLACK_REMINDER } from '../../environments';
 
 @Injectable()

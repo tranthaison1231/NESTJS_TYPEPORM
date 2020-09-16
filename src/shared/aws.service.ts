@@ -1,12 +1,4 @@
-import {
-  Req,
-  Res,
-  Injectable,
-  Inject,
-  HttpStatus,
-  Logger,
-  HttpException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import * as AWS from 'aws-sdk';
 import {
   AWS_ACCESS_KEY_ID,

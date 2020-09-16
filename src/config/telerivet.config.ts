@@ -1,5 +1,3 @@
-import { TELERIVET_KEY, TELERIVET_PROJECT_ID_KEY } from '../environments';
-
 const telerivet = require('telerivet');
 
 const tr = new telerivet.API('kZzJS_8FwOKOtYAeveaZ3jkzwkMWDkALYlIf');

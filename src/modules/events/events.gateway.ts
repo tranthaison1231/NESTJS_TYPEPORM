@@ -24,7 +24,7 @@ export class EventsGateway
     this.server.emit('msgToClient', payload);
   }
 
-  afterInit(server: Server) {
+  afterInit() {
     this.logger.log('Init');
   }
 
@@ -33,7 +33,7 @@ export class EventsGateway
     this.logger.log(`Client disconnected: ${client.id}`);
   }
 
-  handleConnection(client: Socket, ...args: any[]) {
+  handleConnection(client: Socket) {
     this.users += 1;
     this.logger.log(`Client connected: ${client.id}`);
   }

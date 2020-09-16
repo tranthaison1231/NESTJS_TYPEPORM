@@ -2,22 +2,18 @@ import { Repository, EntityRepository } from 'typeorm';
 import {
   Logger,
   InternalServerErrorException,
-  NotAcceptableException,
   NotFoundException,
-  HttpService,
   ConflictException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
+import { ERROR_CODE } from '@/constants/error-code';
+import { hashPassword, comparePassword } from '@/utils/password';
 import { User } from './users.entity';
-
 import { TopupDto, UserDto } from './dto/users.dto';
-import { TransactionsService } from '../transactions/transactions.service';
-import { hashPassword, comparePassword } from '../../utils/password';
 import {
   SignInDto,
   AuthCredentialsDto,
 } from '../auth/dto/auth-credentials.dto';
-import { ERROR_CODE } from '../../constants/error-code';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {

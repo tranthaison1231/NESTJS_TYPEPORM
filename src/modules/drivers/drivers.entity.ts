@@ -9,11 +9,11 @@ export class Driver extends BaseModel {
   @Column()
   salary: number;
 
-  @OneToOne((type) => User)
+  @OneToOne((_type) => User)
   @JoinColumn()
   user: User;
 
-  @OneToMany((type) => Trip, (trip) => trip.driver, {
+  @OneToMany((_type) => Trip, (trip) => trip.driver, {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   })

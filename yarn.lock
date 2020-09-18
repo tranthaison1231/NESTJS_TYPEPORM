@@ -871,6 +871,30 @@
     "@angular-devkit/core" "10.0.7"
     "@angular-devkit/schematics" "10.0.7"
 
+"@sendgrid/client@^7.2.6":
+  version "7.2.6"
+  resolved "https://registry.yarnpkg.com/@sendgrid/client/-/client-7.2.6.tgz#28374927b5d9b3b351b9426f4a218d23d590c958"
+  integrity sha512-AOB3IVlB76SMYdaLEtWGm6/GwrOv0xlAOkyCqk5+XifJRqL2pl8a9lfxFZ9BEnWrdqPJPJ1/omopj0P7d5ZPmw==
+  dependencies:
+    "@sendgrid/helpers" "^7.2.6"
+    axios "^0.19.2"
+
+"@sendgrid/helpers@^7.2.6":
+  version "7.2.6"
+  resolved "https://registry.yarnpkg.com/@sendgrid/helpers/-/helpers-7.2.6.tgz#5d15b8914940147c0635c9a3d2a93fed8c73dc71"
+  integrity sha512-J2xniPBOVo4ASzx+xc735OovHGj/v9oNrDo1Bb5fwTg/kmUxWxeoKZRkB+KLdciwmTtVrZjYLdQB3pMFIe9lAw==
+  dependencies:
+    chalk "^2.0.1"
+    deepmerge "^4.2.2"
+
+"@sendgrid/mail@^7.2.6":
+  version "7.2.6"
+  resolved "https://registry.yarnpkg.com/@sendgrid/mail/-/mail-7.2.6.tgz#8f6a398ad75fb1ed7a35a9bb18cbdac111637ef6"
+  integrity sha512-eP9MuqEZIgt4bHaoufWqKGUY4Bo7FUgST3WGNYIDXIe1rP2dV6/JR7Ac2Dl9iW22gy15nc58fLGIGa41XbwtuA==
+  dependencies:
+    "@sendgrid/client" "^7.2.6"
+    "@sendgrid/helpers" "^7.2.6"
+
 "@sinonjs/commons@^1.7.0":
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.1.tgz#e7df00f98a203324f6dc7cc606cad9d4a8ab2217"
@@ -1136,10 +1160,10 @@
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
 
-"@types/jest@^26.0.13":
-  version "26.0.13"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.13.tgz#5a7b9d5312f5dd521a38329c38ee9d3802a0b85e"
-  integrity sha512-sCzjKow4z9LILc6DhBvn5AkIfmQzDZkgtVVKmGwVrs5tuid38ws281D4l+7x1kP487+FlKDh5kfMZ8WSPAdmdA==
+"@types/jest@^26.0.14":
+  version "26.0.14"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.14.tgz#078695f8f65cb55c5a98450d65083b2b73e5a3f3"
+  integrity sha512-Hz5q8Vu0D288x3iWXePSn53W7hAjP0H7EQ6QvDO9c7t46mR0lNOLlfuwQ+JkVxuhygHzlzPX+0jKdA3ZgSh+Vg==
   dependencies:
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
@@ -1191,10 +1215,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.26.tgz#22a3b8a46510da8944b67bfc27df02c34a35331c"
   integrity sha512-W+fpe5s91FBGE0pEa0lnqGLL4USgpLgs4nokw16SrBBco/gQxuua7KnArSEOd5iaMqbbSHV10vUDkJYJJqpXKA==
 
-"@types/node@^14.10.2":
-  version "14.10.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.10.2.tgz#9b47a2c8e4dabd4db73b57e750b24af689600514"
-  integrity sha512-IzMhbDYCpv26pC2wboJ4MMOa9GKtjplXfcAqrMeNJpUUwpM/2ATt2w1JPUXwS6spu856TvKZL2AOmeU2rAxskw==
+"@types/node@^14.11.1":
+  version "14.11.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.1.tgz#56af902ad157e763f9ba63d671c39cda3193c835"
+  integrity sha512-oTQgnd0hblfLsJ6BvJzzSL+Inogp3lq9fGgqRkMB/ziKMgEUaFl801OncOzUmalfzt14N0oPHMK47ipl+wbTIw==
 
 "@types/nodemailer@^6.4.0":
   version "6.4.0"
@@ -2022,10 +2046,10 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-aws-sdk@^2.753.0:
-  version "2.753.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.753.0.tgz#63f8d4674db6eaf3a77a17e136ed232164ce9fda"
-  integrity sha512-1XjoltWQy76bf+bMA3U1Ta8jSH2jN19UH7vA7J53FT3pCMm24/f7oYtz89VCJflhISs8vB/DdBTHWz2PDRvwEw==
+aws-sdk@^2.755.0:
+  version "2.755.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.755.0.tgz#54ad4479fa990748ad0e7f5191065f512f732f58"
+  integrity sha512-APei6/d3ki6wi9pp6XvQ7QTiOhDBCo1qCOQZ5n8POUE1yrB7/6SNWami9OTj2TavFvnz7OuPr5YZ2/Ra45N49A==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"
@@ -2608,7 +2632,7 @@ chalk@^1.1.1:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
-chalk@^2.0.0, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.4.1, chalk@^2.4.2:
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   integrity sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
@@ -7332,11 +7356,6 @@ node-pre-gyp@0.15.0:
     semver "^5.3.0"
     tar "^4.4.2"
 
-nodemailer@^6.4.11:
-  version "6.4.11"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.4.11.tgz#1f00b4ffd106403f17c03f3d43d5945b2677046c"
-  integrity sha512-BVZBDi+aJV4O38rxsUh164Dk1NCqgh6Cm0rQSb9SK/DHGll/DrCMnycVDD7msJgZCnmVa8ASo8EZzR7jsgTukQ==
-
 noop-logger@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/noop-logger/-/noop-logger-0.1.1.tgz#94a2b1633c4f1317553007d8966fd0e841b6a4c2"
@@ -10033,10 +10052,10 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
 
-twilio@^3.49.1:
-  version "3.49.1"
-  resolved "https://registry.yarnpkg.com/twilio/-/twilio-3.49.1.tgz#be7342d32b412a6a0a0cd655ac9f8f9fdd9e5801"
-  integrity sha512-RhOBlVD7Wl6X193FjbQEdzxoxu/ixpEcanAGS2+r30UktG2zl2KUAxsccze8UGnmdr533fxyodKfW5tcItB91w==
+twilio@^3.49.2:
+  version "3.49.2"
+  resolved "https://registry.yarnpkg.com/twilio/-/twilio-3.49.2.tgz#db00c97936c329c6e6fd75e87615aa034a4dad5d"
+  integrity sha512-xdx9vzCkIVJ7r5teDkkPyKjHljLp9o2OMMnLD1epFpt7bdYGYkYCAtOaLdduB6F+f0HL0B471gITMMuha1Xahw==
   dependencies:
     "@types/express" "^4.17.7"
     axios "^0.19.2"

@@ -1,21 +1,11 @@
 /* eslint-disable no-console */
-import { EMAIL_SEND } from '@/environments';
+import { EMAIL_SEND, SENDGRID_API_KEY } from '@/environments';
 import * as fs from 'fs-extra';
 import * as handlebars from 'handlebars';
-import * as nodemailer from 'nodemailer';
 import * as path from 'path';
-import { mailConfig } from '../config/mail.config';
+import * as sgMail from '@sendgrid/mail';
 
-const transporter = nodemailer.createTransport({
-  host: mailConfig.host,
-  port: mailConfig.port,
-  secure: mailConfig.secure,
-  auth: {
-    user: mailConfig.auth.user,
-    pass: mailConfig.auth.pass,
-  },
-});
-
+sgMail.setApiKey(SENDGRID_API_KEY);
 export interface EmailTemplateOptions {
   template: string;
   data: any;
@@ -38,25 +28,25 @@ export const renderEmailContent = async ({
 export interface EmailOptions {
   from?: string;
   to: string;
-  subject?: string;
-  text?: string;
   html: string;
+  templateId?: string;
+  dynamicTemplateData?: { [key: string]: any };
 }
 
 export const sendEmail = async ({
   from = EMAIL_SEND,
   to,
-  subject = 'Hello world',
-  text = 'Hello world',
   html,
+  templateId = 'd-e2a11c581ce64bf4b13c422819352d7f',
+  dynamicTemplateData = {},
 }: EmailOptions): Promise<void> => {
   try {
-    const info = await transporter.sendMail({
-      from,
+    await sgMail.send({
       to,
-      subject,
-      text,
+      from,
       html,
+      templateId,
+      dynamicTemplateData,
     });
   } catch (error) {
     console.error(`Error: ${error}`);

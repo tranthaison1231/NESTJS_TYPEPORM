@@ -85,8 +85,11 @@ export class AuthService {
     await sendEmail({
       html: resetPasswordTempalate,
       to: email,
-      subject: '[Bus Bus] Reset Password',
-      text: 'Bạn muốn thay đổi mật khẩu',
+      dynamicTemplateData: {
+        subject: '[Bus Bus] Reset Password',
+        preheader: 'Bạn muốn thay đổi mật khẩu',
+        content: resetPasswordTempalate,
+      },
     });
   }
 

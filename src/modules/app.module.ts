@@ -16,9 +16,20 @@ import { AwsService } from '../shared/aws.service';
 import { TransactionsModule } from './transactions/transaction.module';
 import { TripsModule } from './trips/trips.module';
 import { DriversModule } from './drivers/drivers.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+     ConfigModule.forRoot({
+      isGlobal: true,
+      validationSchema: Joi.object({
+        AWS_REGION: Joi.string().required(),
+        AWS_ACCESS_KEY_ID: Joi.string().required(),
+        AWS_SECRET_ACCESS_KEY: Joi.string().required(),
+        AWS_PUBLIC_BUCKET_NAME: Joi.string().required(),
+        PORT: Joi.number(),
+      }),
+    }),
     TypeOrmModule.forRoot(typeOrmConfig),
     TerminusModule,
     // add here
